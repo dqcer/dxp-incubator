@@ -37,7 +37,7 @@ public class ValidAspect {
             if (arg instanceof Validation) {
                 BeanValidationResult beanValidationResult = ValidationUtil.warpValidate(arg);
                 List<BeanValidationResult.ErrorMessage> errorMessages = beanValidationResult.getErrorMessages();
-                if (null != errorMessages) {
+                if (errorMessages.size() > 0) {
                     String msg = "";
                     for (BeanValidationResult.ErrorMessage errorMessage : errorMessages) {
                         msg += String.format("%s : %s ==> [ %s ]", errorMessage.getPropertyName(), errorMessage.getValue(), errorMessage.getMessage());
