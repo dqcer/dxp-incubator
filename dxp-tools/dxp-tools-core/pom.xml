@@ -9,36 +9,25 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.dqcer</groupId>
-    <artifactId>dxp-incubator</artifactId>
+    <artifactId>dxp-tools-core</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>dxp-incubator</name>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>dxp-framework</module>
-        <module>dxp-provider</module>
-        <module>dxp-tools</module>
-    </modules>
-
+    <name>dxp-tools-core</name>
+    <description>Demo project for Spring Boot</description>
     <properties>
-        <dxp-incubator.version>0.0.1-SNAPSHOT</dxp-incubator.version>
         <java.version>1.8</java.version>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.dqcer</groupId>
-                <artifactId>dxp-framework-api</artifactId>
-                <version>${dxp-incubator.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.dqcer</groupId>
-                <artifactId>dxp-framework-dto</artifactId>
-                <version>${dxp-incubator.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
