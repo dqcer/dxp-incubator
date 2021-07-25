@@ -4,33 +4,40 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.dqcer</groupId>
-        <artifactId>dxp-incubator</artifactId>
+        <artifactId>dxp-tools</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.dqcer</groupId>
-    <artifactId>dxp-tools</artifactId>
+    <artifactId>dxp-tools-sync</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>dxp-tools</name>
-
+    <name>dxp-tools-sync</name>
+    <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
-
-    <modules>
-        <module>dxp-tools-core</module>
-        <module>dxp-tools-sync</module>
-    </modules>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-starter-quartz</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+             <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
