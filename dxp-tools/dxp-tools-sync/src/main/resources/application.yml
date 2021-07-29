@@ -1,9 +1,13 @@
 spring:
   datasource:
-    url: jdbc:mysql://172.16.11.11:3308/A04
+    url: jdbc:mysql://172.16.2.171:3308/a03
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   flyway:
-    # ∞Ê±æ«®“∆Œª÷√
     locations: classpath:db
+    enabled: false
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.dqcer

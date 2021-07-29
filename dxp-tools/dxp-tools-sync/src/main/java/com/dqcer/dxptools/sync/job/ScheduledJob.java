@@ -47,7 +47,7 @@ public class ScheduledJob implements Job {
                 .build();
 
         SyncFactory instance = SyncFactory.getInstance();
-        instance.start(configBean);
+       // instance.start(configBean);
     }
 
 
