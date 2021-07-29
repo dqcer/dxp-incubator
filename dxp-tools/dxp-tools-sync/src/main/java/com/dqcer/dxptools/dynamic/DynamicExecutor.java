@@ -1,4 +1,6 @@
-package com.dqcer.dxptools.sync.groovy.demo;
+package com.dqcer.dxptools.dynamic;
+
+import com.dqcer.dxptools.dynamic.service.IBaseService;
 
 import java.util.concurrent.ConcurrentHashMap;
 

@@ -1,4 +1,4 @@
-package com.dqcer.dxptools.sync.groovy.demo;
+package com.dqcer.dxptools.dynamic.service;
 
 import java.security.MessageDigest;
 

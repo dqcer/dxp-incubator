@@ -1,12 +1,12 @@
-package com.dqcer.dxptools.sync.groovy.demo
+package com.dqcer.dxptools.dynamic.service
 
-import com.dqcer.dxptools.sync.groovy.dao.RoleDAO
+import com.dqcer.dxptools.dynamic.dao.BaseDAO
 import org.springframework.beans.factory.annotation.Autowired
 
 class DemoService1 implements IBaseService {
 
     @Autowired
-    private RoleDAO roleDAO
+    private BaseDAO roleDAO
 
     /**
      * 视图
@@ -15,7 +15,7 @@ class DemoService1 implements IBaseService {
      */
     @Override
     def Object view() {
-        return roleDAO.get()
+        return null;
     }
 
     /**
