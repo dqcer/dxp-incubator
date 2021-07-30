@@ -2,20 +2,16 @@ package com.dqcer.dxptools.sync.job;
 
 import com.dqcer.dxptools.sync.bean.DataSourceBean;
 import com.dqcer.dxptools.sync.bean.ToolsSyncConfigBean;
-import com.dqcer.dxptools.sync.strategy.DbContext;
-import com.dqcer.dxptools.sync.strategy.DbStrategy;
 import com.dqcer.dxptools.sync.strategy.SyncFactory;
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Slf4j
 public class ScheduledJob implements Job {
@@ -47,7 +43,7 @@ public class ScheduledJob implements Job {
                 .build();
 
         SyncFactory instance = SyncFactory.getInstance();
-       // instance.start(configBean);
+       instance.start(configBean);
     }
 
 

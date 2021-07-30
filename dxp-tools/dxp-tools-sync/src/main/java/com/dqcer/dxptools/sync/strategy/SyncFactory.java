@@ -64,6 +64,7 @@ public final class SyncFactory {
             List<Map<String, Object>> demo = dbHelper.findBatchInsertSql(inConn, tableName, filterColumns);
             for (Map<String, Object> map : demo) {
                 String string = map.get("sql").toString();
+                //log.info(">>>>>>>>>{}", string);
                 boolean isInsertOk = dbHelper.oneExecuteSql(string, outConn);
                 if (isInsertOk) {
                     continue;
@@ -76,7 +77,8 @@ public final class SyncFactory {
                 log.info("没有可以更新的数据: [{}]", sql);
             }
         }
-        log.info("同步完成，共耗时:[{}]", System.currentTimeMillis() - l);
+        long timeConsuming = System.currentTimeMillis() - l;
+        log.info("同步完成，共耗时毫秒:[{}] 分钟:[{}]", timeConsuming, timeConsuming/1000/60);
     }
 
     private String findDataBaseNameByUrl(String jdbcUrl) {

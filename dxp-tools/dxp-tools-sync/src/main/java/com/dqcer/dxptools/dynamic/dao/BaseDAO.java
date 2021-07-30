@@ -10,6 +10,6 @@ import java.util.Map;
 @Mapper
 public interface BaseDAO {
 
-    @SelectProvider(type = SqlProvider.class, method = "all")
-    List<Map> all(SQL sql);
+    @SelectProvider(type = SqlProvider.class, method = "view")
+    List<Map> view(SQL sql);
 }

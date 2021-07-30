@@ -1,10 +1,12 @@
 package com.dqcer.dxptools.dynamic;
 
+import com.dqcer.dxptools.dynamic.dao.BaseDAO;
 import com.dqcer.dxptools.dynamic.dao.SqlProvider;
 import com.dqcer.dxptools.dynamic.service.IBaseService;
 import com.dqcer.dxptools.dynamic.service.MD5Utils;
 import groovy.lang.GroovyClassLoader;
 
+import java.lang.reflect.Constructor;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -37,10 +39,12 @@ public class DynamicFactory {
      * @return 实例
      * @throws Exception 异常
      */
-    public IBaseService loadNewInstance1(String codeSource) throws Exception {
+    public IBaseService loadNewInstanceService(String codeSource, BaseDAO baseDAO) throws Exception {
         Class<?> aClass = getCodeSourceClass(codeSource);
         if (aClass != null) {
-            Object instance = aClass.newInstance();
+            Constructor<?> constructor = aClass.getConstructor(BaseDAO.class);
+            Object instance = constructor.newInstance(baseDAO);
+//            Object instance = aClass.newInstance();
             if (instance != null) {
                 if (instance instanceof IBaseService) {
                     this.inject((IBaseService) instance);
@@ -53,7 +57,7 @@ public class DynamicFactory {
         throw new IllegalArgumentException("创建实例失败，instance is null");
     }
 
-    public SqlProvider loadNewInstance(String codeSource) throws Exception {
+    public SqlProvider loadNewInstanceDAO(String codeSource) throws Exception {
         Class<?> aClass = getCodeSourceClass(codeSource);
         if (aClass != null) {
             Object instance = aClass.newInstance();

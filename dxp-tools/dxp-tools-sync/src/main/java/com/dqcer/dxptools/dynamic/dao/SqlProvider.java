@@ -4,7 +4,7 @@ import org.apache.ibatis.jdbc.SQL;
 
 public class SqlProvider {
 
-    public String all(SQL sql){
+    public String view(SQL sql){
         return sql.toString();
     }
 }

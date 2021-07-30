@@ -13,4 +13,4 @@ mybatis:
   type-aliases-package: com.dqcer
   # 开启驼峰映射
   configuration:
-    map-underscore-to-camel-case=true:
+    map-underscore-to-camel-case: true

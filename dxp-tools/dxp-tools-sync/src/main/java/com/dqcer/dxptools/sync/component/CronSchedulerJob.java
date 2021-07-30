@@ -28,7 +28,7 @@ public class CronSchedulerJob {
         jobDataMap.put("srcDb", dataSourceBean);
 
         DataSourceBean bean = new DataSourceBean();
-        bean.setUrl("jdbc:mysql://172.16.2.171:3308/a02?characterEncoding=utf-8");
+        bean.setUrl("jdbc:mysql://172.16.2.171:3308/a03?characterEncoding=utf-8");
         bean.setDbType("mysql");
         bean.setUsername("root");
         bean.setPassword("123456");
@@ -47,7 +47,8 @@ public class CronSchedulerJob {
 
         jobDataMap.put("logTitle", "logTitle");
 
-        CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0/6 * * * * ?");
+        //  每天的0点、13点、18点、21点执行
+        CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0 0 0,13,18,21 * * ?");
         CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("trigger1", "group1")
                 .usingJobData("name","王智1").withSchedule(scheduleBuilder).build();
         scheduler.scheduleJob(jobDetail,cronTrigger);

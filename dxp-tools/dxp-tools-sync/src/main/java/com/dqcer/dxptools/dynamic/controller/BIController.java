@@ -34,7 +34,7 @@ public class BIController {
         GroovyObject groovyObject = (GroovyObject) groovyClass.newInstance();
         SQL sql = (SQL) groovyObject.invokeMethod("sqlProvider",null);
 
-        List<Map> all = baseDAO.all(sql);
+        List<Map> all = baseDAO.view(sql);
 
         return all;
     }
