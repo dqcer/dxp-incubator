@@ -1,22 +1,41 @@
 package com.dqcer.dxptools.dynamic.service;
-
 /**
  * @author dongqin
  * @description ibase服务
  * @date 2021/07/28
  */
-public interface IBaseService {
+
+public abstract class IBaseService {
 
 
     /**
-     * 视图
+     * 创建业务表
+     */
+    abstract void createBizTable();
+
+    /**
+     * 目标列表
      *
      * @return {@link Object}
      */
-    Object view();
+    abstract Object targetList();
 
     /**
-     * 导出excel
+     * 批量导入
+     *
+     * @param targetList 目标列表
      */
-    void exportExcel();
+    abstract void batchImport(Object targetList);
+
+
+    /**
+     * 开始进行统计
+     */
+    public void statistical() {
+        createBizTable();
+        Object targetList = targetList();
+        batchImport(targetList);
+    }
+
+
 }

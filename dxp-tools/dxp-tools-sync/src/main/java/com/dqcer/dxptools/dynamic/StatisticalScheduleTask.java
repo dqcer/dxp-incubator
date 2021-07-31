@@ -1,24 +1,18 @@
 package com.dqcer.dxptools.dynamic;
 
 
-import com.dqcer.dxptools.dynamic.dao.BaseDAO;
 import com.dqcer.dxptools.dynamic.service.IBaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import javax.annotation.Resource;
 import java.time.LocalDateTime;
 
 @Slf4j
 @Configuration      //1.主要用于标记配置类，兼备Component的效果。
 @EnableScheduling
 public class StatisticalScheduleTask {
-
-
-    @Resource
-    BaseDAO baseDAO;
 
     @Scheduled(cron = "0/5 * * * * ?")
     //或直接指定时间间隔，例如：5秒
@@ -79,8 +73,8 @@ public class StatisticalScheduleTask {
 
 
         DynamicFactory instance = DynamicFactory.getInstance();
-        IBaseService sqlProvider = instance.loadNewInstanceService(str, baseDAO);
-        log.info(">>>{}", sqlProvider.view());
+        IBaseService sqlProvider = instance.loadNewInstanceService(str);
+        sqlProvider.statistical();
     }
 
 

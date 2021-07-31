@@ -23,8 +23,9 @@ public class DynamicExecutor {
             throw new IllegalArgumentException("未找到实例, id = [" + id + "]");
         }
 //            return script.view(param);
-        return script.view();
+//        return script.s();
 
+        return null;
     }
 
     /**
