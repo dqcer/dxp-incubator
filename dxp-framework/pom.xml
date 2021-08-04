@@ -16,6 +16,8 @@
     <modules>
         <module>dxp-framework-api</module>
         <module>dxp-framework-dto</module>
+        <module>dxp-framework-jcl</module>
+        <module>dxp-framework-rpc</module>
     </modules>
 
 </project>
