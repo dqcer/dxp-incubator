@@ -13,7 +13,7 @@ public class LoginController {
 
     @ValidDTO
     @PostMapping("login")
-    public ResultApi<String> login(@RequestBody LoginDTO loginDTO) {
+    public Mono<ResultApi<String>> login(@RequestBody LoginDTO loginDTO) {
         return ResultApi.ok();
     }
 }
