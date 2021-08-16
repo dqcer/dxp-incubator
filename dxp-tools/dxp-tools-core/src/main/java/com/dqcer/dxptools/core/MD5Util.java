@@ -3,19 +3,20 @@ package com.dqcer.dxptools.core;
 import java.security.MessageDigest;
 
 public class MD5Util {
-    public static void main(String[] args) {
-        String pwd = getMD5("99991");
-        System.out.println(pwd);
-    }
 
-    //生成MD5
+    /**
+     * 获取md5
+     *
+     * @param message 消息
+     * @return {@link String}
+     */
     public static String getMD5(String message) {
         String md5 = "";
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5");  // 创建一个md5算法对象
+            MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageByte = message.getBytes("UTF-8");
-            byte[] md5Byte = md.digest(messageByte);              // 获得MD5字节数组,16*8=128位
-            md5 = bytesToHex(md5Byte);                            // 转换为16进制字符串
+            byte[] md5Byte = md.digest(messageByte);
+            md5 = bytesToHex(md5Byte);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,6 +1,5 @@
 package com.dqcer.dxpprovider.open;
 
-import com.sun.istack.internal.NotNull;
 
 import java.io.Serializable;
 
@@ -8,10 +7,8 @@ public class SyncDto implements Serializable {
 
     private static final long serialVersionUID = 6730859864196506502L;
 
-    @NotNull
     private Long cid;
 
-    @NotNull
     private Long sysId;
 
     private String tableName;

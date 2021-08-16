@@ -1,6 +1,5 @@
 package com.dqcer.dxpprovider.open;
 
-import com.dqcer.dxptools.core.IdUtil;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 /**
@@ -34,9 +34,8 @@ public class ServerController {
         param.put("cid","1300605621556686849");
         param.put("sysId","3");
         param.put("tableName","pub_user_role_study_env_site");
-        param.put("startTime","2020-02-02"); // 公钥
-        param.put("endTime","2022-02-02"); // 公钥
-        //String linkString = SignUtil.createLinkString(param);
+        param.put("startTime","2020-02-02");
+        param.put("endTime","2022-02-02");
         Map<String, String> map = getHeaders(param, "3840120005", "gM6@zA0!eC0?eG0(");
         System.out.println(map.toString());
     }
@@ -44,7 +43,7 @@ public class ServerController {
     public static Map<String, String> getHeaders(Map<String, Object> map, String appId, String appSecret) {
 
         String times = String.valueOf(Timestamp.valueOf(LocalDateTime.now()).getTime());
-        String generateId = IdUtil.generateId();
+        String generateId = UUID.randomUUID().toString().replace("-", "");
 
         map.put("timestamp", times);
         map.put("nonce", generateId);

@@ -19,17 +19,7 @@
 
     <modules>
         <module>dxp-tools-core</module>
+        <module>dxp-tools-spring</module>
         <module>dxp-tools-sync</module>
     </modules>
-
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>

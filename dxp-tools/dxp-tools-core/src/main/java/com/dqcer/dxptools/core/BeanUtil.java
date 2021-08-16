@@ -49,28 +49,28 @@ public class BeanUtil {
 
     }
 
-}
+    static class Demo implements Serializable {
 
-class Demo implements Serializable {
+        private static final long serialVersionUID = -5990251749177713806L;
+        private String id;
 
-    private static final long serialVersionUID = -5990251749177713806L;
-    private String id;
+        private String username;
 
-    private String username;
+        public String getId() {
+            return id;
+        }
 
-    public String getId() {
-        return id;
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 }
