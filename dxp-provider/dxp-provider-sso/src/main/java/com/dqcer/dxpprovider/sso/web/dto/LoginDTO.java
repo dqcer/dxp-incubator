@@ -2,9 +2,6 @@ package com.dqcer.dxpprovider.sso.web.dto;
 
 import com.dqcer.dxpframework.dto.annontation.StrValid;
 import com.dqcer.dxpframework.dto.support.Validation;
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotEmpty;
 
 /**
  * @author dongqin
