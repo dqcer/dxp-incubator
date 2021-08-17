@@ -19,12 +19,12 @@ public class LoginController {
 
 
     @PostMapping("login")
-    public ResultApi<String> login(@RequestBody  LoginDTO loginDTO) {
-        return ResultApi.ok();
+    public ResultApi login(@RequestBody  LoginDTO loginDTO) {
+        return ResultApi.ok(loginDTO);
     }
 
     @PostMapping("")
-    public ResultApi<?> demo(@RequestBody @Validated(Validation.Save.class) LoginDTO loginDTO, Map mp) {
+    public ResultApi demo(@RequestBody @Validated(Validation.Save.class) LoginDTO loginDTO, Map mp) {
         System.out.println(loginDTO.getPd());
         HashMap<String, Object> map = new HashMap<>(8);
         map.put("startTime", new Date());

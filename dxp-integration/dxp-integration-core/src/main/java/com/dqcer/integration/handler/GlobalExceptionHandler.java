@@ -9,7 +9,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -22,23 +21,28 @@ public class GlobalExceptionHandler {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+    /**
+     * 方法参数无效异常处理
+     *
+     * @param exception 异常
+     * @return {@link ResultApi}
+     */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResultApi methodArgumentNotValidException(HttpServletRequest request, MethodArgumentNotValidException exception) {
-
+    public ResultApi methodArgumentNotValidException(MethodArgumentNotValidException exception) {
         BindingResult bindingResult = exception.getBindingResult();
-        StringBuffer stringBuffer = new StringBuffer();
+        StringBuilder stringBuilder = new StringBuilder();
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         for (FieldError fieldError : fieldErrors) {
             String defaultMessage = fieldError.getDefaultMessage();
             String field = fieldError.getField();
             Object rejectedValue = fieldError.getRejectedValue();
-            stringBuffer.append(field + ":'");
-            stringBuffer.append(rejectedValue);
-            stringBuffer.append("' ");
-            stringBuffer.append("message:");
-            stringBuffer.append(defaultMessage + "\t");
+            stringBuilder.append(field).append(":'");
+            stringBuilder.append(rejectedValue);
+            stringBuilder.append("' ");
+            stringBuilder.append("message:");
+            stringBuilder.append(defaultMessage).append("\t");
         }
-        log.error("参数绑定异常: {} {}", exception.getParameter(), stringBuffer.toString());
-        return ResultApi.info(stringBuffer.toString());
+        log.error("参数绑定异常: {} {}", exception.getParameter(), stringBuilder);
+        return ResultApi.info(stringBuilder.toString());
     }
 }

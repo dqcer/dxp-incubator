@@ -10,11 +10,11 @@ import java.time.LocalDate;
  * @description 统一返回前端包装类
  * @date 22:21 2021/4/28
  */
-public class ResultApi<T> implements Serializable {
+public class ResultApi implements Serializable {
 
     private static final long serialVersionUID = 4778158632512046981L;
 
-    private T data;
+    private Object data;
 
     private String message;
 
@@ -35,7 +35,7 @@ public class ResultApi<T> implements Serializable {
      * @param message 消息
      * @param code    状态码
      */
-    protected ResultApi(T result, String message, Integer code) {
+    protected ResultApi(Object result, String message, Integer code) {
         setData(result);
         setMessage(message);
         setCode(code);
@@ -54,11 +54,10 @@ public class ResultApi<T> implements Serializable {
     /**
      * success
      *
-     * @param result
-     * @param <T>
-     * @return ResultApi<T>
+     * @param result 结果
+     * @return ResultApi
      */
-    public static <T> ResultApi<T> ok(T result) {
+    public static  ResultApi ok(Object result) {
         return new ResultApi(result, CodeEnum.GL99900000.getMessage(), CodeEnum.GL99900000.getCode());
     }
 
@@ -71,7 +70,7 @@ public class ResultApi<T> implements Serializable {
      * @param info
      * @return ResultApi<String>
      */
-    public static ResultApi<String> info(String info) {
+    public static ResultApi info(String info) {
         return new ResultApi(info, CodeEnum.GL99900999.getMessage(), CodeEnum.GL99900999.getCode());
     }
 
@@ -80,7 +79,7 @@ public class ResultApi<T> implements Serializable {
      *
      * @return ResultApi<String>
      */
-    public static ResultApi<String> error() {
+    public static ResultApi error() {
         return new ResultApi("error", CodeEnum.GL99900500.getMessage(), CodeEnum.GL99900999.getCode());
     }
 
@@ -90,16 +89,16 @@ public class ResultApi<T> implements Serializable {
      * @param msg 错误信息
      * @return ResultApi<String>
      */
-    public static ResultApi<String> error(String msg) {
+    public static ResultApi error(String msg) {
         return new ResultApi(msg, CodeEnum.GL99900500.getMessage(), CodeEnum.GL99900999.getCode());
     }
 
 
-    public T getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(Object data) {
         this.data = data;
     }
 
