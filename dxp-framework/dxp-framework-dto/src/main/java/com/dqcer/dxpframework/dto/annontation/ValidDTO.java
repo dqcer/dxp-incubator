@@ -7,7 +7,8 @@ import java.lang.annotation.*;
  * @description valid DTO
  * @date 0:41 2021/5/25
  */
-@Target({ElementType.METHOD, ElementType.TYPE})
+@Deprecated
+@Target({ElementType.METHOD, ElementType.TYPE, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface ValidDTO {

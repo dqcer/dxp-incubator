@@ -18,17 +18,23 @@ import java.util.List;
  * @description valid aspect
  * @date 0:38 2021/5/25
  */
+@Deprecated
 @Aspect
 @Order(1)
 @Component
 public class ValidAspect {
 
-    @Pointcut("@annotation(com.dqcer.dxpframework.dto.annontation.ValidDTO)")
+    @Pointcut("within(@com.dqcer.dxpframework.dto.annontation.ValidDTO *) ")
     public void validDTOMethod() {
     }
 
 
-    @Around("validDTOMethod()")
+
+    @Pointcut("execution(* *(@com.dqcer.dxpframework.dto.annontation.ValidDTO (*) ))")
+    public void validDTO1() {
+    }
+
+    @Around("validDTO1() || validDTOMethod()")
     public Object valid(ProceedingJoinPoint joinPoint) throws Throwable {
         for (Object arg : joinPoint.getArgs()) {
             if (arg instanceof Validation) {

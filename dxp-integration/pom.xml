@@ -4,14 +4,22 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.dqcer</groupId>
-        <artifactId>dxp-tools</artifactId>
+        <artifactId>dxp-incubator</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.dqcer</groupId>
-    <artifactId>dxp-tools-core</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>dxp-tools-core</name>
 
-    <description>tools-core</description>
+    <groupId>com.dqcer</groupId>
+    <artifactId>dxp-integration</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>dxp-integration</name>
+    <packaging>pom</packaging>
+
+    <description>集成模块</description>
+
+    <modules>
+        <module>dxp-integration-core</module>
+    </modules>
+
+
 
 </project>

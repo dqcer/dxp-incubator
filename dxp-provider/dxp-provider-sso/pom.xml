@@ -35,12 +35,21 @@
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-framework-api</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-framework-dto</artifactId>
-            <scope>compile</scope>
-
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.dqcer</groupId>
+            <artifactId>dxp-integration-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.dqcer</groupId>
+            <artifactId>dxp-tools-core</artifactId>
         </dependency>
 
     </dependencies>

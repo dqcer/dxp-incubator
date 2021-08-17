@@ -7,15 +7,12 @@
         <artifactId>dxp-incubator</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <groupId>com.dqcer</groupId>
     <artifactId>dxp-tools</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>dxp-tools</name>
     <packaging>pom</packaging>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
 
     <modules>
         <module>dxp-tools-core</module>
