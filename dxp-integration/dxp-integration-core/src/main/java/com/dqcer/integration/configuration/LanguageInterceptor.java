@@ -32,6 +32,7 @@ public class LanguageInterceptor extends LocaleChangeInterceptor {
         }
 
         try {
+            assert locale != null;
             localeResolver.setLocale(request, response, parseLocaleValue(locale));
         } catch (IllegalArgumentException ex) {
             if (isIgnoreInvalidLocale()) {
