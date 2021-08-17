@@ -15,13 +15,13 @@ public class LoginDTO implements Validation {
     /**
      * 账号
      */
-    @StrValid(min = 3, max = 32, message = "{pd.length.error}", groups = Save.class)
+    @StrValid(min = 3, max = 32, message = "{loginDTO.ue}")
     private String ue;
 
     /**
      * 密码
      */
-    @StrValid(min = 3, max = 32, groups = Save.class)
+    @StrValid(min = 3, max = 32, message = "{loginDTO.pd}")
     private String pd;
 
     public String getUe() {

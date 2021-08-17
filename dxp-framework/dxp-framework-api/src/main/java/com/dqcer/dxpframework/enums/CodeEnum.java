@@ -8,9 +8,9 @@ package com.dqcer.dxpframework.enums;
 public enum CodeEnum {
 
     GL99900000(0, "操作成功"),
-    GL99900400(400, "参数异常"),
-    GL99900999(999, "处理信息"),
+    GL99900301(301, "警告信息"),
     GL99900500(500, "系统异常"),
+    GL99900999(999, "待定"),
     ;
 
     private int code;

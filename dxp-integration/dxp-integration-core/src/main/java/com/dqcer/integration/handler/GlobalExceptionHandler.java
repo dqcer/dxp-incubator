@@ -21,6 +21,19 @@ public class GlobalExceptionHandler {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+
+    /**
+     * 异常
+     *
+     * @param exception 异常
+     * @return {@link ResultApi}
+     */
+    @ExceptionHandler(value = Exception.class)
+    public ResultApi exception(Exception exception) {
+        log.error("系统异常: {} ", exception.getMessage());
+        return ResultApi.error(exception.getMessage());
+    }
+
     /**
      * 方法参数无效异常处理
      *
@@ -32,6 +45,7 @@ public class GlobalExceptionHandler {
         BindingResult bindingResult = exception.getBindingResult();
         StringBuilder stringBuilder = new StringBuilder();
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+        ResultApi resultApi = ResultApi.warn();
         for (FieldError fieldError : fieldErrors) {
             String defaultMessage = fieldError.getDefaultMessage();
             String field = fieldError.getField();
@@ -41,8 +55,9 @@ public class GlobalExceptionHandler {
             stringBuilder.append("' ");
             stringBuilder.append("message:");
             stringBuilder.append(defaultMessage).append("\t");
+            resultApi.put(field, defaultMessage);
         }
         log.error("参数绑定异常: {} {}", exception.getParameter(), stringBuilder);
-        return ResultApi.info(stringBuilder.toString());
+        return resultApi;
     }
 }

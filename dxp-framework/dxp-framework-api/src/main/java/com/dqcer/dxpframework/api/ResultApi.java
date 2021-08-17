@@ -4,6 +4,8 @@ import com.dqcer.dxpframework.enums.CodeEnum;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author dqcer
@@ -20,7 +22,10 @@ public class ResultApi implements Serializable {
 
     private Integer code;
 
-    private LocalDate now = LocalDate.now();
+    private String now = LocalDate.now().toString();
+
+    private transient Map<String, Object> map;
+
 
     /**
      * 私有化
@@ -39,45 +44,66 @@ public class ResultApi implements Serializable {
         setData(result);
         setMessage(message);
         setCode(code);
+        this.map = new HashMap<>(8);
     }
 
-
     /**
-     * success
+     * 无参success
      *
-     * @return ResultApi<T>
+     * @return {@link ResultApi}
      */
     public static ResultApi ok() {
         return ok(null);
     }
 
     /**
-     * success
+     * 多个result
+     *
+     * @param key    key
+     * @param result 结果
+     * @return {@link ResultApi}
+     */
+    public ResultApi put(String key, Object result) {
+        map.put(key, result);
+        setData(map);
+        setMessage(message);
+        setCode(code);
+        return this;
+    }
+
+    /**
+     * 有参success
      *
      * @param result 结果
-     * @return ResultApi
+     * @return {@link ResultApi}
      */
     public static  ResultApi ok(Object result) {
         return new ResultApi(result, CodeEnum.GL99900000.getMessage(), CodeEnum.GL99900000.getCode());
     }
 
+    /**
+     * 无参警告
+     *
+     * @return {@link ResultApi}
+     */
+    public static ResultApi warn() {
+        return new ResultApi(null, CodeEnum.GL99900301.getMessage(), CodeEnum.GL99900301.getCode());
+    }
 
     /**
-     * success
-     * <p>
-     * 需要处理提示信息的标识
+     * 警告
      *
-     * @param info
-     * @return ResultApi<String>
+     * @param result 结果
+     * @return {@link ResultApi}
      */
-    public static ResultApi info(String info) {
-        return new ResultApi(info, CodeEnum.GL99900999.getMessage(), CodeEnum.GL99900999.getCode());
+    public static ResultApi warn(Object result) {
+        return new ResultApi(result, CodeEnum.GL99900301.getMessage(), CodeEnum.GL99900301.getCode());
     }
 
     /**
      * 无参异常
      *
-     * @return ResultApi<String>
+     * @return {@link ResultApi}
      */
     public static ResultApi error() {
         return new ResultApi("error", CodeEnum.GL99900500.getMessage(), CodeEnum.GL99900999.getCode());
@@ -86,11 +112,11 @@ public class ResultApi implements Serializable {
     /**
      * 有参异常
      *
-     * @param msg 错误信息
-     * @return ResultApi<String>
+     * @param result 结果
+     * @return {@link ResultApi}
      */
-    public static ResultApi error(String msg) {
-        return new ResultApi(msg, CodeEnum.GL99900500.getMessage(), CodeEnum.GL99900999.getCode());
+    public static ResultApi error(Object result) {
+        return new ResultApi(result, CodeEnum.GL99900500.getMessage(), CodeEnum.GL99900999.getCode());
     }
 
 
@@ -118,11 +144,11 @@ public class ResultApi implements Serializable {
         this.code = code;
     }
 
-    public LocalDate getNow() {
+    public String getNow() {
         return now;
     }
 
-    public void setNow(LocalDate now) {
+    public void setNow(String now) {
         this.now = now;
     }
 }
