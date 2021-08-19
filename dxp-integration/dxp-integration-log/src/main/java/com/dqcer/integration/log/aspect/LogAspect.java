@@ -2,6 +2,7 @@ package com.dqcer.integration.log.aspect;
 
 
 import com.dqcer.dxptools.core.IpAddressUtil;
+import com.dqcer.framework.storage.UserStorage;
 import com.dqcer.integration.log.LogEvent;
 import com.dqcer.integration.log.SpringContextHolder;
 import com.dqcer.integration.log.annotation.Log;
@@ -11,8 +12,6 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -22,9 +21,12 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author dongqin
+ * @description 日志 aop
+ * @date 2021/08/19
+ */
 @Aspect
-@Order(1)
-@Component
 public class LogAspect {
 
     /**
@@ -51,6 +53,7 @@ public class LogAspect {
             map.put("ipAddr", ipAddr);
             map.put("requestURI", requestURI);
             map.put("language", language);
+            map.put("username", UserStorage.getBox().getUsername());
             SpringContextHolder.publishEvent(new LogEvent(map));
         }
 

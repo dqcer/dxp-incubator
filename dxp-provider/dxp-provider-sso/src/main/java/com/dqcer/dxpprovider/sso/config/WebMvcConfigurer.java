@@ -1,5 +1,6 @@
 package com.dqcer.dxpprovider.sso.config;
 
+import com.dqcer.integration.context.BaseInfoInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.Validator;
 import org.springframework.web.servlet.LocaleResolver;
@@ -29,6 +30,7 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor);
+        registry.addInterceptor(new BaseInfoInterceptor());
     }
 
     @Override
