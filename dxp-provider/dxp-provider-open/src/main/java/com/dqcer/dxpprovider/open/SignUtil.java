@@ -7,14 +7,18 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+/**
+ * @author dongqin
+ * @description 签名工具类
+ * @date 2021/08/20 00:08:47
+ */
 public class SignUtil {
 
     public static String sign(Map<String, Object> map, String appSecret) {
         //  除去数组中的空值和签名参数
         Map<String, Object> sPara = nullFilter(map);
 
-        Map<String, Object> stringMap = new TreeMap();
-        stringMap.putAll(sPara);
+        TreeMap<String, Object> stringMap = new TreeMap<>(sPara);
 
         Set<Map.Entry<String, Object>> entries = stringMap.entrySet();
 

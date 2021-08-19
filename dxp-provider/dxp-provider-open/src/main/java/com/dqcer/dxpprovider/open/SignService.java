@@ -40,9 +40,7 @@ public class SignService {
      * @return boolean
      */
     public boolean validTimeout(HttpServletRequest request) {
-        String sign = request.getHeader(SIGN);
         String timestamp = request.getHeader(TIMESTAMP);
-        String nonce = request.getHeader(NONCE);
         long nowTimestamp = Timestamp.valueOf(LocalDateTime.now()).getTime();
         if (Long.parseLong(timestamp) + TIME_OUT > nowTimestamp) {
             return true;
@@ -109,10 +107,7 @@ public class SignService {
 
         String nowSign = SignUtil.sign(map, appSecret);
 
-        if (nowSign.equals(sign)) {
-            return true;
-        }
-        return false;
+        return nowSign.equals(sign);
     }
 
     /**
@@ -123,19 +118,16 @@ public class SignService {
      */
     public boolean validAppId(String appId) {
         Map<String, String> authorization = authorization();
-        if (authorization.containsKey(appId)) {
-            return true;
-        }
-        return false;
+        return authorization.containsKey(appId);
     }
 
     /**
      * 授权的数据 key:appId value:appSecret
      *
-     * @return {@link Map<String, String>}
+     * @return {@link Map}
      */
     public Map<String, String> authorization() {
-        Map map = new HashMap(16);
+        Map<String, String> map = new HashMap<>(16);
         map.put("3840120005", "gM6@zA0!eC0?eG0(");
         return map;
     }
