@@ -3,18 +3,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.dqcer</groupId>
-        <artifactId>dxp-provider</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <groupId>com.dqcer.provider</groupId>
+    <artifactId>dxp-provider</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.dqcer</groupId>
     <artifactId>dxp-provider-sso</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>dxp-provider-sso</name>
     <description>Demo project for Spring Boot</description>
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+
     <dependencies>
 
         <!--集成web容器-->
@@ -64,6 +62,12 @@
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-integration-context</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.dqcer</groupId>
+            <artifactId>dxp-integration-idempotent</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

@@ -8,18 +8,29 @@ import java.lang.annotation.*;
  * @date 20:16 2021/5/13
  */
 @Documented
-@Target({ElementType.METHOD})
+@Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ApiIdempotent {
 
-    /**
-     * 参数 key
-     * @return
-     */
-    String key() default "";
+	/**
+	 * 参数 key
+	 *
+	 * @return {@link String}
+	 */
+	String key();
 
-    int expires() default 60;
+	/**
+	 * 到期时间 默认 60
+	 *
+	 * @return int
+	 */
+	int expires() default 60;
 
-    boolean delKey() default true;
+	/**
+	 * 是否删除 key 默认删除
+	 *
+	 * @return boolean
+	 */
+	boolean delKey() default true;
 
 }

@@ -7,7 +7,7 @@
         <artifactId>dxp-incubator</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.dqcer</groupId>
+    <groupId>com.dqcer.framework</groupId>
     <artifactId>dxp-framework</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>dxp-framework</name>
@@ -18,6 +18,7 @@
         <module>dxp-framework-dto</module>
         <module>dxp-framework-jcl</module>
         <module>dxp-framework-rpc</module>
+        <module>dxp-framework-storage</module>
     </modules>
 
 </project>

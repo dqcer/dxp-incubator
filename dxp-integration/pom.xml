@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.dqcer</groupId>
+    <groupId>com.dqcer.integration</groupId>
     <artifactId>dxp-integration</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>dxp-integration</name>
@@ -19,6 +19,7 @@
     <modules>
         <module>dxp-integration-context</module>
         <module>dxp-integration-core</module>
+        <module>dxp-integration-idempotent</module>
         <module>dxp-integration-log</module>
     </modules>
 

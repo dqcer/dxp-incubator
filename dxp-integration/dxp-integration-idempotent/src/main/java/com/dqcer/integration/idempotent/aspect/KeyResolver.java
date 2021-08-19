@@ -13,9 +13,8 @@ public interface KeyResolver {
 
 	/**
 	 * 解析器
-	 *
 	 * @param idempotent 接口注解标识
-	 * @param point      接口切点信息
+	 * @param point 接口切点信息
 	 * @return 处理结果
 	 */
 	String resolver(ApiIdempotent idempotent, JoinPoint point);

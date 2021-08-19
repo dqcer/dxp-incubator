@@ -1,14 +1,14 @@
 package com.dqcer.dxpprovider.sso.web.dto;
 
+import com.dqcer.dxpframework.dto.BaseDTO;
 import com.dqcer.dxpframework.dto.annontation.StrValid;
-import com.dqcer.dxpframework.dto.support.Validation;
 
 /**
  * @author dongqin
  * @description 登录dto
  * @date 2021/07/16 23:07:48
  */
-public class LoginDTO implements Validation {
+public class LoginDTO extends BaseDTO {
 
     private static final long serialVersionUID = -7311088026242433898L;
 
@@ -23,6 +23,12 @@ public class LoginDTO implements Validation {
      */
     @StrValid(min = 3, max = 32, message = "{loginDTO.pd}")
     private String pd;
+
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 
     public String getUe() {
         return ue;

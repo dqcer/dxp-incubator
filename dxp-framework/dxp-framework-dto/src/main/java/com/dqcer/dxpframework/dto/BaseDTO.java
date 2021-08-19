@@ -2,6 +2,8 @@ package com.dqcer.dxpframework.dto;
 
 
 import com.dqcer.dxpframework.dto.support.Validation;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.Serializable;
 
@@ -15,6 +17,12 @@ public class BaseDTO implements Validation, Serializable {
 
     @Override
     public String toString() {
-        return "BaseDTO{}";
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

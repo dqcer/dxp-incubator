@@ -3,18 +3,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.dqcer</groupId>
-        <artifactId>dxp-integration</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <groupId>com.dqcer.integration</groupId>
+    <artifactId>dxp-integration</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.dqcer</groupId>
     <artifactId>dxp-integration-idempotent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>dxp-integration-idempotent</name>
     <description>idempotent</description>
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.aspectj</groupId>
@@ -31,5 +29,15 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <!--代码格式插件，默认使用spring 规则-->
+            <plugin>
+                <groupId>io.spring.javaformat</groupId>
+                <artifactId>spring-javaformat-maven-plugin</artifactId>
+                <version>0.0.23</version>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

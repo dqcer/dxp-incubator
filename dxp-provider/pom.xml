@@ -7,7 +7,7 @@
         <artifactId>dxp-incubator</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.dqcer</groupId>
+    <groupId>com.dqcer.provider</groupId>
     <artifactId>dxp-provider</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>dxp-provider</name>

@@ -1,10 +1,5 @@
 package com.dqcer.integration.idempotent.aspect;
 
-/**
- * @author lengleng
- * @date 2020/9/25
- */
-
 import com.dqcer.integration.idempotent.annotation.ApiIdempotent;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -32,6 +27,7 @@ public class ExpressionResolver implements KeyResolver {
 		String[] params = DISCOVERER.getParameterNames(getMethod(point));
 		StandardEvaluationContext context = new StandardEvaluationContext();
 
+		assert params != null;
 		for (int len = 0; len < params.length; len++) {
 			context.setVariable(params[len], arguments[len]);
 		}

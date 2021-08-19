@@ -21,7 +21,7 @@ public class LogListener {
     public void listenLog(LogEvent map) {
         Object source = map.getSource();
         if (log.isInfoEnabled()) {
-            log.info("log event : {}", source);
+            log.info("Log listener: {}", source);
         }
     }
 

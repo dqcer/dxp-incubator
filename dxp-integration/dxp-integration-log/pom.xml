@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.dqcer</groupId>
-        <artifactId>dxp-integration</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <groupId>com.dqcer.integration</groupId>
+    <artifactId>dxp-integration</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.dqcer</groupId>
     <artifactId>dxp-integration-log</artifactId>
@@ -49,10 +49,6 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-access</artifactId>
             <version>${logback.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
         </dependency>
         <dependency>
             <groupId>com.dqcer</groupId>

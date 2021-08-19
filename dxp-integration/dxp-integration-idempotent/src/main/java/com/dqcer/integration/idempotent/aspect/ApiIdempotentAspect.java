@@ -11,134 +11,125 @@ import org.redisson.Redisson;
 import org.redisson.api.RMapCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author dongqin
- * @description
- * @date 20:24 2021/5/13
+ * @description api幂等
+ * @date 2021/08/19 23:08:36
  */
 @Aspect
-@Component
 public class ApiIdempotentAspect {
 
+	private static final Logger log = LoggerFactory.getLogger(ApiIdempotentAspect.class);
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ApiIdempotentAspect.class);
+	private ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<>();
 
-    private ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal();
+	private static final String API_IDEMPOTENT = "api_idempotent";
 
-    private static final String API_IDEMPOTENT = "api_idempotent";
+	private static final String KEY = "key";
 
-    private static final String KEY = "key";
+	private static final String DEL_KEY = "delKey";
 
-    private static final String DEL_KEY = "delKey";
+	@Resource
+	private Redisson redisson;
 
-    @Autowired
-    private Redisson redisson;
+	@Resource
+	private KeyResolver keyResolver;
 
-    @Autowired
-    private KeyResolver keyResolver;
+	@Pointcut("@annotation(com.dqcer.integration.idempotent.annotation.ApiIdempotent)")
+	public void pointCut() {
+	}
 
-    @Pointcut("@annotation(com.dqcer.integration.idempotent.annotation.ApiIdempotent)")
-    public void pointCut() {
+	/**
+	 * 之前
+	 * @param joinPoint 连接点
+	 * @throws Exception 异常
+	 */
+	@Before("pointCut()")
+	public void beforePointCut(JoinPoint joinPoint) throws Exception {
+		ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder
+				.getRequestAttributes();
+		assert requestAttributes != null;
+		HttpServletRequest request = requestAttributes.getRequest();
 
-    }
+		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+		Method method = signature.getMethod();
+		if (!method.isAnnotationPresent(ApiIdempotent.class)) {
+			return;
+		}
 
-    @Before("pointCut()")
-    public void beforePointCut(JoinPoint joinPoint) throws Exception {
-        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = requestAttributes.getRequest();
+		ApiIdempotent idempotent = method.getAnnotation(ApiIdempotent.class);
 
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Method method = signature.getMethod();
-        if (!method.isAnnotationPresent(ApiIdempotent.class)) {
-            return;
-        }
+		String key = getKey(idempotent, request, joinPoint);
 
-        ApiIdempotent idempotent = method.getAnnotation(ApiIdempotent.class);
+		long expireTime = idempotent.expires();
+		boolean delKey = idempotent.delKey();
 
-        String key = getKey(idempotent, request, joinPoint);
+		RMapCache<String, Object> rMapCache = redisson.getMapCache(API_IDEMPOTENT);
+		String value = LocalDateTime.now().toString().replace("T", " ");
+		Object object;
+		if (null != rMapCache.get(key)) {
+			throw new IdempotentException();
+		}
 
-        long expireTime = idempotent.expires();
-        boolean delKey = idempotent.delKey();
+		synchronized (this) {
+			object = rMapCache.putIfAbsent(key, value, expireTime, TimeUnit.SECONDS);
+			if (null != object) {
+				throw new IdempotentException();
+			}
+			else {
+				if (log.isInfoEnabled()) {
+					log.info("Api idempotent: has stored key={},value={},expireTime={}{},now={}", key, value,
+							expireTime, TimeUnit.SECONDS, LocalDateTime.now());
+				}
+			}
+		}
 
-        RMapCache<String, Object> rMapCache = redisson.getMapCache(API_IDEMPOTENT);
-        String value = LocalDateTime.now().toString().replace("T", " ");
-        Object object;
-        if (null != rMapCache.get(key)) {
-            throw new IdempotentException();
-        }
+		Map<String, Object> map = CollectionUtils.isEmpty(threadLocal.get()) ? new HashMap<>(4) : threadLocal.get();
+		map.put(KEY, key);
+		map.put(DEL_KEY, delKey);
+		threadLocal.set(map);
 
-        synchronized (this) {
-            object = rMapCache.putIfAbsent(key, value, expireTime, TimeUnit.SECONDS);
-            if (null != object) {
-                throw new IdempotentException();
-            } else {
-                LOGGER.info("[idempotent]:has stored key={},value={},expireTime={}{},now={}", key, value, expireTime, TimeUnit.SECONDS, LocalDateTime.now().toString());
-            }
-        }
+	}
 
-        Map<String, Object> map = CollectionUtils.isEmpty(threadLocal.get()) ? new HashMap<>(4) : threadLocal.get();
-        map.put(KEY, key);
-        map.put(DEL_KEY, delKey);
-        threadLocal.set(map);
+	private String getKey(ApiIdempotent idempotent, HttpServletRequest request, JoinPoint joinPoint) {
+		return keyResolver.resolver(idempotent, joinPoint);
+	}
 
-    }
+	@After("pointCut()")
+	public void afterPointCut() {
+		Map<String, Object> map = threadLocal.get();
+		if (CollectionUtils.isEmpty(map)) {
+			return;
+		}
 
-    private String getKey(ApiIdempotent idempotent, HttpServletRequest request, JoinPoint joinPoint) {
-        String key = idempotent.key();
+		RMapCache<Object, Object> mapCache = redisson.getMapCache(API_IDEMPOTENT);
+		if (mapCache.size() == 0) {
+			return;
+		}
 
-        //  url + 参数
-        if (key != null && key.trim().length() > 0) {
-            String url = request.getRequestURL().toString();
-            String argString = Arrays.asList(joinPoint.getArgs()).toString();
-            key = url + argString;
-        } else {
-            key = keyResolver.resolver(idempotent, joinPoint);
-        }
+		String key = map.get(KEY).toString();
+		boolean delKey = (boolean) map.get(DEL_KEY);
 
-        String aid = request.getHeader("aid");
-        if (key != null && key.length() > 0) {
-            key = aid + key;
-        }
+		if (delKey) {
+			mapCache.fastRemove(key);
+			if (log.isInfoEnabled()) {
 
-        return key;
-    }
-
-    @After("pointCut()")
-    public void afterPointCut(JoinPoint joinPoint) {
-        Map<String, Object> map = threadLocal.get();
-        if (CollectionUtils.isEmpty(map)) {
-            return;
-        }
-
-        RMapCache<Object, Object> mapCache = redisson.getMapCache(API_IDEMPOTENT);
-        if (mapCache.size() == 0) {
-            return;
-        }
-
-        String key = map.get(KEY).toString();
-        boolean delKey = (boolean) map.get(DEL_KEY);
-
-        if (delKey) {
-            mapCache.fastRemove(key);
-            LOGGER.info("[idempotent]:has removed key={}", key);
-        }
-        threadLocal.remove();
-    }
-
-
+				log.info("Api idempotent:has removed key={}", key);
+			}
+		}
+		threadLocal.remove();
+	}
 
 }
