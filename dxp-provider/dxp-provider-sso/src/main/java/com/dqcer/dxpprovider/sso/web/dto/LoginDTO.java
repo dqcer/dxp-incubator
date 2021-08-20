@@ -24,12 +24,6 @@ public class LoginDTO extends BaseDTO {
     @StrValid(min = 3, max = 32, message = "{loginDTO.pd}")
     private String pd;
 
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
     public String getUe() {
         return ue;
     }

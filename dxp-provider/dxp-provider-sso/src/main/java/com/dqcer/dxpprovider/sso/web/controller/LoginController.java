@@ -2,6 +2,7 @@ package com.dqcer.dxpprovider.sso.web.controller;
 
 import com.dqcer.dxpframework.api.ResultApi;
 import com.dqcer.dxpprovider.sso.web.dto.LoginDTO;
+import com.dqcer.integration.ds.DynamicDataSourceContextHolder;
 import com.dqcer.integration.idempotent.annotation.ApiIdempotent;
 import com.dqcer.integration.log.annotation.Log;
 import org.springframework.validation.annotation.Validated;
@@ -17,6 +18,7 @@ public class LoginController {
     @PostMapping("login")
     public ResultApi login(@RequestBody @Validated LoginDTO loginDTO) throws InterruptedException {
         Thread.sleep(3000);
+        System.out.println(DynamicDataSourceContextHolder.peek());
         return ResultApi.ok(loginDTO);
     }
 }

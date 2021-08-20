@@ -61,6 +61,11 @@
                 <artifactId>dxp-integration-core</artifactId>
                 <version>${dxp-incubator.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.dqcer</groupId>
+                <artifactId>dxp-integration-ds</artifactId>
+                <version>${dxp-incubator.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
