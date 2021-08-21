@@ -80,13 +80,13 @@ public class ApiIdempotentAspect {
 		String value = LocalDateTime.now().toString().replace("T", " ");
 		Object object;
 		if (null != rMapCache.get(key)) {
-			throw new IdempotentException();
+			throw new IdempotentException("努力响应中，请稍后...");
 		}
 
 		synchronized (this) {
 			object = rMapCache.putIfAbsent(key, value, expireTime, TimeUnit.SECONDS);
 			if (null != object) {
-				throw new IdempotentException();
+				throw new IdempotentException("努力响应中，请稍后...");
 			}
 			else {
 				if (log.isInfoEnabled()) {

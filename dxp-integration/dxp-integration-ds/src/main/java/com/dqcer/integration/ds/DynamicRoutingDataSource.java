@@ -4,6 +4,7 @@ import com.dqcer.integration.ds.provider.PropertiesDataSourceProvider;
 import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
@@ -13,7 +14,7 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class DynamicRoutingDataSource extends AbstractRoutingDataSource implements InitializingBean {
+public class DynamicRoutingDataSource extends AbstractRoutingDataSource implements InitializingBean, DisposableBean {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -22,17 +23,27 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource implemen
     @Resource
     private PropertiesDataSourceProvider providers;
 
+    public Map<String, DataSource> getDataSources() {
+        return dataSourceMap;
+    }
+
     @Override
     protected Object determineCurrentLookupKey() {
-        // TODO: 2021/8/20 赖加载
-        return determinePrimaryDataSource();
+        if (log.isInfoEnabled()) {
+            log.info("获取数据源...");
+        }
+        String peek = DynamicDataSourceContextHolder.peek();
+        if (null == peek || peek.trim().length() == 0) {
+            return determinePrimaryDataSource();
+        }
+        return dataSourceMap.get(peek);
     }
 
 
     private DataSource determinePrimaryDataSource() {
-        log.debug("dynamic-datasource switch to the primary datasource");
         DataSource dataSource = dataSourceMap.get("master");
         if (dataSource != null) {
+            DynamicDataSourceContextHolder.push("master");
             return dataSource;
         }
         throw new RuntimeException("dynamic-datasource can not find primary datasource");
@@ -47,11 +58,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource implemen
             String key = dsItem.getKey();
             synchronized (this) {
                 DataSource value = dsItem.getValue();
-                DataSource oldDataSource = dataSourceMap.put(key, value);
-                if (log.isInfoEnabled()) {
-                        HikariDataSource hikariDataSource = (HikariDataSource) value;
-                        log.info("Dynamic datasource add success key: {}  jdbc-url:{}", key, hikariDataSource.getJdbcUrl());
-                }
+                DataSource oldDataSource = addDataSource(key, value);
 
                 // 关闭老的数据源
                 if (oldDataSource != null) {
@@ -61,6 +68,24 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource implemen
         }
     }
 
+    @Override
+    public void destroy() {
+        log.info("dynamic-datasource start closing ....");
+        for (Map.Entry<String, DataSource> item : dataSourceMap.entrySet()) {
+            closeDataSource(item.getKey(), item.getValue());
+        }
+        log.info("dynamic-datasource all closed success,bye");
+    }
+
+    public DataSource addDataSource(String key, DataSource value) {
+        DataSource oldDataSource = dataSourceMap.put(key, value);
+        if (log.isInfoEnabled()) {
+                HikariDataSource hikariDataSource = (HikariDataSource) value;
+                log.info("Add datasource : {}  jdbc-url:{}", key, hikariDataSource.getJdbcUrl());
+        }
+        return oldDataSource;
+    }
+
 
     /**
      * close db
@@ -68,14 +93,14 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource implemen
      * @param ds         dsName
      * @param dataSource db
      */
-    private void closeDataSource(String ds, DataSource dataSource) {
+    public void closeDataSource(String ds, DataSource dataSource) {
         try {
             Class<? extends DataSource> clazz = dataSource.getClass();
             Method closeMethod = clazz.getDeclaredMethod("close");
             closeMethod.invoke(dataSource);
 
             if (log.isInfoEnabled()) {
-                log.info("Dynamic datasource close: {}", ds);
+                log.info("Close datasource : {}", ds);
             }
 
         } catch (Exception e) {

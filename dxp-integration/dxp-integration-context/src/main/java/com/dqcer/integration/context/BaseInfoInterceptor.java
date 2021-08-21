@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 public class BaseInfoInterceptor implements HandlerInterceptor {
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        // TODO: 2021/8/21 获取当前用户信息
         UserStorage.Box box = new UserStorage.Box();
         box.setUserId(123456789L);
         box.setUsername("dqcer@sina.com");
@@ -23,7 +24,7 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         UserStorage.clearBox();
     }
 }

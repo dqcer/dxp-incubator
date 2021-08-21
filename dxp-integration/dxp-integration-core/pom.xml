@@ -41,14 +41,6 @@
         </dependency>
         <!-- end -->
 
-<!--        &lt;!&ndash; log &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.slf4j</groupId>-->
-<!--            <artifactId>slf4j-api</artifactId>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; end &ndash;&gt;-->
-
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-framework-api</artifactId>

@@ -2,6 +2,7 @@ package com.dqcer.integration.ds.configuration;
 
 
 import com.dqcer.integration.ds.DynamicRoutingDataSource;
+import com.dqcer.integration.ds.aop.DataSourceAspect;
 import com.dqcer.integration.ds.properties.DynamicDataSourceProperties;
 import com.dqcer.integration.ds.provider.DataSourceProvider;
 import com.dqcer.integration.ds.provider.PropertiesDataSourceProvider;
@@ -49,6 +50,11 @@ public class AutoConfiguration {
     public DataSource dataSource() {
         // TODO: 2021/8/20 负载均衡
         return new DynamicRoutingDataSource();
+    }
+
+    @Bean
+    public DataSourceAspect dataSourceAspect() {
+        return new DataSourceAspect();
     }
 
 }
