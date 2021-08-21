@@ -1,3 +1,12 @@
+
+
+### 平台目录结构说明 
+- dxp-incubator
+    - dxp-framework-api
+    - dxp-framework-dto(完善自定义注解)
+
+
+
 # todo list
 
 
