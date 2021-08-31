@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 /**
  * @author dongqin
  * @description 基础的实体类
- * @date 2021/08/21 20:08:09
+ * @date 2021/03/21 20:08:09
  */
 public class BaseEntity implements Serializable {
 
@@ -55,6 +55,6 @@ public class BaseEntity implements Serializable {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return null;
+        return "";
     }
 }

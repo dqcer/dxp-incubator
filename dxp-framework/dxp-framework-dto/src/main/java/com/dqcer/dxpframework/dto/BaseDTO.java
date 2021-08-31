@@ -13,6 +13,7 @@ import java.io.Serializable;
  * @date 23:37 2021/5/5
  */
 public class BaseDTO implements Validation, Serializable {
+
     private static final long serialVersionUID = -537843738855940508L;
 
     @Override
@@ -23,6 +24,6 @@ public class BaseDTO implements Validation, Serializable {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return null;
+        return "";
     }
 }

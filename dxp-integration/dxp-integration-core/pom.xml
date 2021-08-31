@@ -46,6 +46,12 @@
             <artifactId>dxp-framework-api</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <!--log-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
