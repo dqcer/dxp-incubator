@@ -2,6 +2,11 @@ package com.dqcer.integration.ds.processor;
 
 import org.aopalliance.intercept.MethodInvocation;
 
+/**
+ * @author dongqin
+ * @description ds处理器
+ * @date 2021/08/31
+ */
 public abstract class AbstractDsProcessor {
 
     private AbstractDsProcessor nextProcessor;

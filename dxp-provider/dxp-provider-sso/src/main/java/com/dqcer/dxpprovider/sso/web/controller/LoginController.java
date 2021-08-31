@@ -18,7 +18,7 @@ public class LoginController {
     @ApiIdempotent(key = "#loginDTO.toString()")
     @Log
     @PostMapping("login")
-    public ResultApi login(@RequestBody @Validated LoginDTO loginDTO)  {
+    public ResultApi<LoginDTO> login(@RequestBody @Validated LoginDTO loginDTO)  {
         return ResultApi.ok(loginDTO);
     }
 

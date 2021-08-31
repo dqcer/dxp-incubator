@@ -11,6 +11,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 
+/**
+ * @author dongqin
+ * @description 创造者自动配置
+ * @date 2021/08/31
+ */
 @Configuration
 @EnableConfigurationProperties(DynamicDataSourceProperties.class)
 public class CreatorAutoConfiguration {

@@ -14,6 +14,11 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author dongqin
+ * @description 动态数据源
+ * @date 2021/08/31
+ */
 public class DynamicRoutingDataSource extends AbstractRoutingDataSource implements InitializingBean, DisposableBean {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());

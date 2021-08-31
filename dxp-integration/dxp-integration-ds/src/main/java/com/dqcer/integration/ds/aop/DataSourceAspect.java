@@ -27,6 +27,11 @@ import java.lang.reflect.Method;
 import java.text.MessageFormat;
 import java.util.Map;
 
+/**
+ * @author dongqin
+ * @description 数据来源切面处理
+ * @date 2021/08/31
+ */
 @Aspect
 @Order(1)
 public class DataSourceAspect {
@@ -79,7 +84,6 @@ public class DataSourceAspect {
         if (!method.isAnnotationPresent(DS.class)) {
             Map<String, javax.sql.DataSource> map = dataSourceProvider.loadDataSources();
             DynamicDataSourceContextHolder.push("master");
-            System.out.println(map);
         } else {
             DS idempotent = method.getAnnotation(DS.class);
             String resolver = resolver(idempotent, joinPoint);

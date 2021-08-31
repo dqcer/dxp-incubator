@@ -63,20 +63,4 @@ public class JdbcDataSourceProvider implements DataSourceProvider {
 
         return map;
     }
-
-    /**
-     * 创建数据源映射
-     *
-     * @param dataSourcePropertiesMap 数据源属性映射
-     * @return {@link Map}
-     */
-    protected Map<String, DataSource> createDataSourceMap(Map<String, DynamicDataSourceProperties> dataSourcePropertiesMap) {
-        Map<String, DataSource> dataSourceMap = new HashMap<>(dataSourcePropertiesMap.size() * 2);
-        for (Map.Entry<String, DynamicDataSourceProperties> item : dataSourcePropertiesMap.entrySet()) {
-            String dsName = item.getKey();
-            DynamicDataSourceProperties dataSourceProperty = item.getValue();
-            dataSourceMap.put(dsName, defaultDataSourceCreator.createDataSource(dataSourceProperty));
-        }
-        return dataSourceMap;
-    }
 }

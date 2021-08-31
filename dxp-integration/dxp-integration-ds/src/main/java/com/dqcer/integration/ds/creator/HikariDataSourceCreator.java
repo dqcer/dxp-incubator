@@ -8,6 +8,11 @@ import javax.sql.DataSource;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * @author dongqin
+ * @description hikari数据源的创造者
+ * @date 2021/08/31
+ */
 public class HikariDataSourceCreator {
 
     private final static String HIKARI_DATASOURCE = "com.zaxxer.hikari.HikariDataSource";
