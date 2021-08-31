@@ -14,59 +14,40 @@
     <description>Demo project for Spring Boot</description>
 
     <dependencies>
-        <dependency>
-            <groupId>com.dqcer</groupId>
-            <artifactId>dxp-integration-ds</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-        <!--集成web容器-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-undertow</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-framework-api</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-framework-dto</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-integration-core</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-tools-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
+            <groupId>com.dqcer</groupId>
+            <artifactId>dxp-integration-ds</artifactId>
         </dependency>
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-integration-log</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.dqcer</groupId>
+            <artifactId>dxp-integration-idempotent</artifactId>
         </dependency>
         <dependency>
             <groupId>com.dqcer</groupId>
@@ -75,10 +56,8 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.dqcer</groupId>
-            <artifactId>dxp-integration-idempotent</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
         </dependency>
     </dependencies>
 

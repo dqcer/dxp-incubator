@@ -88,6 +88,16 @@
                 <artifactId>dxp-integration-ds</artifactId>
                 <version>${dxp-incubator.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.dqcer</groupId>
+                <artifactId>dxp-integration-log</artifactId>
+                <version>${dxp-incubator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dqcer</groupId>
+                <artifactId>dxp-integration-idempotent</artifactId>
+                <version>${dxp-incubator.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
