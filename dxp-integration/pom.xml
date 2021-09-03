@@ -23,6 +23,7 @@
         <module>dxp-integration-ds</module>
         <module>dxp-integration-idempotent</module>
         <module>dxp-integration-log</module>
+        <module>dxp-integration-slider</module>
     </modules>
 
 

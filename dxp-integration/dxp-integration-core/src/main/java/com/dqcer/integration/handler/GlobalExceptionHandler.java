@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = Exception.class)
     public ResultApi<String> exception(Exception exception) {
-        log.error("系统异常: {}", exception.getMessage());
+        log.error("系统异常: {}", exception);
         return ResultApi.error(exception.getMessage());
     }
 

@@ -14,8 +14,6 @@ import java.io.Serializable;
  */
 public class BaseDTO implements Validation, Serializable {
 
-    private static final long serialVersionUID = -537843738855940508L;
-
     @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
