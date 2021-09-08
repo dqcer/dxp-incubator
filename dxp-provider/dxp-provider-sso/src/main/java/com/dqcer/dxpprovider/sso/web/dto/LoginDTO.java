@@ -3,6 +3,8 @@ package com.dqcer.dxpprovider.sso.web.dto;
 import com.dqcer.dxpframework.dto.BaseDTO;
 import com.dqcer.dxpframework.dto.annontation.StrValid;
 
+import javax.validation.constraints.Email;
+
 /**
  * @author dongqin
  * @description 登录dto
@@ -15,6 +17,7 @@ public class LoginDTO extends BaseDTO {
     /**
      * 账号
      */
+    @Email()
     @StrValid(min = 3, max = 32, message = "{loginDTO.ue}")
     private String ue;
 

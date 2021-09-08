@@ -37,11 +37,11 @@ public class AuthorizationController {
     @GetMapping("/valid")
     public ResultApi<?> valid(Integer xposition) {
         /* 从缓存获取验证码的值 实际项目应该根据用户令牌等获取 */
-        SlideCodePlace slideCodePlace = redisService.getSlideCode();
-        boolean valid = slideCodePlace.valid();
-        if (!valid) {
-            return ResultApi.warn();
-        }
+//        SlideCodePlace slideCodePlace = redisService.getSlideCode();
+//        boolean valid = slideCodePlace.valid();
+//        if (!valid) {
+//            return ResultApi.warn();
+//        }
         return ResultApi.ok();
     }
 

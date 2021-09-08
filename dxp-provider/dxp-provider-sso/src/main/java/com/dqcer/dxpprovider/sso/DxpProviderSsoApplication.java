@@ -7,6 +7,11 @@ import com.dqcer.integration.slider.EnableSliderValid;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author dongqin
+ * @description sso应用程序
+ * @date 2021/09/04
+ */
 @EnableSliderValid
 @EnableLogListener
 @EnableDynamicDataSource
