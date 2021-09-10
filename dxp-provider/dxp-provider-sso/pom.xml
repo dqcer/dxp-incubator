@@ -64,6 +64,11 @@
             <artifactId>dxp-integration-slider</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.dqcer</groupId>
+            <artifactId>dxp-integration-cache</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

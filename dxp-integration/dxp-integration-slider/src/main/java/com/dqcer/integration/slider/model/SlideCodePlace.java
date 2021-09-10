@@ -151,8 +151,7 @@ public class SlideCodePlace implements Serializable {
 	}
 
 	public boolean valid() {
-		int xPosition = this.getXposition();
-		int deviation = this.getDeviation();
+		int xPosition = xposition;
 		Integer minXPosition = xPosition - deviation;
 		// 最大允许值
 		Integer maxXPosition = xPosition + deviation;

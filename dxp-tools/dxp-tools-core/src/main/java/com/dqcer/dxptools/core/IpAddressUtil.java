@@ -37,7 +37,7 @@ public class IpAddressUtil {
     }
 
 
-    public static String getHostIp() {
+    public static String getHostIp(HttpServletRequest request) {
         try {
             return InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {

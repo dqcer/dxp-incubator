@@ -3,12 +3,12 @@ package com.dqcer.dxpprovider.sso.web.dto;
 import com.dqcer.dxpframework.dto.BaseDTO;
 import com.dqcer.dxpframework.dto.annontation.StrValid;
 
-import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author dongqin
  * @description 登录dto
- * @date 2021/07/16 23:07:48
+ * @date 2021/09/10
  */
 public class LoginDTO extends BaseDTO {
 
@@ -17,7 +17,6 @@ public class LoginDTO extends BaseDTO {
     /**
      * 账号
      */
-    @Email()
     @StrValid(min = 3, max = 32, message = "{loginDTO.ue}")
     private String ue;
 
@@ -26,6 +25,20 @@ public class LoginDTO extends BaseDTO {
      */
     @StrValid(min = 3, max = 32, message = "{loginDTO.pd}")
     private String pd;
+
+    /**
+     * 偏差值，由前端计算后得出，用于滑块验证
+     */
+    @NotNull(message = "{loginDTO.deviation}")
+    private Integer deviation;
+
+    public Integer getDeviation() {
+        return deviation;
+    }
+
+    public void setDeviation(Integer deviation) {
+        this.deviation = deviation;
+    }
 
     public String getUe() {
         return ue;
