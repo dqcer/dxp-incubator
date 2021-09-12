@@ -12,5 +12,6 @@ import java.lang.annotation.*;
 @Documented
 public @interface Log {
 
+    LogActionEnum action() default LogActionEnum.SAVE;
 
 }
