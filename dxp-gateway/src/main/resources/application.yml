@@ -1,0 +1,40 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: dxp-gateway
+  cloud:
+    # nacos
+    nacos:
+      discovery:
+        server-addr: 172.16.11.5:28848
+        namespace: DXP-INCUBATOR
+    # 网关配置
+    gateway:
+      ## 跨域配置
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowCredentials: true
+            allowedOriginPatterns: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
+            maxAge: 3628800
+      ## 路由转发
+      routes:
+        -  id: dxp-provider-sso
+           uri: lb://dxp-provider-sso
+           predicates:
+             - Path=/sso/**
+           filters:
+             - StripPrefix=1
+      ## 全局超时配置
+      httpclient:
+        connect-timeout: 1000 #毫秒
+        response-timeout: 5s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

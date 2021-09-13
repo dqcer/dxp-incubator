@@ -14,13 +14,10 @@
     <description>Demo project for Spring Boot</description>
 
     <dependencies>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
-
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-framework-api</artifactId>
@@ -68,6 +65,10 @@
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-integration-cache</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
     </dependencies>
 
