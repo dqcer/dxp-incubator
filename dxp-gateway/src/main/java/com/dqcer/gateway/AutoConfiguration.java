@@ -5,6 +5,7 @@ import com.dqcer.gateway.filter.OpenApiFilter;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.server.WebExceptionHandler;
 
 /**
  * @author dongqin
@@ -22,5 +23,10 @@ public class AutoConfiguration {
     @Bean
     public GlobalFilter openApiFilter() {
         return new OpenApiFilter();
+    }
+
+    @Bean
+    public WebExceptionHandler webExceptionHandler() {
+        return new ExceptionHandler();
     }
 }
