@@ -26,4 +26,15 @@ public class ObjUtil {
     public static boolean isNotNull(Object obj) {
         return !isNull(obj);
     }
+
+    /**
+     * 如果空返回默认值
+     *
+     * @param object       对象
+     * @param defaultValue 默认的值
+     * @return {@link T}
+     */
+    public static <T> T defaultIfNull(final T object, final T defaultValue) {
+        return (null != object) ? object : defaultValue;
+    }
 }

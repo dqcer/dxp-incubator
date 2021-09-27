@@ -1,8 +1,6 @@
-package com.dqcer.integration.log;
+package com.dqcer.integration.log.config;
 
 import org.springframework.context.ApplicationEvent;
-
-import java.util.Map;
 
 /**
  * @author dongqin
@@ -16,7 +14,7 @@ public class LogEvent extends ApplicationEvent {
      *
      * @param source 源
      */
-    public LogEvent(Map<String, String> source) {
+    public LogEvent(BaseSysLog source) {
         super(source);
     }
 }
