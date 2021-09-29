@@ -5,7 +5,7 @@ import com.dqcer.dxpprovider.sso.constant.CacheConstant;
 import com.dqcer.dxpprovider.sso.web.dto.LoginDTO;
 import com.dqcer.dxptools.core.IpAddressUtil;
 import com.dqcer.dxptools.core.ObjUtil;
-import com.dqcer.integration.log.annotation.Log;
+import com.dqcer.integration.log.annotation.OperationLog;
 import com.dqcer.integration.operation.RedissonObject;
 import com.dqcer.integration.slider.SliderCode;
 import com.dqcer.integration.slider.model.SlideCodePlace;
@@ -60,7 +60,7 @@ public class AuthorizationController {
      * @param request  请求
      * @return {@link ResultApi<String>}
      */
-    @Log
+    @OperationLog(module = "auth.login")
     @PostMapping("/auth")
     public ResultApi<String> auth(@RequestBody @Validated LoginDTO loginDTO, HttpServletRequest request) {
 
