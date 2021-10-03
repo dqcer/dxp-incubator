@@ -25,10 +25,10 @@ import java.text.MessageFormat;
 public class SlideCodeController {
 
     @Resource
-    SliderCode sliderCode;
+    private SliderCode sliderCode;
 
     @Resource
-    RedissonObject redissonObject;
+    private RedissonObject redissonObject;
 
     /**
      * 获取滑块图片

@@ -22,5 +22,5 @@ import java.lang.annotation.Target;
 @Import({LogAutoConfiguration.class, RemoteLogService.class})
 public @interface EnableSysLog {
 
-    String[] basePackages() default {"com.eclincloud.eccframework.log.feign"};
+    String[] basePackages() default {"com.dqcer.integration.log.feign"};
 }
