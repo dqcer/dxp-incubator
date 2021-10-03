@@ -13,6 +13,13 @@ import java.lang.annotation.*;
 public @interface ApiIdempotent {
 
 	/**
+	 * 开启验证token
+	 *
+	 * @return boolean
+	 */
+	boolean validToken() default false;
+
+	/**
 	 * 参数 key
 	 *
 	 * @return {@link String}

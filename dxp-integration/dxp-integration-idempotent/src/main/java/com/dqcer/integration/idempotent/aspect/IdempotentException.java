@@ -7,8 +7,14 @@ package com.dqcer.integration.idempotent.aspect;
  */
 public class IdempotentException extends Exception {
 
+	private IdempotentExceptionTypeEnum typeEnum;
+
 	public IdempotentException() {
 		super();
+	}
+	public IdempotentException(IdempotentExceptionTypeEnum typeEnum) {
+		super();
+		this.typeEnum = typeEnum;
 	}
 
 	public IdempotentException(String message) {
@@ -27,5 +33,39 @@ public class IdempotentException extends Exception {
 			boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
+
+	public enum IdempotentExceptionTypeEnum {
+		/**
+		 * 其它
+		 */
+		PARAM,
+
+		/**
+		 * 新增
+		 */
+		INSERT,
+
+		/**
+		 * 修改
+		 */
+		UPDATE,
+
+		/**
+		 * 删除
+		 */
+		DELETE,
+
+		/**
+		 * 导出
+		 */
+		EXPORT,
+
+		/**
+		 * 导入
+		 */
+		IMPORT,
+
+	}
+
 
 }

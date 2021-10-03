@@ -1,6 +1,9 @@
 package com.dqcer.integration.idempotent.aspect;
 
+import com.dqcer.dxptools.core.StrUtil;
 import com.dqcer.integration.idempotent.annotation.ApiIdempotent;
+import com.dqcer.integration.idempotent.service.ApiIdempotentService;
+import com.dqcer.integration.idempotent.util.HttpContextUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -12,8 +15,6 @@ import org.redisson.api.RMapCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,8 @@ public class ApiIdempotentAspect {
 
 	private ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<>();
 
+	private ThreadLocal<ApiIdempotent> IDEMPOTENT_ANNOTATION = new ThreadLocal<>();
+
 	private static final String API_IDEMPOTENT = "api_idempotent";
 
 	private static final String KEY = "key";
@@ -47,21 +50,23 @@ public class ApiIdempotentAspect {
 	@Resource
 	private KeyResolver keyResolver;
 
+	@Resource
+	private ApiIdempotentService apiIdempotentService;
+
 	@Pointcut("@annotation(com.dqcer.integration.idempotent.annotation.ApiIdempotent)")
 	public void pointCut() {
 	}
 
 	/**
-	 * 之前
+	 * 执行之前
+	 *
 	 * @param joinPoint 连接点
 	 * @throws Exception 异常
 	 */
 	@Before("pointCut()")
 	public void beforePointCut(JoinPoint joinPoint) throws Exception {
-		ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder
-				.getRequestAttributes();
-		assert requestAttributes != null;
-		HttpServletRequest request = requestAttributes.getRequest();
+
+		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
 
 		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 		Method method = signature.getMethod();
@@ -70,6 +75,14 @@ public class ApiIdempotentAspect {
 		}
 
 		ApiIdempotent idempotent = method.getAnnotation(ApiIdempotent.class);
+		IDEMPOTENT_ANNOTATION.set(idempotent);
+
+		boolean tokenModel = idempotent.validToken();
+
+		if (tokenModel) {
+			assert request != null;
+			tokenModal(request);
+		}
 
 		String key = getKey(idempotent, request, joinPoint);
 
@@ -103,12 +116,36 @@ public class ApiIdempotentAspect {
 
 	}
 
+	private void tokenModal(HttpServletRequest request) throws IdempotentException {
+		String token = request.getHeader(ApiIdempotentService.API_IDEMPOTENT_TOKEN);
+		if (StrUtil.isBlank(token)) {
+			throw new IdempotentException("参数缺失...");
+		}
+
+		boolean existByToken = apiIdempotentService.existByToken(token);
+		if (!existByToken) {
+			throw new IdempotentException("参数缺失...");
+		}
+	}
+
 	private String getKey(ApiIdempotent idempotent, HttpServletRequest request, JoinPoint joinPoint) {
 		return keyResolver.resolver(idempotent, joinPoint);
 	}
 
 	@After("pointCut()")
 	public void afterPointCut() {
+		ApiIdempotent apiIdempotent = IDEMPOTENT_ANNOTATION.get();
+
+		if (apiIdempotent.validToken()) {
+			HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
+			assert request != null;
+			String token = request.getHeader(ApiIdempotentService.API_IDEMPOTENT_TOKEN);
+			apiIdempotentService.removeToken(token);
+			IDEMPOTENT_ANNOTATION.remove();
+			return;
+		}
+
+
 		Map<String, Object> map = threadLocal.get();
 		if (CollectionUtils.isEmpty(map)) {
 			return;
