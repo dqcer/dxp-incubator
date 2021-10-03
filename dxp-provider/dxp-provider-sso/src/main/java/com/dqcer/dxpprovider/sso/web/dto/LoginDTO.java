@@ -14,22 +14,24 @@ public class LoginDTO extends BaseDTO {
 
     private static final long serialVersionUID = -7311088026242433898L;
 
+    public interface Account {}
+
     /**
      * 账号
      */
-    @StrValid(min = 3, max = 32, message = "{loginDTO.ue}")
+    @StrValid(min = 3, max = 32, groups = Account.class,  message = "{loginDTO.ue}")
     private String ue;
 
     /**
      * 密码
      */
-    @StrValid(min = 3, max = 32, message = "{loginDTO.pd}")
+    @StrValid(min = 3, max = 32, groups = Account.class, message = "{loginDTO.pd}")
     private String pd;
 
     /**
      * 偏差值，由前端计算后得出，用于滑块验证
      */
-    @NotNull(message = "{loginDTO.deviation}")
+    @NotNull(groups = Account.class, message = "{loginDTO.deviation}")
     private Integer deviation;
 
     public Integer getDeviation() {
