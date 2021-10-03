@@ -32,14 +32,14 @@ spring:
           max-active: 32
           # #连接池最大阻塞等待时间（使用负值表示没有限制）
           max-wait: -1ms
-  cloud:
-    # nacos
-    nacos:
-      discovery:
-        server-addr: 172.16.11.5:28848
-        namespace: DXP-INCUBATOR
-
-# 日志级别
+#  cloud:
+#    # nacos
+#    nacos:
+#      discovery:
+#        server-addr: 172.16.11.5:28848
+#        namespace: DXP-INCUBATOR
+  main:
+    allow-bean-definition-overriding: true #日志级别
 logging:
   level:
     com.dqcer: info
