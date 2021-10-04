@@ -44,9 +44,9 @@ public class SlideCodeController {
         String key = MessageFormat.format(CacheConstant.SLIDE_CODE_IP_USERNAME, hostIp, request.getSession().getId());
 
         SlideCodePlace slideCodePlace = sliderCode.slideCode();
-        redissonObject.setValue(key, slideCodePlace, 1_000L * 60 * 60);
         //  偏差值
         slideCodePlace.setDeviation(5);
+        redissonObject.setValue(key, slideCodePlace, 1_000L * 60 * 60);
 
         return ResultApi.ok(slideCodePlace);
     }

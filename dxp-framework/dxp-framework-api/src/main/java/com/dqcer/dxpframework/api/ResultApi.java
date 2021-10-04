@@ -16,6 +16,14 @@ public class ResultApi implements Serializable {
 
     private static final long serialVersionUID = 4778158632512046981L;
 
+    public static final boolean IS_OK_TRUE = true;
+    public static final boolean IS_OK_FALSE = false;
+
+    /**
+     * 是否成功
+     */
+    private boolean success;
+
     /**
      * 数据
      */
@@ -29,7 +37,7 @@ public class ResultApi implements Serializable {
     /**
      * code
      */
-    private Integer code;
+    private String code;
 
     /**
      * 时间戳
@@ -50,8 +58,10 @@ public class ResultApi implements Serializable {
      * @param result  data
      * @param message 消息
      * @param code    状态码
+     * @param isOk    是可以的
      */
-    protected ResultApi(Object result, String message, Integer code) {
+    protected ResultApi(boolean isOk, Object result, String message, String code) {
+        setSuccess(isOk);
         setData(result);
         setMessage(message);
         setCode(code);
@@ -89,7 +99,7 @@ public class ResultApi implements Serializable {
      * @return {@link ResultApi}
      */
     public static  ResultApi ok(Object result) {
-        return new ResultApi(result, CodeEnum.GL99900000.getMessage(), CodeEnum.GL99900000.getCode());
+        return new ResultApi(IS_OK_TRUE, result, CodeEnum.GL99900000.getMessage(), CodeEnum.GL99900000.getCode());
     }
 
     /**
@@ -98,17 +108,27 @@ public class ResultApi implements Serializable {
      * @return {@link ResultApi}
      */
     public static  ResultApi warn() {
-        return new ResultApi(null, CodeEnum.GL99900301.getMessage(), CodeEnum.GL99900301.getCode());
+        return new ResultApi(IS_OK_FALSE, null, CodeEnum.GL99900301.getMessage(), CodeEnum.GL99900301.getCode());
     }
 
     /**
      * 警告
      *
-     * @param result 结果
+     * @param code 结果
      * @return {@link ResultApi}
      */
-    public static  ResultApi warn(Object result) {
-        return new ResultApi(result, CodeEnum.GL99900301.getMessage(), CodeEnum.GL99900301.getCode());
+    public static  ResultApi warn(String code) {
+        return new ResultApi(IS_OK_FALSE, code, CodeEnum.GL99900301.getMessage(), CodeEnum.GL99900301.getCode());
+    }
+
+    /**
+     * 异常
+     *
+     * @param code 结果
+     * @return {@link ResultApi}
+     */
+    public static  ResultApi error(String code) {
+        return new ResultApi(IS_OK_FALSE, null, CodeEnum.GL99900301.getMessage(), code);
     }
 
     /**
@@ -117,7 +137,7 @@ public class ResultApi implements Serializable {
      * @return {@link ResultApi}
      */
     public static  ResultApi error() {
-        return new ResultApi(null, CodeEnum.GL99900500.getMessage(), CodeEnum.GL99900999.getCode());
+        return new ResultApi(IS_OK_FALSE, null, CodeEnum.GL99900500.getMessage(), CodeEnum.GL99900999.getCode());
     }
 
     /**
@@ -127,7 +147,7 @@ public class ResultApi implements Serializable {
      * @return {@link ResultApi}
      */
     public static  ResultApi error(Object result) {
-        return new ResultApi(result, CodeEnum.GL99900500.getMessage(), CodeEnum.GL99900999.getCode());
+        return new ResultApi(IS_OK_FALSE, result, CodeEnum.GL99900500.getMessage(), CodeEnum.GL99900999.getCode());
     }
 
 
@@ -147,11 +167,11 @@ public class ResultApi implements Serializable {
         this.message = message;
     }
 
-    public Integer getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
@@ -163,4 +183,11 @@ public class ResultApi implements Serializable {
         this.now = now;
     }
 
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public boolean getSuccess() {
+        return success;
+    }
 }

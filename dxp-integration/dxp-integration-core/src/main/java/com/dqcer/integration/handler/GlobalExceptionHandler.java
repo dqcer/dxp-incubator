@@ -3,6 +3,8 @@ package com.dqcer.integration.handler;
 import com.dqcer.dxpframework.api.ResultApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,6 +18,7 @@ import java.util.List;
  * @description 全局异常处理程序
  * @date 2021/08/17
  */
+@Order(-100)
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -32,6 +35,12 @@ public class GlobalExceptionHandler {
     public ResultApi exception(Exception exception) {
         log.error("系统异常: {}", exception);
         return ResultApi.error(exception.getMessage());
+    }
+
+    @ExceptionHandler(value = HttpMessageNotReadableException.class)
+    public ResultApi exception(HttpMessageNotReadableException exception) {
+        log.error("参数接收时，类型转换异常 : {}", exception);
+        return ResultApi.error("999400");
     }
 
     /**

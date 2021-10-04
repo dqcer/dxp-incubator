@@ -18,7 +18,7 @@
         <!-- exception -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <artifactId>spring-context</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -49,8 +49,10 @@
 
         <!--log-->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
+            <groupId>com.dqcer</groupId>
+            <artifactId>dxp-framework-jcl</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

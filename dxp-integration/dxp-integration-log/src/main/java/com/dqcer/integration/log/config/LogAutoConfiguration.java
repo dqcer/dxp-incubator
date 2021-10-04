@@ -20,6 +20,7 @@ public class LogAutoConfiguration {
 
     private final RemoteLogService remoteLogService;
 
+
     public LogAutoConfiguration(RemoteLogService remoteLogService) {
         this.remoteLogService = remoteLogService;
     }

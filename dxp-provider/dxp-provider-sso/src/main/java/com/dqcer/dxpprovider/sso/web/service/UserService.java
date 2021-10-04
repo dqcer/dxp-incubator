@@ -30,7 +30,7 @@ public class UserService  {
 
         String salt = sysUserEntity.getSalt();
         String oldPassword = MD5Util.getMD5(password + salt);
-        if (!oldPassword.equals(oldPassword)) {
+        if (!oldPassword.equals(password)) {
             return ResultApi.warn("999402");
         }
 

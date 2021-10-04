@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.dqcer.integration.handler.GlobalExceptionHandler,\
-  com.dqcer.integration.configuration.LanguageConfiguration

@@ -31,7 +31,7 @@ public class LogListener {
         if (log.isInfoEnabled()) {
             log.info("Log listener: {}", sysLog);
         }
-        logService.insertLog(sysLog);
+        //logService.insertLog(sysLog);
     }
 
 }

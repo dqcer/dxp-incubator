@@ -96,7 +96,7 @@ public class OperationLogAspect implements Ordered {
         baseSysLog.setParam(key.toString());
         if (proceed instanceof ResultApi) {
             ResultApi result = (ResultApi) proceed;
-            baseSysLog.setResultCode(result.getCode());
+//            baseSysLog.setResultCode(result.getCode());
             baseSysLog.setResultMsg(result.getMessage());
         } else {
 
