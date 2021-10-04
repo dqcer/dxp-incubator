@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
      * @return {@link ResultApi}
      */
     @ExceptionHandler(value = Exception.class)
-    public ResultApi<String> exception(Exception exception) {
+    public ResultApi exception(Exception exception) {
         log.error("系统异常: {}", exception);
         return ResultApi.error(exception.getMessage());
     }
@@ -41,11 +41,11 @@ public class GlobalExceptionHandler {
      * @return {@link ResultApi}
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResultApi<String> methodArgumentNotValidException(MethodArgumentNotValidException exception) {
+    public ResultApi methodArgumentNotValidException(MethodArgumentNotValidException exception) {
         BindingResult bindingResult = exception.getBindingResult();
         StringBuilder stringBuilder = new StringBuilder();
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-        ResultApi<String> resultApi = ResultApi.warn();
+        ResultApi resultApi = ResultApi.warn();
         for (FieldError fieldError : fieldErrors) {
             String defaultMessage = fieldError.getDefaultMessage();
             String field = fieldError.getField();

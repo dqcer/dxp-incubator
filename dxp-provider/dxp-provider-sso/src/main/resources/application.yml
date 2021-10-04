@@ -8,30 +8,30 @@ spring:
   application:
     name: dxp-provider-sso
   datasource:
-    url: jdbc:mysql://172.16.2.171:3308/dxp-master?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
+    url: jdbc:mysql://192.168.0.171:3306/dxp-master?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
-    #port: 7001
-    #host: 172.16.2.171
-    #host: 192.168.0.106
-    password: 123456
-    cluster:
-      nodes: 192.168.0.106:7001,192.168.0.106:7002,192.168.0.106:7003,192.168.0.106:7004,192.168.0.106:7005,192.168.0.106:7006
-      max-redirects: 3
-      # 连接超时时间
-      timeout: 10s
-      lettuce:
-        pool:
-          # 连接池中的最小空闲连接
-          min-idle: 1
-          # 连接池中的最大空闲连接
-          max-idle: 16
-          # 连接池的最大数据库连接数
-          max-active: 32
-          # #连接池最大阻塞等待时间（使用负值表示没有限制）
-          max-wait: -1ms
+    port: 6379
+    host: 192.168.0.171
+#    host: 192.168.0.106
+#    password: 123456
+#    cluster:
+#      nodes: 192.168.0.106:7001,192.168.0.106:7002,192.168.0.106:7003,192.168.0.106:7004,192.168.0.106:7005,192.168.0.106:7006
+#      max-redirects: 3
+#      # 连接超时时间
+#      timeout: 10s
+#      lettuce:
+#        pool:
+#          # 连接池中的最小空闲连接
+#          min-idle: 1
+#          # 连接池中的最大空闲连接
+#          max-idle: 16
+#          # 连接池的最大数据库连接数
+#          max-active: 32
+#          # #连接池最大阻塞等待时间（使用负值表示没有限制）
+#          max-wait: -1ms
 #  cloud:
 #    # nacos
 #    nacos:
@@ -40,17 +40,16 @@ spring:
 #        namespace: DXP-INCUBATOR
 
   flyway:
-    enabled: false # 开启 Flyway 功能
-    cleanDisabled: true # 禁用 Flyway 所有的 drop 相关的逻辑，避免出现跑路的情况。
+    enabled:  true # 开启 Flyway 功能
+    cleanDisabled: false # 禁用 Flyway 所有的 drop 相关的逻辑，避免出现跑路的情况。
     locations: # 迁移脚本目录
       - classpath:db/migration # 配置 SQL-based 的 SQL 脚本在该目录下
       - classpath:cn.iocoder.springboot.lab20.databaseversioncontrol.migration # 配置 Java-based 的 Java 文件在该目录下
     check-location: false # 是否校验迁移脚本目录下。如果配置为 true ，代表需要校验。此时，如果目录下没有迁移脚本，会抛出 IllegalStateException 异常
-    url: jdbc:mysql://127.0.0.1:3306/lab-20-flyway?useSSL=false&useUnicode=true&characterEncoding=UTF-8 # 数据库地址
+    url: jdbc:mysql://192.168.0.171:3306/dxp-master?useSSL=false&useUnicode=true&characterEncoding=UTF-8 # 数据库地址
     user: root # 数据库账号
-    password: # 数据库密码
-  main:
-    allow-bean-definition-overriding: true #日志级别
+    password: 123456 # 数据库密码
+    table: dxp_schema_history
 logging:
   level:
     com.dqcer: info

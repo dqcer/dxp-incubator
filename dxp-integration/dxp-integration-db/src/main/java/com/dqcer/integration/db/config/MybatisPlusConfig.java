@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
  * @description mybatis plus 配置
  * @date 2021/08/21 19:08:98
  */
+@MapperScan("com.dqcer.dxpprovider.sso.web.dao")
 @Configuration
-@MapperScan("com.dqcer.*.*")
 public class MybatisPlusConfig {
 
 

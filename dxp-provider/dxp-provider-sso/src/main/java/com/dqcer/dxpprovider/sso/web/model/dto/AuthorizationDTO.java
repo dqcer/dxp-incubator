@@ -1,4 +1,4 @@
-package com.dqcer.dxpprovider.sso.web.dto;
+package com.dqcer.dxpprovider.sso.web.model.dto;
 
 import com.dqcer.dxpframework.dto.BaseDTO;
 import com.dqcer.dxpframework.dto.annontation.StrValid;

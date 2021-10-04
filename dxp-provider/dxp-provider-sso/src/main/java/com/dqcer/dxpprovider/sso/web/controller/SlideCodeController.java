@@ -38,7 +38,7 @@ public class SlideCodeController {
      * @throws IOException IOException
      */
     @PostMapping("account/image")
-    public ResultApi<SlideCodePlace> slideCode( HttpServletRequest request) throws IOException {
+    public ResultApi slideCode( HttpServletRequest request) throws IOException {
 
         String hostIp = IpAddressUtil.getHostIp(request);
         String key = MessageFormat.format(CacheConstant.SLIDE_CODE_IP_USERNAME, hostIp, request.getSession().getId());

@@ -2,7 +2,8 @@ package com.dqcer.dxpprovider.sso.web.controller;
 
 import com.dqcer.dxpframework.api.ResultApi;
 import com.dqcer.dxpprovider.sso.constant.CacheConstant;
-import com.dqcer.dxpprovider.sso.web.dto.LoginDTO;
+import com.dqcer.dxpprovider.sso.web.model.dto.LoginDTO;
+import com.dqcer.dxpprovider.sso.web.service.UserService;
 import com.dqcer.dxptools.core.IpAddressUtil;
 import com.dqcer.dxptools.core.ObjUtil;
 import com.dqcer.integration.log.annotation.OperationLog;
@@ -30,16 +31,19 @@ public class AuthorizationController {
     @Resource
     private RedissonObject redissonObject;
 
+    @Resource
+    private UserService userService;
+
     /**
      * 账号登录
      *
      * @param loginDTO 登录dto
      * @param request  请求
-     * @return {@link ResultApi<String>}
+     * @return {@link ResultApi}
      */
     @OperationLog(module = "auth.account.login")
     @PostMapping("account/login")
-    public ResultApi<String> auth(@RequestBody @Validated(LoginDTO.Account.class) LoginDTO loginDTO, HttpServletRequest request) {
+    public ResultApi auth(@RequestBody @Validated(LoginDTO.Account.class) LoginDTO loginDTO, HttpServletRequest request) {
 
         String id = request.getSession().getId();
         String key = MessageFormat.format(CacheConstant.SLIDE_CODE_IP_USERNAME, IpAddressUtil.getHostIp(request), id);
@@ -47,11 +51,9 @@ public class AuthorizationController {
         // 从缓存获取验证码的值 实际项目应该根据用户令牌等获取
         SlideCodePlace slideCodePlace = (SlideCodePlace) redissonObject.getValue(key);
         if (ObjUtil.isNotNull(slideCodePlace)) {
-            slideCodePlace.setDeviation(loginDTO.getDeviation());
-            boolean valid = slideCodePlace.valid();
+            boolean valid = slideCodePlace.valid(loginDTO.getNewXPosition());
             if (valid) {
-                // TODO: 2021/9/10
-                return ResultApi.ok("auth success");
+                return userService.auth(loginDTO.getUe(), loginDTO.getPd());
             }
         }
         return ResultApi.warn("auth error");

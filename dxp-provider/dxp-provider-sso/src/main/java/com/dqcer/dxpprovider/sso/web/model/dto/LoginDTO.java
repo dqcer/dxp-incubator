@@ -1,4 +1,4 @@
-package com.dqcer.dxpprovider.sso.web.dto;
+package com.dqcer.dxpprovider.sso.web.model.dto;
 
 import com.dqcer.dxpframework.dto.BaseDTO;
 import com.dqcer.dxpframework.dto.annontation.StrValid;
@@ -32,14 +32,14 @@ public class LoginDTO extends BaseDTO {
      * 偏差值，由前端计算后得出，用于滑块验证
      */
     @NotNull(groups = Account.class, message = "{loginDTO.deviation}")
-    private Integer deviation;
+    private Integer newXPosition;
 
-    public Integer getDeviation() {
-        return deviation;
+    public Integer getNewXPosition() {
+        return newXPosition;
     }
 
-    public void setDeviation(Integer deviation) {
-        this.deviation = deviation;
+    public void setNewXPosition(Integer newXPosition) {
+        this.newXPosition = newXPosition;
     }
 
     public String getUe() {

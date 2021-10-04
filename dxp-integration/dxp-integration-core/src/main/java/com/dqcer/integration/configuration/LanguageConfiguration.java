@@ -37,7 +37,7 @@ public class LanguageConfiguration {
     public Validator validator()  {
         ResourceBundleMessageSource resourceBundleMessageSource = new ResourceBundleMessageSource();
         resourceBundleMessageSource.setDefaultEncoding("UTF-8");
-        resourceBundleMessageSource.setBasenames("i18n/ValidationMessages");
+        resourceBundleMessageSource.setBasenames("i18n/ValidationMessages", "i18n/BusinessMessages");
 
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
         validator.setValidationMessageSource(resourceBundleMessageSource);

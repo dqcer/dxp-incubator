@@ -30,7 +30,7 @@ public class MD5Util {
      * @param bytes 字节
      * @return {@link String}
      */
-    public static String bytesToHex(byte[] bytes) {
+    private static String bytesToHex(byte[] bytes) {
         StringBuffer hexStr = new StringBuffer();
         int num;
         for (int i = 0; i < bytes.length; i++) {

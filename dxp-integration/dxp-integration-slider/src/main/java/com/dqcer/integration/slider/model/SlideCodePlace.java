@@ -150,13 +150,17 @@ public class SlideCodePlace implements Serializable {
 		}
 	}
 
-	public boolean valid() {
-		int xPosition = xposition;
-		Integer minXPosition = xPosition - deviation;
-		// 最大允许值
-		Integer maxXPosition = xPosition + deviation;
-		// 判断误差值
-		if (this.xposition > minXPosition && this.xposition < maxXPosition) {
+	public boolean valid(int newXPosition) {
+//		int xPosition = xposition;
+//		Integer minXPosition = xPosition - deviation;
+//		// 最大允许值
+//		Integer maxXPosition = xPosition + deviation;
+//		// 判断误差值
+//		if (this.xposition > minXPosition && this.xposition < maxXPosition) {
+//			return true;
+//		}
+
+		if (Math.abs(newXPosition - xposition) < deviation) {
 			return true;
 		}
 		return false;

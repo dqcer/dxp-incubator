@@ -12,14 +12,14 @@ import java.util.Map;
  * @description 统一返回前端包装类
  * @date 22:21 2021/4/28
  */
-public class ResultApi<T extends Serializable> implements Serializable {
+public class ResultApi implements Serializable {
 
     private static final long serialVersionUID = 4778158632512046981L;
 
     /**
      * 数据
      */
-    private T data;
+    private Object data;
 
     /**
      * 消息
@@ -51,11 +51,11 @@ public class ResultApi<T extends Serializable> implements Serializable {
      * @param message 消息
      * @param code    状态码
      */
-    protected ResultApi(T result, String message, Integer code) {
+    protected ResultApi(Object result, String message, Integer code) {
         setData(result);
         setMessage(message);
         setCode(code);
-        this.map = new HashMap<>(8);
+        this.map = new HashMap(8);
     }
 
     /**
@@ -63,7 +63,7 @@ public class ResultApi<T extends Serializable> implements Serializable {
      *
      * @return {@link ResultApi}
      */
-    public static <T extends Serializable> ResultApi<T> ok() {
+    public static ResultApi ok() {
         return ok(null);
     }
 
@@ -74,9 +74,9 @@ public class ResultApi<T extends Serializable> implements Serializable {
      * @param result 结果
      * @return {@link ResultApi}
      */
-    public ResultApi<T> put(String key, T result) {
+    public ResultApi put(String key, Object result) {
         map.put(key, result);
-        setData((T) map);
+        setData((Object) map);
         setMessage(message);
         setCode(code);
         return this;
@@ -88,8 +88,8 @@ public class ResultApi<T extends Serializable> implements Serializable {
      * @param result 结果
      * @return {@link ResultApi}
      */
-    public static <T extends Serializable> ResultApi<T> ok(T result) {
-        return new ResultApi<>(result, CodeEnum.GL99900000.getMessage(), CodeEnum.GL99900000.getCode());
+    public static  ResultApi ok(Object result) {
+        return new ResultApi(result, CodeEnum.GL99900000.getMessage(), CodeEnum.GL99900000.getCode());
     }
 
     /**
@@ -97,8 +97,8 @@ public class ResultApi<T extends Serializable> implements Serializable {
      *
      * @return {@link ResultApi}
      */
-    public static <T extends Serializable> ResultApi<T> warn() {
-        return new ResultApi<>(null, CodeEnum.GL99900301.getMessage(), CodeEnum.GL99900301.getCode());
+    public static  ResultApi warn() {
+        return new ResultApi(null, CodeEnum.GL99900301.getMessage(), CodeEnum.GL99900301.getCode());
     }
 
     /**
@@ -107,8 +107,8 @@ public class ResultApi<T extends Serializable> implements Serializable {
      * @param result 结果
      * @return {@link ResultApi}
      */
-    public static <T extends Serializable> ResultApi<T> warn(T result) {
-        return new ResultApi<>(result, CodeEnum.GL99900301.getMessage(), CodeEnum.GL99900301.getCode());
+    public static  ResultApi warn(Object result) {
+        return new ResultApi(result, CodeEnum.GL99900301.getMessage(), CodeEnum.GL99900301.getCode());
     }
 
     /**
@@ -116,8 +116,8 @@ public class ResultApi<T extends Serializable> implements Serializable {
      *
      * @return {@link ResultApi}
      */
-    public static <T extends Serializable> ResultApi<T> error() {
-        return new ResultApi<>(null, CodeEnum.GL99900500.getMessage(), CodeEnum.GL99900999.getCode());
+    public static  ResultApi error() {
+        return new ResultApi(null, CodeEnum.GL99900500.getMessage(), CodeEnum.GL99900999.getCode());
     }
 
     /**
@@ -126,16 +126,16 @@ public class ResultApi<T extends Serializable> implements Serializable {
      * @param result 结果
      * @return {@link ResultApi}
      */
-    public static <T extends Serializable> ResultApi<T> error(T result) {
-        return new ResultApi<>(result, CodeEnum.GL99900500.getMessage(), CodeEnum.GL99900999.getCode());
+    public static  ResultApi error(Object result) {
+        return new ResultApi(result, CodeEnum.GL99900500.getMessage(), CodeEnum.GL99900999.getCode());
     }
 
 
-    public T getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(Object data) {
         this.data = data;
     }
 

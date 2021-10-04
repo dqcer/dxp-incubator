@@ -24,11 +24,11 @@ public class CommonController {
     /**
      * 获取幂等token
      *
-     * @return {@link ResultApi<String>}
+     * @return {@link ResultApi}
      */
     @OperationLog(module = "idempotent.token")
     @PostMapping("idempotent/token")
-    public ResultApi<String> idempotentToken()  {
+    public ResultApi idempotentToken()  {
         return ResultApi.ok(apiIdempotentService.createToken());
     }
 

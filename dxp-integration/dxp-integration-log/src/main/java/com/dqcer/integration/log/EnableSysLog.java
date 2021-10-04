@@ -2,7 +2,6 @@ package com.dqcer.integration.log;
 
 
 import com.dqcer.integration.log.config.LogAutoConfiguration;
-import com.dqcer.integration.log.feign.RemoteLogService;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Import;
 
@@ -19,7 +18,7 @@ import java.lang.annotation.Target;
 @EnableFeignClients
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Import({LogAutoConfiguration.class, RemoteLogService.class})
+@Import({LogAutoConfiguration.class})
 public @interface EnableSysLog {
 
     String[] basePackages() default {"com.dqcer.integration.log.feign"};
