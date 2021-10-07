@@ -56,6 +56,6 @@ public class AuthorizationController {
                 return userService.auth(loginDTO.getUe(), loginDTO.getPd());
             }
         }
-        return ResultApi.warn("auth error");
+        return ResultApi.warn("999410");
     }
 }

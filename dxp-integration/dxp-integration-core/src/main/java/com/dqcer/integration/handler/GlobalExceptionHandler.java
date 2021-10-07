@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
+import java.util.MissingResourceException;
 
 /**
  * @author dongqin
@@ -34,11 +35,30 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ResultApi exception(Exception exception) {
         log.error("系统异常: {}", exception);
-        return ResultApi.error(exception.getMessage());
+        return ResultApi.error("999400");
     }
 
+
+    /**
+     * 缺少资源异常，无法找到对应properties文件中对应的key
+     *
+     * @param exception 异常
+     * @return {@link ResultApi}
+     */
+    @ExceptionHandler(value = MissingResourceException.class)
+    public ResultApi missingResourceException(Exception exception) {
+        log.error("无法找到对应properties文件中对应的key : {}", exception);
+        return ResultApi.error("999400");
+    }
+
+    /**
+     * http消息转换异常，参数接收时，类型转换异常
+     *
+     * @param exception 异常
+     * @return {@link ResultApi}
+     */
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
-    public ResultApi exception(HttpMessageNotReadableException exception) {
+    public ResultApi httpMessageConversionException(HttpMessageNotReadableException exception) {
         log.error("参数接收时，类型转换异常 : {}", exception);
         return ResultApi.error("999400");
     }
