@@ -14,9 +14,9 @@ import java.lang.annotation.*;
 public @interface DynamicDataSource {
 
     /**
-     * 指定的数据源
+     * 指定的数据源，默认可不用加该注解
      *
      * @return {@link String}
      */
-    String value() default "";
+    String value();
 }
