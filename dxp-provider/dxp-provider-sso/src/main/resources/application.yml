@@ -43,7 +43,7 @@ spring:
 
   flyway:
     enabled:  true # 开启 Flyway 功能
-    cleanDisabled: false # 禁用 Flyway 所有的 drop 相关的逻辑，避免出现跑路的情况。
+    cleanDisabled: true # 禁用 Flyway 所有的 drop 相关的逻辑，避免出现跑路的情况。
     locations: # 迁移脚本目录
       - classpath:db/migration # 配置 SQL-based 的 SQL 脚本在该目录下
      # - classpath:cn.iocoder.springboot.lab20.databaseversioncontrol.migration # 配置 Java-based 的 Java 文件在该目录下
