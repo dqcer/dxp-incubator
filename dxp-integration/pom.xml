@@ -20,6 +20,7 @@
         <module>dxp-integration-cache</module>
         <module>dxp-integration-context</module>
         <module>dxp-integration-core</module>
+        <module>dxp-integration-datasource</module>
         <module>dxp-integration-db</module>
         <module>dxp-integration-ds</module>
         <module>dxp-integration-encrypt</module>

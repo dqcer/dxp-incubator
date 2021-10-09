@@ -42,7 +42,7 @@ spring:
 #        namespace: DXP-INCUBATOR
 
   flyway:
-    enabled:  true # 开启 Flyway 功能
+    enabled:  false # 开启 Flyway 功能
     cleanDisabled: true # 禁用 Flyway 所有的 drop 相关的逻辑，避免出现跑路的情况。
     locations: # 迁移脚本目录
       - classpath:db/migration # 配置 SQL-based 的 SQL 脚本在该目录下
@@ -51,7 +51,7 @@ spring:
     url: jdbc:mysql://${dev.mysql}/dxp-master?useSSL=false&useUnicode=true&characterEncoding=UTF-8 # 数据库地址
     user: root # 数据库账号
     password: 123456 # 数据库密码
-    table: dxp_schema_history
+    # table: dxp_schema_history
 logging:
   level:
     com.dqcer: info

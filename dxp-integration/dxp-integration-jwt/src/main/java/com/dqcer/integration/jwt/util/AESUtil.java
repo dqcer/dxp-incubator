@@ -7,6 +7,7 @@ import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author dongqin
@@ -17,10 +18,6 @@ public class AESUtil {
 
     private static final Logger log = LoggerFactory.getLogger(AESUtil.class);
 
-    /**
-     * 字符集名称
-     */
-    private static final String CHARSET_NAME = "utf-8";
 
     /**
      * key
@@ -46,11 +43,11 @@ public class AESUtil {
      */
     public static String encrypt(String data) {
         try {
-            byte[] raw = KEY.getBytes(CHARSET_NAME);
+            byte[] raw = KEY.getBytes(StandardCharsets.UTF_8);
             SecretKeySpec secretKeySpec = new SecretKeySpec(raw, ALGORITHM);
             Cipher cipher = Cipher.getInstance(TRANSFORMATION_GIVEN);
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
-            byte[] encrypted = cipher.doFinal(data.getBytes(CHARSET_NAME));
+            byte[] encrypted = cipher.doFinal(data.getBytes(StandardCharsets.UTF_8));
             return new BASE64Encoder().encode(encrypted);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -66,25 +63,16 @@ public class AESUtil {
      */
     public static String decrypt(String data) {
         try {
-            byte[] raw = KEY.getBytes(CHARSET_NAME);
+            byte[] raw = KEY.getBytes(StandardCharsets.UTF_8);
             SecretKeySpec secretKeySpec = new SecretKeySpec(raw, ALGORITHM);
             Cipher cipher = Cipher.getInstance(TRANSFORMATION_GIVEN);
             cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
             byte[] encrypted1 = new BASE64Decoder().decodeBuffer(data);
             byte[] original = cipher.doFinal(encrypted1);
-            return new String(original,CHARSET_NAME);
+            return new String(original,StandardCharsets.UTF_8);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
         return null;
-    }
-
-    public static void main(String[] args)  {
-        String cSrc = "1111111111111111111";
-        System.out.println(cSrc);
-        String enString = AESUtil.encrypt(cSrc);
-        System.out.println("加密后的字串是：" + enString);
-        String DeString = AESUtil.decrypt(enString);
-        System.out.println("解密后的字串是：" + DeString);
     }
 }
