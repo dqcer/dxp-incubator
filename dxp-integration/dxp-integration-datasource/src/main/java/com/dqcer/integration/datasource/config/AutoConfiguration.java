@@ -69,7 +69,7 @@ public class AutoConfiguration {
      * @return {@link DataSource}
      */
     private DataSource wrapDataSource(DataSource dataSource) {
-        // TODO: 2021/10/9  
+        // TODO: 2021/10/9
         return dataSource;
     }
 
