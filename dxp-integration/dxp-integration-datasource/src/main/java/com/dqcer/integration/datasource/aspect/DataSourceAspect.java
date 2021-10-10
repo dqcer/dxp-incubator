@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
  * @date 2021/10/09
  */
 @Aspect
-@Order(Ordered.HIGHEST_PRECEDENCE)
+@Order(Ordered.HIGHEST_PRECEDENCE + 1)
 public class DataSourceAspect {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());

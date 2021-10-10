@@ -7,6 +7,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -38,6 +39,17 @@ public class GlobalExceptionHandler {
         return ResultApi.error("999500");
     }
 
+    /**
+     * 缺少资源异常，无法找到对应properties文件中对应的key
+     *
+     * @param exception 异常
+     * @return {@link ResultApi}
+     */
+    @ExceptionHandler(value = HttpMediaTypeNotSupportedException.class)
+    public ResultApi httpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException exception) {
+        log.error("请求头Content-Type异常  : {}", exception);
+        return ResultApi.error("999303");
+    }
 
     /**
      * 缺少资源异常，无法找到对应properties文件中对应的key

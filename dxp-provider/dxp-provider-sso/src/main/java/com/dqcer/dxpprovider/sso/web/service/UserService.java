@@ -7,6 +7,7 @@ import com.dqcer.dxpprovider.sso.web.model.entity.SysUserEntity;
 import com.dqcer.dxptools.core.MD5Util;
 import com.dqcer.dxptools.core.ObjUtil;
 import com.dqcer.framework.storage.GlobalConstant;
+import com.dqcer.integration.datasource.annotation.DynamicDataSource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,6 +19,7 @@ public class UserService  {
     @Resource
     private UserDAO userDAO;
 
+    @DynamicDataSource
     public ResultApi auth(String username, String password) {
         SysUserEntity sysUserEntity = userDAO.selectOne(Wrappers.lambdaQuery(SysUserEntity.class).eq(SysUserEntity::getLoginName, username));
         if (ObjUtil.isNull(sysUserEntity)) {
