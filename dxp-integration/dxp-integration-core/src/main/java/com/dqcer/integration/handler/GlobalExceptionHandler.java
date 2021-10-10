@@ -1,6 +1,7 @@
 package com.dqcer.integration.handler;
 
 import com.dqcer.dxpframework.api.ResultApi;
+import com.dqcer.dxpframework.enums.CodeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -35,7 +36,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ResultApi exception(Exception exception) {
         log.error("系统异常: {}", exception);
-        return ResultApi.error("999400");
+        return ResultApi.error("999500");
     }
 
 
@@ -48,7 +49,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = MissingResourceException.class)
     public ResultApi missingResourceException(Exception exception) {
         log.error("无法找到对应properties文件中对应的key : {}", exception);
-        return ResultApi.error("999400");
+        return ResultApi.error("999302");
     }
 
     /**
@@ -60,7 +61,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     public ResultApi httpMessageConversionException(HttpMessageNotReadableException exception) {
         log.error("参数接收时，类型转换异常 : {}", exception);
-        return ResultApi.error("999400");
+        return ResultApi.error("999300");
     }
 
     /**
@@ -74,7 +75,7 @@ public class GlobalExceptionHandler {
         BindingResult bindingResult = exception.getBindingResult();
         StringBuilder stringBuilder = new StringBuilder();
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-        ResultApi resultApi = ResultApi.warn();
+        ResultApi resultApi = ResultApi.error(CodeEnum.GL99900301.getCode());
         for (FieldError fieldError : fieldErrors) {
             String defaultMessage = fieldError.getDefaultMessage();
             String field = fieldError.getField();

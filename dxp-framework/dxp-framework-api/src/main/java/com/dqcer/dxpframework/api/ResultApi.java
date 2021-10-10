@@ -5,7 +5,6 @@ import com.dqcer.dxpframework.enums.CodeEnum;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author dqcer
@@ -44,7 +43,7 @@ public class ResultApi implements Serializable {
      */
     private String now = LocalDate.now().toString();
 
-    private transient Map<String, Object> map;
+    private transient HashMap map;
 
 
     /**
@@ -86,7 +85,7 @@ public class ResultApi implements Serializable {
      */
     public ResultApi put(String key, Object result) {
         map.put(key, result);
-        setData((Object) map);
+        setData(map);
         setMessage(message);
         setCode(code);
         return this;
@@ -103,51 +102,13 @@ public class ResultApi implements Serializable {
     }
 
     /**
-     * 无参警告
-     *
-     * @return {@link ResultApi}
-     */
-    public static  ResultApi warn() {
-        return new ResultApi(IS_OK_FALSE, null, CodeEnum.GL99900301.getMessage(), CodeEnum.GL99900301.getCode());
-    }
-
-    /**
-     * 警告
-     *
-     * @param code 结果
-     * @return {@link ResultApi}
-     */
-    public static  ResultApi warn(String code) {
-        return new ResultApi(IS_OK_FALSE, code, CodeEnum.GL99900301.getMessage(), CodeEnum.GL99900301.getCode());
-    }
-
-    /**
      * 异常
      *
      * @param code 结果
      * @return {@link ResultApi}
      */
     public static  ResultApi error(String code) {
-        return new ResultApi(IS_OK_FALSE, null, CodeEnum.GL99900301.getMessage(), code);
-    }
-
-    /**
-     * 无参异常
-     *
-     * @return {@link ResultApi}
-     */
-    public static  ResultApi error() {
-        return new ResultApi(IS_OK_FALSE, null, CodeEnum.GL99900500.getMessage(), CodeEnum.GL99900999.getCode());
-    }
-
-    /**
-     * 有参异常
-     *
-     * @param result 结果
-     * @return {@link ResultApi}
-     */
-    public static  ResultApi error(Object result) {
-        return new ResultApi(IS_OK_FALSE, result, CodeEnum.GL99900500.getMessage(), CodeEnum.GL99900999.getCode());
+        return new ResultApi(IS_OK_FALSE, null, null, code);
     }
 
 

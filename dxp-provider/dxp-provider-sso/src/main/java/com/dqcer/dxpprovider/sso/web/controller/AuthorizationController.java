@@ -50,12 +50,15 @@ public class AuthorizationController {
 
         // 从缓存获取验证码的值 实际项目应该根据用户令牌等获取
         SlideCodePlace slideCodePlace = (SlideCodePlace) redissonObject.getValue(key);
-        if (ObjUtil.isNotNull(slideCodePlace)) {
-            boolean valid = slideCodePlace.valid(loginDTO.getNewXPosition());
-            if (valid) {
-                return userService.auth(loginDTO.getUe(), loginDTO.getPd());
-            }
+        if (ObjUtil.isNull(slideCodePlace)) {
+            return ResultApi.error("901001");
         }
-        return ResultApi.warn("999410");
+
+        boolean valid = slideCodePlace.valid(loginDTO.getNewXPosition());
+        if (!valid) {
+            return ResultApi.error("901002");
+        }
+
+        return userService.auth(loginDTO.getUe(), loginDTO.getPd());
     }
 }
