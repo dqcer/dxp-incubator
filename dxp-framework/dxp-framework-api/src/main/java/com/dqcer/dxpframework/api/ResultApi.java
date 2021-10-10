@@ -98,7 +98,7 @@ public class ResultApi implements Serializable {
      * @return {@link ResultApi}
      */
     public static  ResultApi ok(Object result) {
-        return new ResultApi(IS_OK_TRUE, result, CodeEnum.GL99900000.getMessage(), CodeEnum.GL99900000.getCode());
+        return new ResultApi(IS_OK_TRUE, result, null, CodeEnum.GL99900000.getCode());
     }
 
     /**

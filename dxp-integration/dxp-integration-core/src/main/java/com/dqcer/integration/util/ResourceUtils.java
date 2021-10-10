@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
  * @description Resource Util
  * @date 14:07 2021/5/18
  */
+@Deprecated
 public class ResourceUtils {
 
     private ResourceUtils(){}
@@ -52,6 +53,7 @@ public class ResourceUtils {
      */
     private static String commonMsg(Locale locale, String code){
         ResourceBundle bundle = ResourceBundle.getBundle("i18n/SysMessages", locale);
+
         return bundle.getString(code);
     }
 

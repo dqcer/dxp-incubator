@@ -1,7 +1,6 @@
 package com.dqcer.integration.handler;
 
 import com.dqcer.dxpframework.api.ResultApi;
-import com.dqcer.dxpframework.enums.CodeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -75,7 +74,7 @@ public class GlobalExceptionHandler {
         BindingResult bindingResult = exception.getBindingResult();
         StringBuilder stringBuilder = new StringBuilder();
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-        ResultApi resultApi = ResultApi.error(CodeEnum.GL99900301.getCode());
+        ResultApi resultApi = ResultApi.error("999301");
         for (FieldError fieldError : fieldErrors) {
             String defaultMessage = fieldError.getDefaultMessage();
             String field = fieldError.getField();

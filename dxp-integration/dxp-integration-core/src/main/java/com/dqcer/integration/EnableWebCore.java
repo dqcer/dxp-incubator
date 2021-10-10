@@ -1,6 +1,7 @@
 package com.dqcer.integration;
 
 
+import com.dqcer.integration.configuration.AutoConfiguration;
 import com.dqcer.integration.configuration.LanguageConfiguration;
 import com.dqcer.integration.handler.GlobalExceptionHandler;
 import com.dqcer.integration.handler.GlobalResponseAdvice;
@@ -18,6 +19,6 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Import({GlobalExceptionHandler.class, GlobalResponseAdvice.class, LanguageConfiguration.class})
+@Import({GlobalExceptionHandler.class, GlobalResponseAdvice.class, LanguageConfiguration.class, AutoConfiguration.class})
 public @interface EnableWebCore {
 }
