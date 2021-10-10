@@ -3,7 +3,6 @@ package com.dqcer.dxpprovider.sso.web.controller;
 import com.dqcer.dxpframework.api.ResultApi;
 import com.dqcer.dxpprovider.sso.web.model.dto.LoginDTO;
 import com.dqcer.dxpprovider.sso.web.service.UserService;
-import com.dqcer.integration.ds.DS;
 import com.dqcer.integration.idempotent.annotation.ApiIdempotent;
 import com.dqcer.integration.log.annotation.OperationLog;
 import org.springframework.validation.annotation.Validated;
@@ -21,7 +20,7 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @DS("#loginDTO.ue")
+//    @DS("#loginDTO.ue")
     @ApiIdempotent(key = "#loginDTO.toString()")
     @OperationLog(module = "auth.login")
     @PostMapping("login")

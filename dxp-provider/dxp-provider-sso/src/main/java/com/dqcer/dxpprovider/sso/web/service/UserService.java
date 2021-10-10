@@ -21,7 +21,7 @@ public class UserService  {
     public ResultApi auth(String username, String password) {
         SysUserEntity sysUserEntity = userDAO.selectOne(Wrappers.lambdaQuery(SysUserEntity.class).eq(SysUserEntity::getLoginName, username));
         if (ObjUtil.isNull(sysUserEntity)) {
-            return ResultApi.warn("999401");
+            return ResultApi.warn("910401");
         }
 
         if (GlobalConstant.Status.ENABLE.ordinal() != sysUserEntity.getStatus()) {
@@ -29,8 +29,8 @@ public class UserService  {
         }
 
         String salt = sysUserEntity.getSalt();
-        String oldPassword = MD5Util.getMD5(password + salt);
-        if (!oldPassword.equals(password)) {
+        String newPassword = MD5Util.getMD5(password + salt);
+        if (!newPassword.equals(sysUserEntity.getPassword())) {
             return ResultApi.warn("999402");
         }
 

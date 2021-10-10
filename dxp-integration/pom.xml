@@ -24,6 +24,7 @@
         <module>dxp-integration-db</module>
         <module>dxp-integration-ds</module>
         <module>dxp-integration-encrypt</module>
+        <module>dxp-integration-fieldlog</module>
         <module>dxp-integration-idempotent</module>
         <module>dxp-integration-jwt</module>
         <module>dxp-integration-log</module>

@@ -118,6 +118,16 @@
                 <artifactId>dxp-integration-idempotent</artifactId>
                 <version>${dxp-incubator.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.dqcer</groupId>
+                <artifactId>dxp-integration-db</artifactId>
+                <version>${dxp-incubator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dqcer</groupId>
+                <artifactId>dxp-integration-datasource</artifactId>
+                <version>${dxp-incubator.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

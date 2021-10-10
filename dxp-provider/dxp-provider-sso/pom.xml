@@ -34,10 +34,10 @@
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-tools-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.dqcer</groupId>
-            <artifactId>dxp-integration-ds</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.dqcer</groupId>-->
+<!--            <artifactId>dxp-integration-ds</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-integration-log</artifactId>
@@ -77,7 +77,10 @@
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-integration-db</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dqcer</groupId>
+            <artifactId>dxp-integration-datasource</artifactId>
         </dependency>
 
     </dependencies>

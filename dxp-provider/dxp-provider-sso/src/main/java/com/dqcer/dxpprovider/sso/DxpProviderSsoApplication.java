@@ -2,6 +2,7 @@ package com.dqcer.dxpprovider.sso;
 
 import com.dqcer.integration.EnableCache;
 import com.dqcer.integration.EnableWebCore;
+import com.dqcer.integration.datasource.EnableDynamicDataSource;
 import com.dqcer.integration.db.EnableMapper;
 import com.dqcer.integration.idempotent.annotation.EnableIdempotent;
 import com.dqcer.integration.log.EnableSysLog;
@@ -19,7 +20,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableCache
 @EnableSliderValid
 @EnableSysLog
-//@EnableDynamicDataSource
+@EnableDynamicDataSource
 @EnableIdempotent
 @SpringBootApplication
 public class DxpProviderSsoApplication {
