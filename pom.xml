@@ -18,16 +18,18 @@
     </modules>
 
     <properties>
+        <dxp-incubator.version>0.0.1-SNAPSHOT</dxp-incubator.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>1.8</java.version>
         <spring.boot.version>2.4.8</spring.boot.version>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
         <spring-cloud.version>2020.0.2</spring-cloud.version>
-        <dxp-incubator.version>0.0.1-SNAPSHOT</dxp-incubator.version>
         <mybatis-plus.version>3.4.3.2</mybatis-plus.version>
         <hibernate-validator.version>6.1.0.Final</hibernate-validator.version>
         <commons-codec.version>1.15</commons-codec.version>
+        <hutool.version>5.2.5</hutool.version>
+        <redisson.spring.boot.version>3.16.2</redisson.spring.boot.version>
     </properties>
 
     <dependencyManagement>
@@ -74,6 +76,22 @@
                 <version>${commons-codec.version}</version>
             </dependency>
             <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-core</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-json</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.dqcer</groupId>
                 <artifactId>dxp-tools-core</artifactId>
                 <version>${dxp-incubator.version}</version>
@@ -110,12 +128,27 @@
             </dependency>
             <dependency>
                 <groupId>com.dqcer</groupId>
+                <artifactId>dxp-integration-context</artifactId>
+                <version>${dxp-incubator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dqcer</groupId>
+                <artifactId>dxp-integration-cache</artifactId>
+                <version>${dxp-incubator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dqcer</groupId>
                 <artifactId>dxp-integration-log</artifactId>
                 <version>${dxp-incubator.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.dqcer</groupId>
                 <artifactId>dxp-integration-idempotent</artifactId>
+                <version>${dxp-incubator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dqcer.integration</groupId>
+                <artifactId>dxp-integration-slider</artifactId>
                 <version>${dxp-incubator.version}</version>
             </dependency>
             <dependency>
