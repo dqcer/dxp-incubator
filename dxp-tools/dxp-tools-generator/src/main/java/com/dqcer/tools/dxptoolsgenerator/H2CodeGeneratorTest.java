@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
+import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.junit.jupiter.api.BeforeAll;
@@ -58,14 +59,14 @@ public class H2CodeGeneratorTest {
      * 全局配置
      */
     private GlobalConfig.Builder globalConfig() {
-        return new GlobalConfig.Builder().fileOverride();
+        return new GlobalConfig.Builder().fileOverride().dateType(DateType.ONLY_DATE);
     }
 
     /**
      * 包配置
      */
     private PackageConfig.Builder packageConfig() {
-        return new PackageConfig.Builder();
+        return new PackageConfig.Builder().parent(PACKAGE_NAME).moduleName(MODEL_NAME).mapper("biz").other("biz.impl");
     }
 
     /**
@@ -86,17 +87,6 @@ public class H2CodeGeneratorTest {
     }
 
     /**
-     * 简单生成
-     */
-    @Test
-    public void testSimple() {
-        AutoGenerator generator = new AutoGenerator(DATA_SOURCE_CONFIG);
-        generator.strategy(strategyConfig().build());
-        generator.global(globalConfig().build());
-        generator.execute();
-    }
-
-    /**
      * 过滤表前缀（后缀同理，支持多个）
      * result: t_simple -> simple
      */
@@ -108,54 +98,7 @@ public class H2CodeGeneratorTest {
         generator.execute();
     }
 
-    /**
-     * 过滤字段后缀（前缀同理，支持多个）
-     * result: deleted_flag -> deleted
-     */
-    @Test
-    public void testFieldSuffix() {
-        AutoGenerator generator = new AutoGenerator(DATA_SOURCE_CONFIG);
-        generator.strategy(strategyConfig().addFieldSuffix("_flag").build());
-        generator.global(globalConfig().build());
-        generator.execute();
-    }
 
-
-
-    /**
-     * 逻辑删除字段设置
-     * result: 新增@TableLogic注解
-     * 忽略字段设置
-     * result: 不生成
-     */
-    @Test
-    public void testLogicDeleteAndIgnoreColumn() {
-        AutoGenerator generator = new AutoGenerator(DATA_SOURCE_CONFIG);
-        generator.strategy(strategyConfig().entityBuilder()
-                .logicDeleteColumnName("deleted") // 基于数据库字段
-                .logicDeletePropertyName("deleteFlag")// 基于模型属性
-                .addIgnoreColumns("age") // 基于数据库字段
-                .build());
-        generator.global(globalConfig().build());
-        generator.execute();
-    }
-
-    /**
-     * 自定义模板生成的文件名称
-     * result: TSimple -> TSimpleEntity
-     */
-    @Test
-    public void testCustomTemplateName() {
-        AutoGenerator generator = new AutoGenerator(DATA_SOURCE_CONFIG);
-        generator.strategy(strategyConfig()
-                .entityBuilder().formatFileName("%sEntity")
-                .mapperBuilder().formatMapperFileName("%sDao").formatXmlFileName("%sXml")
-                .controllerBuilder().formatFileName("%sAction")
-                .serviceBuilder().formatServiceFileName("%sService").formatServiceImplFileName("%sServiceImp")
-                .build());
-        generator.global(globalConfig().build());
-        generator.execute();
-    }
 
     /**
      * 自定义模板生成的文件路径
@@ -166,14 +109,23 @@ public class H2CodeGeneratorTest {
     public void testCustomTemplatePath() {
         // 设置自定义路径
         Map<OutputFile, String> pathInfo = new HashMap<>();
-        pathInfo.put(OutputFile.mapperXml, "D://");
-        pathInfo.put(OutputFile.entity, "D://entity//");
+        pathInfo.put(OutputFile.controller, USER_DIR);
+        pathInfo.put(OutputFile.service, USER_DIR);
+        pathInfo.put(OutputFile.serviceImpl, USER_DIR);
+        pathInfo.put(OutputFile.mapper, USER_DIR);
+        pathInfo.put(OutputFile.other, USER_DIR);
+        pathInfo.put(OutputFile.mapperXml, USER_DIR);
         AutoGenerator generator = new AutoGenerator(DATA_SOURCE_CONFIG);
         generator.strategy(strategyConfig().build());
         generator.packageInfo(packageConfig().pathInfo(pathInfo).build());
         generator.global(globalConfig().build());
         generator.execute();
     }
+    public static final String USER_DIR = System.getProperty("user.dir") + "/src/main/java";
+
+    public static final String PACKAGE_NAME = "com.dqcer.tool";
+    public static final String PACKAGE_DIR = "/com/dqcer/tool";
+    public static final String MODEL_NAME = "test";
 
     /**
      * 自定义模板
@@ -183,15 +135,35 @@ public class H2CodeGeneratorTest {
 
         // 设置自定义输出文件
         Map<String, String> customFile = new HashMap<>();
-        customFile.put("test.java", "/templates/biz.java.vm");
+        customFile.put("test.java", "/templates/bizImpl.java.vm");
 
         AutoGenerator generator = new AutoGenerator(DATA_SOURCE_CONFIG);
-        generator.strategy(strategyConfig().build());
+
+        // 设置自定义路径
+        Map<OutputFile, String> pathInfo = new HashMap<>();
+        pathInfo.put(OutputFile.controller, USER_DIR  + PACKAGE_DIR + "/" + MODEL_NAME + "/controller");
+        pathInfo.put(OutputFile.service, USER_DIR + PACKAGE_DIR  + "/" + MODEL_NAME + "/service");
+        pathInfo.put(OutputFile.serviceImpl, USER_DIR + PACKAGE_DIR  + "/" + MODEL_NAME+ "/service/impl");
+        pathInfo.put(OutputFile.mapper, USER_DIR + PACKAGE_DIR  + "/" + MODEL_NAME+ "/biz");
+        pathInfo.put(OutputFile.other, USER_DIR + PACKAGE_DIR  + "/" + MODEL_NAME+ "/biz/impl");
+        pathInfo.put(OutputFile.mapperXml, USER_DIR + PACKAGE_DIR  + "/" + MODEL_NAME+ "/entity");
+        pathInfo.put(OutputFile.entity, USER_DIR + PACKAGE_DIR  + "/" + MODEL_NAME+ "/entity");
+        generator.packageInfo(packageConfig().pathInfo(pathInfo).build());
+
+        generator.strategy(strategyConfig()
+                .entityBuilder().formatFileName("%sEntity")
+                .mapperBuilder().formatMapperFileName("%sBiz").formatXmlFileName("%s.hbm")
+                .controllerBuilder().formatFileName("%sController")
+                .serviceBuilder().formatServiceFileName("%sService").formatServiceImplFileName("%sServiceImp")
+                .build());
+
         generator.template(templateConfig()
                 .entity("/templates/entity.java")
                 .controller("/templates/controller.java")
                 .service("/templates/service.java")
                 .serviceImpl("/templates/serviceImpl.java")
+                .mapper("/templates/biz.java")
+                .mapperXml("/templates/hbm.xml")
                 .build());
         generator.injection(injectionConfig().customFile(customFile).build());
         generator.global(globalConfig().build());
