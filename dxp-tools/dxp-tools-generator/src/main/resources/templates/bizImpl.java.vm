@@ -1,5 +1,6 @@
-package ${package.Mapper}.impl;
+package ${basePackage}.${entity};
 
+import com.boarsoft.hibernate.biz.SimpleBizImpl;
 import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
 
@@ -9,6 +10,7 @@ import ${superMapperClassPackage};
  * @description  $!{table.comment} 业务实现层
  * @@date ${date}
  */
-public class ${table.mapperName}Impl extends ${superMapperClass}<${entity}> {
+@Service
+public class ${table.mapperName}Impl extends SimpleBizImpl implements ${table.mapperName} {
 
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 5.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-5.0.dtd">
+<hibernate-mapping>
+    <class name="${package.Entity}.${entity}" table="${table.name}">
+        <id name="id">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+
+        #foreach($field in ${table.fields})
+            #if("${field.name}" != "id")
+                #if("$!field.comment" != "")
+                    <!--${field.comment}-->
+                #end
+                <property name="${field.propertyName}">
+                    <column name="${field.name}" />
+                </property>
+            #end
+        #end
+    </class>
+</hibernate-mapping>

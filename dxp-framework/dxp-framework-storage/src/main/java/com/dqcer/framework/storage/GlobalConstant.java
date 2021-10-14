@@ -24,4 +24,9 @@ public class GlobalConstant {
          */
         DISABLE
     }
+
+    public static void main(String[] args) {
+        String str =  "com.dqcer";
+        System.out.println(str.replaceAll("\\.", "\\/"));
+    }
 }

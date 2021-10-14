@@ -16,6 +16,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author dongqin
@@ -36,6 +38,33 @@ public class H2CodeGeneratorTest {
         scriptRunner.runScript(new InputStreamReader(inputStream));
         conn.close();
     }
+    private static Pattern linePattern = Pattern.compile("_(\\w)");
+
+    public static String lineToHump(String str) {
+        str = str.toLowerCase();
+        Matcher matcher = linePattern.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, matcher.group(1).toUpperCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
+    }
+
+
+    /**
+     * 将字符串的首字母转大写
+     *
+     * @param str 需要转换的字符串
+     * @return
+     */
+    private static String captureName(String str) {
+        // 进行字母的ascii编码前移，效率要高于截取字符串进行转换的操作
+        char[] cs= str.toCharArray();
+        cs[0] -= 32;
+        return String.valueOf(cs);
+    }
+
 
     /**
      * 数据源配置
@@ -52,7 +81,7 @@ public class H2CodeGeneratorTest {
      * 策略配置
      */
     private StrategyConfig.Builder strategyConfig() {
-        return new StrategyConfig.Builder().addInclude("t_simple"); // 设置需要生成的表名
+        return new StrategyConfig.Builder().addInclude(TABLE_NAME); // 设置需要生成的表名
     }
 
     /**
@@ -66,7 +95,7 @@ public class H2CodeGeneratorTest {
      * 包配置
      */
     private PackageConfig.Builder packageConfig() {
-        return new PackageConfig.Builder().parent(PACKAGE_NAME).moduleName(MODEL_NAME).mapper("biz").other("biz.impl");
+        return new PackageConfig.Builder().parent(PACKAGE_NAME).moduleName(MODEL_NAME);
     }
 
     /**
@@ -76,13 +105,14 @@ public class H2CodeGeneratorTest {
         return new TemplateConfig.Builder();
     }
 
+    public static String TABLE_NAME = "t_simple";
+
+
     /**
      * 注入配置
      */
     private InjectionConfig.Builder injectionConfig() {
-        // 测试自定义输出文件之前注入操作，该操作再执行生成代码前 debug 查看
         return new InjectionConfig.Builder().beforeOutputFile((tableInfo, objectMap) -> {
-
             System.out.println("tableInfo: " + tableInfo.getEntityName() + " objectMap: " + objectMap.size());
         });
     }
@@ -134,19 +164,26 @@ public class H2CodeGeneratorTest {
     @Test
     public void testCustomTemplate() {
 
-        // 设置自定义输出文件
-        Map<String, String> customFile = new HashMap<>();
-        customFile.put("test.java", "/templates/bizImpl.java.vm");
+
 
         AutoGenerator generator = new AutoGenerator(DATA_SOURCE_CONFIG);
+
+        InjectionConfig.Builder builder = injectionConfig();
+
+        String baseTableName = captureName(lineToHump(TABLE_NAME));
+
+        // 设置自定义输出文件
+        Map<String, String> customFile = new HashMap<>();
+        customFile.put(baseTableName + "Biz.java", "/templates/biz.java.vm");
+        customFile.put(baseTableName + "BizImpl.java", "/templates/bizImpl.java.vm");
 
         // 设置自定义路径
         Map<OutputFile, String> pathInfo = new HashMap<>();
         pathInfo.put(OutputFile.controller, USER_DIR  + PACKAGE_DIR + "/" + MODEL_NAME + "/controller");
         pathInfo.put(OutputFile.service, USER_DIR + PACKAGE_DIR  + "/" + MODEL_NAME + "/service");
         pathInfo.put(OutputFile.serviceImpl, USER_DIR + PACKAGE_DIR  + "/" + MODEL_NAME+ "/service/impl");
-        pathInfo.put(OutputFile.mapper, USER_DIR + PACKAGE_DIR  + "/" + MODEL_NAME+ "/biz");
-        pathInfo.put(OutputFile.other, USER_DIR + PACKAGE_DIR  + "/" + MODEL_NAME+ "/biz/impl");
+//        pathInfo.put(OutputFile.mapper, USER_DIR + PACKAGE_DIR  + "/" + MODEL_NAME+ "/biz");
+        pathInfo.put(OutputFile.other, USER_DIR + PACKAGE_DIR  + "/" + MODEL_NAME);
         pathInfo.put(OutputFile.mapperXml, USER_DIR + PACKAGE_DIR  + "/" + MODEL_NAME+ "/entity");
         pathInfo.put(OutputFile.entity, USER_DIR + PACKAGE_DIR  + "/" + MODEL_NAME+ "/entity");
         generator.packageInfo(packageConfig().pathInfo(pathInfo).build());
@@ -166,8 +203,12 @@ public class H2CodeGeneratorTest {
                 .mapper("/templates/biz.java")
                 .mapperXml("/templates/hbm.xml")
                 .build());
-        InjectionConfig.Builder builder = injectionConfig();
-        generator.injection(builder.customFile(customFile).build());
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("basePackage", PACKAGE_NAME + "."+ MODEL_NAME);
+        map.put("baseTableName", baseTableName);
+
+        generator.injection(builder.customFile(customFile).customMap(map).build());
         generator.global(globalConfig().build());
         generator.execute();
     }
