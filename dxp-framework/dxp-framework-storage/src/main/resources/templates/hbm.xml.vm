@@ -7,16 +7,15 @@
             <column name="id" />
             <generator class="native" />
         </id>
-
-        #foreach($field in ${table.fields})
-            #if("${field.name}" != "id")
-                #if("$!field.comment" != "")
-                    <!--${field.comment}-->
-                #end
-                <property name="${field.propertyName}">
-                    <column name="${field.name}" />
-                </property>
-            #end
-        #end
+#foreach($field in ${table.fields})
+    #if("${field.name}" != "id")
+    #if("$!field.comment" != "")
+        <!--${field.comment}-->
+    #end
+        <property name="${field.propertyName}">
+            <column name="${field.name}" />
+        </property>
+    #end
+#end
     </class>
 </hibernate-mapping>

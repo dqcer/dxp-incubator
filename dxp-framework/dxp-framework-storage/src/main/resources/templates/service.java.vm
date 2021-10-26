@@ -11,10 +11,15 @@ import ${superServiceClassPackage};
  * @author ${author}
  * @since ${date}
  */
-#if(${kotlin})
-interface ${table.serviceName} : ${superServiceClass}<${entity}>
-#else
-public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+public interface ${table.serviceName}  {
 
+    /**
+     * 保存
+     *
+     * @param dto        dto
+     * @param session 数据源
+     * @return {@link ReplyInfo<Object>}
+     */
+    ReplyInfo<Object> save(UnifySession session, JobSettingDTO dto);
 }
-#end
+

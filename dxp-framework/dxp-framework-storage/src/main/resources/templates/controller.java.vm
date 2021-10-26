@@ -1,11 +1,18 @@
 package ${package.Controller};
 
+import javax.annotation.Resource;
+import ${package.Service}.${table.serviceName};
+
+import com.boarsoft.bean.ReplyInfo;
+import com.boarsoft.common.Authorized;
+import com.eclincloud.base.common.validator.ValidGroup;
+import com.eclincloud.ecc.web.annotation.UserSession;
+import com.eclincloud.ecc.web.bean.UnifySession;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-#if(${superControllerClassPackage})
-import ${superControllerClassPackage};
-#end
-
 
 /**
  * @author ${author}
@@ -14,10 +21,22 @@ import ${superControllerClassPackage};
  */
 @RestController
 @RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
-#if(${superControllerClass})
-public class ${table.controllerName} extends ${superControllerClass} {
-#else
 public class ${table.controllerName} {
-#end
 
-        }
+    @Resource
+    ${table.serviceName} ${table.serviceName.substring(1,2).toLowerCase()}${table.serviceName.substring(2)};
+
+
+    /**
+    * 保存
+    *
+    * @param jobSettingDTO dto
+    * @return {@link ReplyInfo<Object>}
+    */
+    @Authorized(code = "${table.entityPath}.base.save")
+    @PostMapping("base/save.do")
+    public ReplyInfo<Object> save(@RequestBody @Validated({ValidGroup.Query.class}) JobSettingDTO jobSettingDTO, @UserSession UnifySession session) {
+            return ${table.serviceName.substring(1,2).toLowerCase()}${table.serviceName.substring(2)}.save(session, jobSettingDTO);
+    }
+
+}

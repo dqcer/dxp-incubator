@@ -1,7 +1,4 @@
-package${entity};
-
-import ${package.Entity}.${entity};
-import ${superMapperClassPackage};
+package ${cfg.basePackage};
 
 
 /**
@@ -9,7 +6,7 @@ import ${superMapperClassPackage};
  * @description  $!{table.comment} 业务接口层
  * @@date ${date}
  */
-public interface ${table.mapperName} {
+public interface ${entity}Biz {
 
 }
 
