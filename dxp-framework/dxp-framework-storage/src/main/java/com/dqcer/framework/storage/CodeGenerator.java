@@ -43,6 +43,10 @@ public class CodeGenerator {
 
     public static void main(String[] args) {
 
+        /**
+         * 主键为Long
+         */
+
         String moduleName = "test";
         String tableName = "plt_account";
         String basePackage = "com.dqcer";
@@ -72,15 +76,6 @@ public class CodeGenerator {
         pc.setParent(basePackage);
         mpg.setPackageInfo(pc);
 
-//        // 自定义配置
-//        InjectionConfig cfg = new InjectionConfig() {
-//            @Override
-//            public void initMap() {
-//                // to do nothing
-//                Map<String, Object> map = cfg.getMap();
-//                map.put("test", "terst");
-//            }
-//        };
 
         // 自定义配置
         InjectionConfig cfg = new InjectionConfig() {
@@ -132,6 +127,14 @@ public class CodeGenerator {
                         + "/api/entity/" + tableInfo.getEntityName() + ".hbm." + StringPool.DOT_XML;
             }
         });
+        focList.add(new FileOutConfig("/templates/dto.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
+                return projectPath + "/src/main/java/" + basePackage.replaceAll("\\.", "\\/") + "/" + pc.getModuleName()
+                        + "/api/dto/" + tableInfo.getEntityName() + "DTO" + StringPool.DOT_JAVA;
+            }
+        });
 
         cfg.setFileOutConfigList(focList);
         mpg.setCfg(cfg);
@@ -145,7 +148,7 @@ public class CodeGenerator {
         // templateConfig.setService();
         // templateConfig.setController();
 
-        templateConfig.setXml("/templates/hbm.xml.vm");
+        templateConfig.setXml(null);
 //        templateConfig.setMapper("/templates/biz.java");
         templateConfig.setMapper(null);
         templateConfig.setEntity(null);
@@ -165,9 +168,6 @@ public class CodeGenerator {
         strategy.setInclude(tableName);
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
-
-        gc.setXmlName("%sEntity.hbm");
-
 
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new VelocityTemplateEngine());

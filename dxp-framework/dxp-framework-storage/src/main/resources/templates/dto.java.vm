@@ -1,24 +1,32 @@
-package ${cfg.basePackage}.api.entity;
+package ${cfg.basePackage}.api.dto;
 
 #foreach($pkg in ${table.importPackages})
 import ${pkg};
 #end
+import com.eclincloud.base.common.enums.StatusEnum;
+import com.eclincloud.base.common.validator.ValidGroup;
+import com.eclincloud.base.common.validator.annontaion.StatusValid;
+import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.NotNull;
 
 /**
  * @author ${author}
  * @description 自定义属性注入abc=$!{abc} $!{table.comment}
  * @@date ${date}
  */
-#if(${superEntityClass})
-public class ${entity}Entity extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
-#elseif(${activeRecord})
-public class ${entity}Entity extends Model<${entity}> {
-#else
-public class ${entity}Entity implements Serializable {
-#end
+public class ${entity}DTO implements Serializable {
+
 
 private static final long serialVersionUID = 1L;
+
+
+    /**
+     * 主键
+     */
+    @NotNull(groups = { ValidGroup.Status.class, ValidGroup.Update.class})
+    private Long id;
+
 ## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
 
@@ -42,6 +50,7 @@ private static final long serialVersionUID = 1L;
         #elseif(${field.convert})
         @TableId("${field.name}")
         #end
+
         ## 普通字段
     #elseif(${field.fill})
         ## -----   存在字段填充设置   -----
@@ -61,6 +70,7 @@ private static final long serialVersionUID = 1L;
     #if(${logicDeleteFieldName}==${field.name})
     @TableLogic
     #end
+
 
     private ${field.propertyType} ${field.propertyName};
 #end
