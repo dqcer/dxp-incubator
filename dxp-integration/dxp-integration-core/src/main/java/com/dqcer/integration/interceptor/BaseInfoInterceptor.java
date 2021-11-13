@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.dqcer.dxpframework.api.ResultApi;
 import com.dqcer.dxptools.core.IpAddressUtil;
 import com.dqcer.dxptools.core.ObjUtil;
+import com.dqcer.dxptools.core.StrUtil;
 import com.dqcer.framework.storage.*;
+import com.dqcer.integration.annotation.UnAuthorize;
 import com.dqcer.integration.operation.RedissonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +39,53 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json");
+
+        HandlerMethod method = (HandlerMethod) handler;
+
+        // 请求参数
+        LocalDateTime now = LocalDateTime.now();
+        MethodParameter[] methodParameters = method.getMethodParameters();
+        StringBuilder key = new StringBuilder();
+        if (ObjUtil.isNotNull(methodParameters)) {
+            for (Object arg : methodParameters) {
+                if (ObjUtil.isNotNull(arg)) {
+                    boolean execute = isExecute(arg);
+                    if (execute) {
+                        if (arg instanceof MultipartFile) {
+                            MultipartFile multipartFile = (MultipartFile) arg;
+                            Map<String, Object> map = new HashMap<>(8);
+                            map.put("fileName", multipartFile.getOriginalFilename());
+                            map.put("size", multipartFile.getSize());
+                            String stringPretty = map.toString();
+                            key.append(stringPretty);
+                        } else {
+                            String stringPretty = arg.toString();
+                            key.append(stringPretty);
+                        }
+                    }
+                }
+            }
+        }
+        UnifyParameter parameter = new UnifyParameter();
+        parameter.setParameter(key.toString());
+        parameter.setStartTime(now);
+        QueryStorage.setParameter(parameter);
+
+        // 获取当前用户信息
+        UnifySession unifySession = new UnifySession();
+        unifySession.setLanguage(request.getHeader(HttpHeaders.ACCEPT_LANGUAGE));
+        unifySession.setIp(IpAddressUtil.getIpAddr(request));
+
+        UnAuthorize unauthorize = method.getMethodAnnotation(UnAuthorize.class);
+        if (null != unauthorize) {
+            if (log.isDebugEnabled()) {
+                log.debug("UnAuthorize: {}", request.getRequestURI());
+            }
+            UserStorage.setSession(unifySession);
+            return true;
+        }
 
         String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
 
@@ -44,7 +93,7 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
             log.debug("Authorization: {}", authorization);
         }
 
-        if (!authorization.startsWith(HeaderConstant.BEARER)) {
+        if (StrUtil.isBlank(authorization) || !authorization.startsWith(HeaderConstant.BEARER)) {
             response.getWriter().write(JSON.toJSONString(ResultApi.error("999400")));
             //  认证失败
             return false;
@@ -72,7 +121,7 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
         }
 
         LocalDateTime lastActiveTime = user.getLastActiveTime();
-        LocalDateTime now = LocalDateTime.now();
+
 
         if (lastActiveTime.plusMinutes(30).isBefore(now)) {
             response.getWriter().write(JSON.toJSONString(ResultApi.error("999401")));
@@ -84,41 +133,8 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
         redissonObject.setValue(MessageFormat.format(CacheConstant.SSO_TOKEN, token), user.setLastActiveTime(now));
 
 
-        // TODO: 2021/8/21 获取当前用户信息
-        UnifySession unifySession = new UnifySession();
         unifySession.setAccountId(user.getAccountId());
-        unifySession.setLanguage(request.getHeader(HttpHeaders.ACCEPT_LANGUAGE));
-        unifySession.setIp(IpAddressUtil.getIpAddr(request));
         UserStorage.setSession(unifySession);
-        // TODO: 2021/11/13 请求参数
-        HandlerMethod method = (HandlerMethod) handler;
-        MethodParameter[] methodParameters = method.getMethodParameters();
-        StringBuilder key = new StringBuilder();
-        if (ObjUtil.isNotNull(methodParameters)) {
-            for (Object arg : methodParameters) {
-                if (ObjUtil.isNotNull(arg)) {
-                    boolean execute = isExecute(arg);
-                    if (execute) {
-                        if (arg instanceof MultipartFile) {
-                            MultipartFile multipartFile = (MultipartFile) arg;
-                            Map<String, Object> map = new HashMap<>(8);
-                            map.put("fileName", multipartFile.getOriginalFilename());
-                            map.put("size", multipartFile.getSize());
-                            String stringPretty = map.toString();
-                            key.append(stringPretty);
-                        } else {
-                            String stringPretty = arg.toString();
-                            key.append(stringPretty);
-                        }
-                    }
-                }
-            }
-        }
-        UnifyParameter parameter = new UnifyParameter();
-        parameter.setParameter(key.toString());
-        parameter.setStartTime(now);
-
-        QueryStorage.setParameter(parameter);
 
         return true;
     }

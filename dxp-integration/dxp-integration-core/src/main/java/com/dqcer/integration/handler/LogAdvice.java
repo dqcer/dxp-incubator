@@ -46,6 +46,7 @@ public class LogAdvice implements ResponseBodyAdvice<Object> {
             log.debug("log 拦截", object, methodParameter);
         }
 
+
         UnifySession unifySession = UserStorage.getSession();
         UnifyParameter unifyParameter = QueryStorage.getParameter();
 

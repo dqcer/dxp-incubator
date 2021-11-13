@@ -1,10 +1,11 @@
 package com.dqcer.dxpprovider.sso.web.controller;
 
 import com.dqcer.dxpframework.api.ResultApi;
-import com.dqcer.framework.storage.CacheConstant;
 import com.dqcer.dxpprovider.sso.web.model.dto.LoginDTO;
 import com.dqcer.dxpprovider.sso.web.service.UserService;
 import com.dqcer.dxptools.core.IpAddressUtil;
+import com.dqcer.framework.storage.CacheConstant;
+import com.dqcer.integration.annotation.UnAuthorize;
 import com.dqcer.integration.operation.RedissonObject;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,7 @@ public class AuthorizationController {
      * @param request  请求
      * @return {@link ResultApi}
      */
+    @UnAuthorize
     //@OperationLog(module = "auth.account.login")
     @PostMapping("account/login")
     public ResultApi auth(@RequestBody @Validated(LoginDTO.Account.class) LoginDTO loginDTO, HttpServletRequest request) {
