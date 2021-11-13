@@ -27,9 +27,9 @@ public class LogListener {
     @Order
     @EventListener(LogEvent.class)
     public void listenLog(LogEvent event) {
-        BaseSysLog sysLog = (BaseSysLog) event.getSource();
-        if (log.isInfoEnabled()) {
-            log.info("Log listener: {}", sysLog);
+        SysLog sysLog = (SysLog) event.getSource();
+        if (log.isDebugEnabled()) {
+            log.debug("Log listener: {}", sysLog);
         }
         //logService.insertLog(sysLog);
     }

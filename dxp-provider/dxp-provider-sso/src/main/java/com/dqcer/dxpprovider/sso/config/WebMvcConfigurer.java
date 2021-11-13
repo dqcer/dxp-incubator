@@ -1,6 +1,6 @@
 package com.dqcer.dxpprovider.sso.config;
 
-import com.dqcer.integration.context.BaseInfoInterceptor;
+import com.dqcer.integration.interceptor.BaseInfoInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.Validator;
 import org.springframework.web.servlet.LocaleResolver;

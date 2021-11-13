@@ -2,19 +2,16 @@ package com.dqcer.integration.log.aspect;
 
 
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSON;
 import cn.hutool.json.JSONUtil;
-import com.dqcer.dxpframework.api.ResultApi;
+import com.dqcer.framework.storage.UnifySession;
+import com.dqcer.framework.storage.UserStorage;
 import com.dqcer.integration.log.annotation.OperationLog;
-import com.dqcer.integration.log.config.*;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.Ordered;
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -35,19 +31,19 @@ import java.util.Objects;
 @Aspect
 public class OperationLogAspect implements Ordered {
 
-
-
     @Pointcut("@annotation(com.dqcer.integration.log.annotation.OperationLog)")
     public void logPointCut() {
         // 日志织入点
     }
 
-    @Around("logPointCut()")
+   // @Around("logPointCut()")
     public Object doAfterReturning(ProceedingJoinPoint joinPoint) throws Throwable {
+        UnifySession unifySession = UserStorage.getSession();
+
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
 
-        SysLogContextHolder.LOG_REQUESTS_THREAD_LOCAL.set(request);
-        String uid = request.getHeader("uid");
+//        SysLogContextHolder.LOG_REQUESTS_THREAD_LOCAL.set(request);
+        Long accountId = unifySession.getAccountId();
         String requestUri = request.getRequestURI();
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
@@ -87,29 +83,24 @@ public class OperationLogAspect implements Ordered {
 
         Object proceed = joinPoint.proceed();
 
-        BaseSysLog baseSysLog = new BaseSysLog();
-        if (StrUtil.isNotBlank(uid)) {
-            baseSysLog.setCreatedBy(Long.parseLong(uid));
-        }
-        baseSysLog.setCreatedTime(new Date());
-        baseSysLog.setRequestUrl(requestUri);
-        baseSysLog.setParam(key.toString());
-        if (proceed instanceof ResultApi) {
-            ResultApi result = (ResultApi) proceed;
-//            baseSysLog.setResultCode(result.getCode());
-            baseSysLog.setResultMsg(result.getMessage());
-        } else {
-
-            baseSysLog.setResultCode(0);
-            baseSysLog.setResultMsg(ResultApi.ok().getMessage());
-        }
-
-        baseSysLog.setIp(IpUtils.getIpAddr(request));
-        baseSysLog.setLanguage(request.getHeader(HttpHeaders.ACCEPT_LANGUAGE));
-        baseSysLog.setModule(operationLog.module());
-
-        RequestContextHolder.setRequestAttributes(RequestContextHolder.getRequestAttributes(), true);
-        SpringContextHolder.publishEvent(new LogEvent(baseSysLog));
+//        SysLog sysLog = new SysLog();
+//        sysLog.setCreatedBy(accountId);
+//        sysLog.setCreatedTime(new Date());
+//        sysLog.setRequestUrl(requestUri);
+//        sysLog.setParam(key.toString());
+//        if (proceed instanceof ResultApi) {
+//            ResultApi result = (ResultApi) proceed;
+//            sysLog.setResult(result.toString());
+//        } else {
+//            // TODO: 2021/11/13 IO流处理
+//        }
+//
+//        sysLog.setIp(unifySession.getIp());
+//        sysLog.setLanguage(unifySession.getLanguage());
+//        sysLog.setModule(operationLog.module());
+//
+//        RequestContextHolder.setRequestAttributes(RequestContextHolder.getRequestAttributes(), true);
+//        SpringContextHolder.publishEvent(new LogEvent(sysLog));
 
         return proceed;
 

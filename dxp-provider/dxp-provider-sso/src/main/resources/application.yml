@@ -1,8 +1,18 @@
 server:
   port: 8080
+  # 开启压缩功能 好像没体现
+  compression:
+    enabled: true
+    min-response-size: 0
+    mime-types: ["text/html","text/xml","application/xml","application/json","application/octet-stream"]
   undertow:
     threads:
       worker: 15
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #控制台打印日志
+  global-config:
+    banner: false
 dev:
   mysql: 172.16.2.171:3308
   redis: 172.16.2.171
@@ -10,7 +20,7 @@ spring:
   application:
     name: dxp-provider-sso
   datasource:
-    url: jdbc:mysql://${dev.mysql}/dxp-master?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
+    url: jdbc:mysql://${dev.mysql}/uat-e-cloud?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver

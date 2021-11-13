@@ -1,6 +1,7 @@
 package com.dqcer.integration.handler;
 
 import com.dqcer.dxpframework.api.ResultApi;
+import com.dqcer.framework.storage.AdviceOrderConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -22,9 +23,9 @@ import javax.annotation.Resource;
  * @description 全局响应处理
  * @date 2021/10/04 23:10:42
  */
-@Order(-200)
+@Order(AdviceOrderConstant.I18N_ORDER)
 @RestControllerAdvice
-public class GlobalResponseAdvice implements ResponseBodyAdvice<Object> {
+public class I18nAdvice implements ResponseBodyAdvice<Object> {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -39,11 +40,10 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public Object beforeBodyWrite(Object object, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
         if(object instanceof ResultApi){
-            if (log.isInfoEnabled()) {
-                log.info("ResultApi 国际化处理...");
+            if (log.isDebugEnabled()) {
+                log.debug("ResultApi 国际化处理...");
             }
             ResultApi resultApi = (ResultApi) object;
-            //resultApi.setMessage(ResourceUtils.get(resultApi.getCode()));
             resultApi.setMessage(messageSource.getMessage(resultApi.getCode(), null, ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getLocale()));
         }
         return object;

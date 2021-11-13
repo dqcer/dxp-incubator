@@ -10,13 +10,13 @@ import java.time.LocalDateTime;
  * @description 针对中间1对多、多对多关联表
  * @date 2021/03/21 20:08:09
  */
-public class MiddleEntity<ID> extends Entity<ID> {
+public abstract class MiddleEntity<ID> extends Entity<ID> {
 
     /**
-     * 创建时间
+     * 创建时间，方便增量同步
      */
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createdTime;
+    protected LocalDateTime createdTime;
 
     public LocalDateTime getCreatedTime() {
         return createdTime;

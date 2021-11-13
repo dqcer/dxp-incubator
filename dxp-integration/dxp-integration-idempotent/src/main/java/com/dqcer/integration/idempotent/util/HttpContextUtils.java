@@ -11,7 +11,7 @@ import java.util.Objects;
  * @description http上下文
  * @date 2021/10/03 12:10:93
  */
-public class HttpContextUtils {
+public final class HttpContextUtils {
 
     private HttpContextUtils() {
     }

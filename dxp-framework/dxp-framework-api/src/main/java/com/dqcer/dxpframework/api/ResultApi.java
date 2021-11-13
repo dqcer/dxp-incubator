@@ -3,7 +3,6 @@ package com.dqcer.dxpframework.api;
 import com.dqcer.dxpframework.enums.CodeEnum;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.HashMap;
 
 /**
@@ -38,10 +37,6 @@ public class ResultApi implements Serializable {
      */
     private String code;
 
-    /**
-     * 时间戳
-     */
-    private String now = LocalDate.now().toString();
 
     private transient HashMap map;
 
@@ -136,13 +131,6 @@ public class ResultApi implements Serializable {
         this.code = code;
     }
 
-    public String getNow() {
-        return now;
-    }
-
-    public void setNow(String now) {
-        this.now = now;
-    }
 
     public void setSuccess(boolean success) {
         this.success = success;
@@ -150,5 +138,17 @@ public class ResultApi implements Serializable {
 
     public boolean getSuccess() {
         return success;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("ResultApi{");
+        sb.append("success=").append(success);
+        sb.append(", data=").append(data);
+        sb.append(", message='").append(message).append('\'');
+        sb.append(", code='").append(code).append('\'');
+        sb.append(", map=").append(map);
+        sb.append('}');
+        return sb.toString();
     }
 }

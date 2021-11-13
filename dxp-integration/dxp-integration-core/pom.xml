@@ -57,6 +57,22 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.dqcer</groupId>
+            <artifactId>dxp-framework-storage</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dqcer</groupId>
+            <artifactId>dxp-integration-log</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dqcer</groupId>
+            <artifactId>dxp-tools-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dqcer</groupId>
+            <artifactId>dxp-integration-cache</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

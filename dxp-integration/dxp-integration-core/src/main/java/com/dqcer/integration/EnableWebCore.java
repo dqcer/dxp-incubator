@@ -4,7 +4,8 @@ package com.dqcer.integration;
 import com.dqcer.integration.configuration.AutoConfiguration;
 import com.dqcer.integration.configuration.LanguageConfiguration;
 import com.dqcer.integration.handler.GlobalExceptionHandler;
-import com.dqcer.integration.handler.GlobalResponseAdvice;
+import com.dqcer.integration.handler.LogAdvice;
+import com.dqcer.integration.handler.I18nAdvice;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;
@@ -19,6 +20,6 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Import({GlobalExceptionHandler.class, GlobalResponseAdvice.class, LanguageConfiguration.class, AutoConfiguration.class})
+@Import({GlobalExceptionHandler.class, I18nAdvice.class, LogAdvice.class,  LanguageConfiguration.class, AutoConfiguration.class})
 public @interface EnableWebCore {
 }

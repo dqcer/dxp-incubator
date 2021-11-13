@@ -35,9 +35,10 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = Exception.class)
     public ResultApi exception(Exception exception) {
-        log.error("系统异常: {}", exception);
+        log.error("系统异常: ", exception);
         return ResultApi.error("999500");
     }
+
 
     /**
      * 缺少资源异常，无法找到对应properties文件中对应的key
@@ -47,7 +48,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = HttpMediaTypeNotSupportedException.class)
     public ResultApi httpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException exception) {
-        log.error("请求头Content-Type异常  : {}", exception);
+        log.error("请求头Content-Type异常: ", exception);
         return ResultApi.error("999303");
     }
 
@@ -59,7 +60,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = MissingResourceException.class)
     public ResultApi missingResourceException(Exception exception) {
-        log.error("无法找到对应properties文件中对应的key : {}", exception);
+        log.error("无法找到对应properties文件中对应的key: ", exception);
         return ResultApi.error("999302");
     }
 
@@ -71,7 +72,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     public ResultApi httpMessageConversionException(HttpMessageNotReadableException exception) {
-        log.error("参数接收时，类型转换异常 : {}", exception);
+        log.error("参数接收时，类型转换异常: ", exception);
         return ResultApi.error("999300");
     }
 
@@ -98,7 +99,7 @@ public class GlobalExceptionHandler {
             stringBuilder.append(defaultMessage).append("\t");
             resultApi.put(field, defaultMessage);
         }
-        log.error("参数绑定异常: {} {}", exception.getParameter(), stringBuilder);
+        log.error("参数绑定异常: {}", exception.getParameter(), stringBuilder);
         return resultApi;
     }
 }

@@ -7,60 +7,34 @@ package com.dqcer.framework.storage;
  */
 public class UserStorage {
 
-    static ThreadLocal<Box> boxThreadLocal = new InheritableThreadLocal();
+    /**
+     * 统一的会话
+     */
+    static ThreadLocal<UnifySession> UNIFY_SESSION = new InheritableThreadLocal();
 
-    public static Box getBox() {
-        return boxThreadLocal.get();
+    /**
+     * 获取会话
+     *
+     * @return {@link UnifySession}
+     */
+    public static UnifySession getSession() {
+        return UNIFY_SESSION.get();
     }
 
-    public static void setBox(Box box) {
-        boxThreadLocal.set(box);
+    /**
+     * 设置会话
+     *
+     * @param box 盒子
+     */
+    public static void setSession(UnifySession box) {
+        UNIFY_SESSION.set(box);
     }
 
-    public static void clearBox() {
-        boxThreadLocal.remove();
-    }
-
-
-    public static class Box {
-        private Long userId;
-        private String username;
-        private Long roleId;
-        private String roleName;
-
-        public Long getUserId() {
-            return userId;
-        }
-
-        public void setUserId(Long userId) {
-            this.userId = userId;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public Long getRoleId() {
-            return roleId;
-        }
-
-        public void setRoleId(Long roleId) {
-            this.roleId = roleId;
-        }
-
-        public String getRoleName() {
-            return roleName;
-        }
-
-        public void setRoleName(String roleName) {
-            this.roleName = roleName;
-        }
-
-
+    /**
+     * 清除会话
+     */
+    public static void clearSession() {
+        UNIFY_SESSION.remove();
     }
 
 }

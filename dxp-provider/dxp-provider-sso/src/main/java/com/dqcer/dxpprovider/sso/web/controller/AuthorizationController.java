@@ -1,12 +1,10 @@
 package com.dqcer.dxpprovider.sso.web.controller;
 
 import com.dqcer.dxpframework.api.ResultApi;
-import com.dqcer.dxpprovider.sso.constant.CacheConstant;
+import com.dqcer.framework.storage.CacheConstant;
 import com.dqcer.dxpprovider.sso.web.model.dto.LoginDTO;
 import com.dqcer.dxpprovider.sso.web.service.UserService;
 import com.dqcer.dxptools.core.IpAddressUtil;
-import com.dqcer.integration.datasource.annotation.DynamicDataSource;
-import com.dqcer.integration.log.annotation.OperationLog;
 import com.dqcer.integration.operation.RedissonObject;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,12 +34,11 @@ public class AuthorizationController {
     /**
      * 账号登录
      *
-     * @param loginDTO 登录dto
+     * @param loginDTO 登录dto E0A28F0F66C369000BA6590857885B27
      * @param request  请求
      * @return {@link ResultApi}
      */
-    @DynamicDataSource
-    @OperationLog(module = "auth.account.login")
+    //@OperationLog(module = "auth.account.login")
     @PostMapping("account/login")
     public ResultApi auth(@RequestBody @Validated(LoginDTO.Account.class) LoginDTO loginDTO, HttpServletRequest request) {
 
@@ -61,4 +58,5 @@ public class AuthorizationController {
 
         return userService.auth(loginDTO.getUe(), loginDTO.getPd());
     }
+
 }

@@ -10,40 +10,35 @@ import java.time.LocalDateTime;
  * @description 针对单个的实体表
  * @date 2021/03/21 20:08:09
  */
-public class AttribEntity<ID> extends Entity<ID> {
+public abstract class AttribEntity<ID> extends Entity<ID> {
 
     /**
      * 创建时间
      */
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createdTime;
+    protected LocalDateTime createdTime;
 
     /**
      * 创建人
      */
-    private Long createdBy;
+    protected Long createdBy;
 
     /**
      * 更新时间
      */
     @TableField(fill = FieldFill.UPDATE)
-    private LocalDateTime updatedTime;
+    protected LocalDateTime updatedTime;
 
     /**
      * 更新人
      */
-    private Long updatedBy;
+    protected Long updatedBy;
 
     /**
      * 状态
      */
-    private Integer status;
+    protected Integer status;
 
-
-    /**
-     * 备注
-     */
-    private String remark;
 
     public LocalDateTime getCreatedTime() {
         return createdTime;
@@ -87,11 +82,6 @@ public class AttribEntity<ID> extends Entity<ID> {
         this.status = status;
     }
 
-    public String getRemark() {
-        return remark;
-    }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
+
 }

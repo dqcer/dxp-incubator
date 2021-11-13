@@ -29,6 +29,10 @@
             <artifactId>dxp-framework-storage</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.dqcer</groupId>
+            <artifactId>dxp-tools-core</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

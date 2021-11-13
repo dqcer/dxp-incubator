@@ -53,8 +53,8 @@ public class DataSourceAspect {
 
     @After("dataSourcePointcut()")
     public void closeDataSource(JoinPoint joinPoint) {
-        if (log.isInfoEnabled()) {
-            log.info("关闭数据源");
+        if (log.isDebugEnabled()) {
+            log.debug("关闭数据源");
         }
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
@@ -75,8 +75,8 @@ public class DataSourceAspect {
     @Before("dataSourcePointcut()")
     public void switchDataSource(JoinPoint joinPoint) {
 
-        if (log.isInfoEnabled()) {
-            log.info("切换数据源，当前数据源 {}", DynamicDataSourceContextHolder.peek());
+        if (log.isDebugEnabled()) {
+            log.debug("切换数据源，当前数据源 {}", DynamicDataSourceContextHolder.peek());
         }
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
