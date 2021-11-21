@@ -6,7 +6,10 @@ import com.dqcer.dxpprovider.sso.web.service.UserService;
 import com.dqcer.dxptools.core.IpAddressUtil;
 import com.dqcer.framework.storage.CacheConstant;
 import com.dqcer.integration.annotation.UnAuthorize;
+import com.dqcer.integration.fieldlog.annotation.AuditLog;
 import com.dqcer.integration.operation.RedissonObject;
+import org.springframework.expression.Expression;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author dongqin
@@ -39,8 +44,8 @@ public class AuthorizationController {
      * @param request  请求
      * @return {@link ResultApi}
      */
+    @AuditLog(index = "#p0loginDTO.ue")
     @UnAuthorize
-    //@OperationLog(module = "auth.account.login")
     @PostMapping("account/login")
     public ResultApi auth(@RequestBody @Validated(LoginDTO.Account.class) LoginDTO loginDTO, HttpServletRequest request) {
 
@@ -59,6 +64,14 @@ public class AuthorizationController {
 //        }
 
         return userService.auth(loginDTO.getUe(), loginDTO.getPd());
+    }
+
+    public static void main(String[] args) {
+        SpelExpressionParser parser = new SpelExpressionParser();
+        Expression expression = parser.parseExpression("#root.purchaseName");
+        Map order = new HashMap<>();
+        order.put("purchaseName", "张三");
+        System.out.println(expression.getValue(order));
     }
 
 }

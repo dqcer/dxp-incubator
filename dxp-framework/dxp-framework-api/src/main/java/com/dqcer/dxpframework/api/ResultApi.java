@@ -18,7 +18,7 @@ public class ResultApi implements Serializable {
     public static final boolean IS_OK_FALSE = false;
 
     /**
-     * 是否成功
+     * 请求是否成功
      */
     private boolean success;
 
@@ -103,7 +103,7 @@ public class ResultApi implements Serializable {
      * @return {@link ResultApi}
      */
     public static  ResultApi error(String code) {
-        return new ResultApi(IS_OK_FALSE, null, null, code);
+        return new ResultApi(IS_OK_TRUE, null, null, code);
     }
 
 
