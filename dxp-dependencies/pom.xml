@@ -13,6 +13,7 @@
 	<artifactId>dxp-dependencies</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dxp-dependencies</name>
+	<packaging>pom</packaging>
 	<description>依赖关系统一管理</description>
 
 	<properties>
