@@ -22,10 +22,6 @@
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-integration-log</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.dqcer</groupId>
-            <artifactId>dxp-integration-idempotent</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

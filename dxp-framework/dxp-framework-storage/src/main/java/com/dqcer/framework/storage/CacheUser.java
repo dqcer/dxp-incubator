@@ -28,6 +28,11 @@ public class CacheUser implements Serializable {
     private Long accountId;
 
     /**
+     * 租户id
+     */
+    private Long tenantId;
+
+    /**
      * 1/在线 2/挤下线
      */
     private Integer onlineStatus;
@@ -36,6 +41,15 @@ public class CacheUser implements Serializable {
      * 最后活跃的时间
      */
     private LocalDateTime lastActiveTime;
+
+    public Long getTenantId() {
+        return tenantId;
+    }
+
+    public CacheUser setTenantId(Long tenantId) {
+        this.tenantId = tenantId;
+        return this;
+    }
 
     public Long getAccountId() {
         return accountId;

@@ -2,7 +2,7 @@ package com.dqcer.dxpprovider.sso.web.controller;
 
 import com.dqcer.dxpframework.api.ResultApi;
 import com.dqcer.dxpprovider.sso.web.model.dto.LoginDTO;
-import com.dqcer.dxpprovider.sso.web.service.UserService;
+import com.dqcer.dxpprovider.sso.web.service.AccountService;
 import com.dqcer.dxptools.core.IpAddressUtil;
 import com.dqcer.framework.storage.CacheConstant;
 import com.dqcer.integration.annotation.UnAuthorize;
@@ -35,7 +35,7 @@ public class AuthorizationController {
     private RedissonObject redissonObject;
 
     @Resource
-    private UserService userService;
+    private AccountService userService;
 
     /**
      * 账号登录

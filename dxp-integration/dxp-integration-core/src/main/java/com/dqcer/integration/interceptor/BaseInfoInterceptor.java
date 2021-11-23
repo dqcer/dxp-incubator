@@ -16,7 +16,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -34,8 +33,11 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Resource
-    private RedissonObject redissonObject;
+    private final RedissonObject redissonObject;
+
+    public BaseInfoInterceptor(RedissonObject redissonObject) {
+        this.redissonObject = redissonObject;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
@@ -132,8 +134,8 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
 
         redissonObject.setValue(MessageFormat.format(CacheConstant.SSO_TOKEN, token), user.setLastActiveTime(now));
 
-
         unifySession.setAccountId(user.getAccountId());
+        unifySession.setTenantId(user.getTenantId());
         UserStorage.setSession(unifySession);
 
         return true;

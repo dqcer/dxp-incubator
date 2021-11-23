@@ -3,15 +3,14 @@ package com.dqcer.dxpprovider.sso.web.service;
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dqcer.dxpframework.api.ResultApi;
-import com.dqcer.framework.storage.CacheConstant;
 import com.dqcer.dxpprovider.sso.web.dao.UserDAO;
 import com.dqcer.dxpprovider.sso.web.model.entity.AccountEntity;
 import com.dqcer.dxptools.core.MD5Util;
 import com.dqcer.dxptools.core.ObjUtil;
-import com.dqcer.framework.storage.CacheUser;
-import com.dqcer.framework.storage.StatusEnum;
+import com.dqcer.framework.storage.*;
 import com.dqcer.integration.datasource.annotation.DynamicDataSource;
 import com.dqcer.integration.operation.RedissonObject;
+import com.dqcer.provider.sso.api.vo.AccountVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +18,7 @@ import javax.annotation.Resource;
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author dongqin
@@ -26,7 +26,7 @@ import java.util.List;
  * @date 2021/11/14
  */
 @Service
-public class UserService  {
+public class AccountService {
 
     @Resource
     private RedissonObject redissonObject;
@@ -34,6 +34,17 @@ public class UserService  {
     @Resource
     private UserDAO userDAO;
 
+    public static void main(String[] args) {
+        System.out.println(MD5Util.getMD5("P@ssw0rdP@ssw0rd"));
+    }
+
+    /**
+     * 身份验证
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return {@link ResultApi}
+     */
     @Transactional(readOnly = true)
     @DynamicDataSource
     public ResultApi auth(String username, String password) {
@@ -52,7 +63,7 @@ public class UserService  {
             return ResultApi.error("901403");
         }
 
-        String token = MD5Util.getMD5(MD5Util.getMD5(accountEntity.getAccount().concat(dbPassword)));
+        String token = UUID.randomUUID().toString();
 
         CacheUser cacheUser = new CacheUser().setAccountId(accountEntity.getId())
                 .setLastActiveTime(LocalDateTime.now())
@@ -67,7 +78,11 @@ public class UserService  {
         return sysUserEntities;
     }
 
-    public static void main(String[] args) {
-        System.out.println(MD5Util.getMD5("P@ssw0rdP@ssw0rd"));
+    public List<AccountVO> baseDetail() {
+        UnifySession session = UserStorage.getSession();
+        Long accountId = session.getAccountId();
+
+
+        return null;
     }
 }
