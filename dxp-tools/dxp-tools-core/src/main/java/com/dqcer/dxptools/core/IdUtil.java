@@ -9,6 +9,13 @@ import java.util.UUID;
  */
 public class IdUtil {
 
+    /**
+     * 禁止实例化
+     */
+    private IdUtil() {
+        throw new AssertionError();
+    }
+
     public static String generateId() {
         return UUID.randomUUID().toString().replace("-", "");
     }

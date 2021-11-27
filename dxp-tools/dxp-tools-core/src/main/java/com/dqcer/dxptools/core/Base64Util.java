@@ -10,7 +10,12 @@ import java.util.Base64;
  */
 public class Base64Util {
 
-    private Base64Util(){}
+    /**
+     * 禁止实例化
+     */
+    private Base64Util(){
+        throw new AssertionError();
+    }
 
 
     /**

@@ -11,6 +11,13 @@ import java.util.Map;
 public class ObjUtil {
 
     /**
+     * 禁止实例化
+     */
+    private ObjUtil() {
+        throw new AssertionError();
+    }
+
+    /**
      * 判断是否为空
      *
      * @param obj obj

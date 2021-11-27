@@ -12,6 +12,12 @@ import java.util.Map;
  */
 public class BeanUtil {
 
+    /**
+     * 禁止实例化
+     */
+    private BeanUtil() {
+        throw new AssertionError();
+    }
 
     /**
      * bean 转 map

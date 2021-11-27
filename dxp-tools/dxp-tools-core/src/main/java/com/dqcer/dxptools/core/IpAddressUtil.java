@@ -11,6 +11,13 @@ import java.net.UnknownHostException;
  */
 public class IpAddressUtil {
 
+    /**
+     * 禁止实例化
+     */
+    private IpAddressUtil() {
+        throw new AssertionError();
+    }
+
     public static String getIpAddr(HttpServletRequest request) {
         if (request == null) {
             return "unknown";

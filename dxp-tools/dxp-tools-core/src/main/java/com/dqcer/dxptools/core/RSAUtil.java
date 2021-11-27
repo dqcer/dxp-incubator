@@ -27,7 +27,12 @@ public class RSAUtil {
 
     private static final Logger log = LoggerFactory.getLogger(RSAUtil.class);
 
-    private RSAUtil() { }
+    /**
+     * 禁止实例化
+     */
+    private RSAUtil() {
+        throw new AssertionError();
+    }
 
 
     /**

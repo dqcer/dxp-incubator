@@ -7,6 +7,12 @@ package com.dqcer.dxptools.core;
  */
 public class StrUtil {
 
+    /**
+     * 禁止实例化
+     */
+    private StrUtil() {
+        throw new AssertionError();
+    }
 
     /**
      * 判断是否为空

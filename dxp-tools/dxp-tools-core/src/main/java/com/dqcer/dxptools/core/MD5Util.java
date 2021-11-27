@@ -5,6 +5,13 @@ import java.security.MessageDigest;
 public class MD5Util {
 
     /**
+     * 禁止实例化
+     */
+    private MD5Util() {
+        throw new AssertionError();
+    }
+
+    /**
      * 获取md5
      *
      * @param message 消息
