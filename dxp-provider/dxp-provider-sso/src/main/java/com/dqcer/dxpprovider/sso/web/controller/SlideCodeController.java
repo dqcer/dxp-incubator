@@ -1,7 +1,7 @@
 package com.dqcer.dxpprovider.sso.web.controller;
 
 import com.dqcer.dxpframework.api.ResultApi;
-import com.dqcer.dxpprovider.sso.constant.CacheConstant;
+import com.dqcer.framework.storage.CacheConstant;
 import com.dqcer.dxptools.core.IpAddressUtil;
 import com.dqcer.integration.operation.RedissonObject;
 import com.dqcer.integration.slider.SliderCode;

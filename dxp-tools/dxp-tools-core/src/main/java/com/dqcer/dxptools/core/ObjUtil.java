@@ -1,5 +1,8 @@
 package com.dqcer.dxptools.core;
 
+import java.util.Collection;
+import java.util.Map;
+
 /**
  * @author dongqin
  * @description obj工具
@@ -14,7 +17,21 @@ public class ObjUtil {
      * @return boolean
      */
     public static boolean isNull(Object obj) {
-        return null == obj || obj.equals(null);
+        if (null == obj) {
+            return true;
+        }
+
+        if (obj instanceof CharSequence) {
+            return StrUtil.isBlank(String.valueOf(obj));
+        }
+        if (obj instanceof Map) {
+            return ((Map<?, ?>) obj).isEmpty();
+        }
+        if (obj instanceof Collection) {
+            return ((Collection<?>) obj).isEmpty();
+        }
+        return false;
+
     }
 
     /**

@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
  * @date 2021/10/09
  */
 @Aspect
-@Order(Ordered.HIGHEST_PRECEDENCE)
+@Order(Ordered.HIGHEST_PRECEDENCE + 1)
 public class DataSourceAspect {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -30,8 +30,8 @@ public class DataSourceAspect {
 
     @Before("dataSourcePointCut()")
     public void before(JoinPoint joinPoint) {
-        if (log.isInfoEnabled()) {
-            log.info("切换前数据源，当前数据源：{}", DynamicContextHolder.peek());
+        if (log.isDebugEnabled()) {
+            log.debug("切换前数据源，当前数据源：{}", DynamicContextHolder.peek());
         }
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
@@ -39,8 +39,8 @@ public class DataSourceAspect {
         if (null != annotation) {
             DynamicContextHolder.push(annotation.value());
         }
-        if (log.isInfoEnabled()) {
-            log.info("切换后数据源，当前数据源：{}", DynamicContextHolder.peek());
+        if (log.isDebugEnabled()) {
+            log.debug("切换后数据源，当前数据源：{}", DynamicContextHolder.peek());
         }
     }
 
@@ -55,8 +55,8 @@ public class DataSourceAspect {
     }
 
     private void cleanDataSource(JoinPoint joinPoint) {
-        if (log.isInfoEnabled()) {
-            log.info("清空当前线程数据源：{}", DynamicContextHolder.peek());
+        if (log.isDebugEnabled()) {
+            log.debug("清空当前线程数据源：{}", DynamicContextHolder.peek());
         }
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();

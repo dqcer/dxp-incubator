@@ -11,7 +11,6 @@
     <artifactId>dxp-integration-encrypt</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>dxp-integration-encrypt</name>
-    <description>Demo project for Spring Boot</description>
 
     <dependencies>
         <dependency>
@@ -27,6 +26,7 @@
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-tools-core</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

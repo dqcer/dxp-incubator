@@ -18,5 +18,5 @@ public @interface DynamicDataSource {
      *
      * @return {@link String}
      */
-    String value();
+    String value() default "";
 }

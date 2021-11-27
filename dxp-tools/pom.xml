@@ -16,6 +16,7 @@
 
     <modules>
         <module>dxp-tools-core</module>
+        <module>dxp-tools-generator</module>
         <module>dxp-tools-spring</module>
         <module>dxp-tools-sync</module>
     </modules>

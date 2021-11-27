@@ -1,6 +1,6 @@
 package com.dqcer.integration.log.feign;
 
-import com.dqcer.integration.log.config.BaseSysLog;
+import com.dqcer.integration.log.config.SysLog;
 import com.dqcer.integration.log.feign.factory.RemoteLogFallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +20,7 @@ public interface RemoteLogService {
      * @param log 日志
      */
     @PostMapping("log/save")
-    void insertLog(@RequestBody BaseSysLog log);
+    void insertLog(@RequestBody SysLog log);
 
 
 }

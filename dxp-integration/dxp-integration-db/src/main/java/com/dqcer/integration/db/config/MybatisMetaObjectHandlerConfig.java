@@ -18,8 +18,8 @@ public class MybatisMetaObjectHandlerConfig implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        if (log.isInfoEnabled()) {
-            log.info("start insert fill ....");
+        if (log.isDebugEnabled()) {
+            log.debug("start insert fill ....");
         }
         // TODO: 2021/8/23 createdBy 当前操作人 
         this.strictInsertFill(metaObject, "createTime", () -> LocalDateTime.now(), LocalDateTime.class);

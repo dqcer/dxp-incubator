@@ -1,0 +1,15 @@
+package ${basePackage}.${entity};
+
+import ${package.Entity}.${entity};
+import ${superMapperClassPackage};
+
+
+/**
+ * @author ${author}
+ * @description  $!{table.comment} 业务接口层
+ * @@date ${date}
+ */
+public interface ${table.mapperName} {
+
+}
+

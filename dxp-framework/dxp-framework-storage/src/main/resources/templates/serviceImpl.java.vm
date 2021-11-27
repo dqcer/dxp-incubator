@@ -1,0 +1,36 @@
+package ${package.ServiceImpl};
+
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import ${superServiceImplClassPackage};
+import org.springframework.stereotype.Service;
+
+/**
+ * <p>
+ * $!{table.comment} 服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
+
+    @Resource
+    private ${entity}Biz ${${entity}Biz.substring(1,2).toLowerCase()}${${entity}Biz.substring(2)};
+
+    /**
+     * 列表
+     *
+     * @param dto dto
+     * @return {@link ReplyInfo<Object>}
+     */
+    @DaoSharding(policy = "default", index = 0)
+    @Override
+    public ReplyInfo<Object> save(UnifySession session, JobSettingDTO dto) {
+        List<PubJobConfigEntity> entities = ${${entity}Biz.substring(1,2).toLowerCase()}${${entity}Biz.substring(2)}.save(dto.getSysId(), dto.getModuleId());
+        return ReplyInfo.success(entities);
+    }
+}
+

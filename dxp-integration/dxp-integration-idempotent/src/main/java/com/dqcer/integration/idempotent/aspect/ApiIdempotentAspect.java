@@ -102,8 +102,8 @@ public class ApiIdempotentAspect {
 				throw new IdempotentException("努力响应中，请稍后...");
 			}
 			else {
-				if (log.isInfoEnabled()) {
-					log.info("Api idempotent: has stored key={},value={},expireTime={}{},now={}", key, value,
+				if (log.isDebugEnabled()) {
+					log.debug("Api idempotent: has stored key={},value={},expireTime={}{},now={}", key, value,
 							expireTime, TimeUnit.SECONDS, LocalDateTime.now());
 				}
 			}
@@ -161,9 +161,9 @@ public class ApiIdempotentAspect {
 
 		if (delKey) {
 			mapCache.fastRemove(key);
-			if (log.isInfoEnabled()) {
+			if (log.isDebugEnabled()) {
 
-				log.info("Api idempotent:has removed key={}", key);
+				log.debug("Api idempotent:has removed key={}", key);
 			}
 		}
 		threadLocal.remove();

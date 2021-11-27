@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+
+    <!-- 控制spirng、hikari中日志 -->
+    <logger name="org.springframework.web" level="WARN"/>
+    <logger name="org.springframework.context" level="WARN"/>
+    <logger name="org.springframework.beans" level="WARN"/>
+    <logger name="com.zaxxer.hikari" level="WARN"/>
+
+    <!-- 控制框架中日志 -->
+    <logger name="com.dqcer.framework" level="debug"/>
+    <logger name="com.dqcer.integration" level="debug"/>
+    <logger name="com.dqcer.provider" level="debug"/>
+    <logger name="com.dqcer.tools" level="debug"/>
+
+
+</configuration>

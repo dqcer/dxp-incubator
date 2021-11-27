@@ -1,0 +1,12 @@
+package ${cfg.basePackage};
+
+
+/**
+ * @author ${author}
+ * @description  $!{table.comment} 业务接口层
+ * @@date ${date}
+ */
+public interface ${entity}Biz {
+
+}
+

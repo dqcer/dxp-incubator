@@ -1,0 +1,15 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import ${superServiceClassPackage};
+
+
+/**
+ * @author ${author}
+ * @description  $!{table.comment} 多业务组装接口层
+ * @@date ${date}
+ */
+public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+
+}
+

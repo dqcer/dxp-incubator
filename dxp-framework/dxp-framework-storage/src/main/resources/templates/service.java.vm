@@ -1,0 +1,25 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import ${superServiceClassPackage};
+
+/**
+ * <p>
+ * $!{table.comment} 服务类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+public interface ${table.serviceName}  {
+
+    /**
+     * 保存
+     *
+     * @param dto        dto
+     * @param session 数据源
+     * @return {@link ReplyInfo<Object>}
+     */
+    ReplyInfo<Object> save(UnifySession session, JobSettingDTO dto);
+}
+

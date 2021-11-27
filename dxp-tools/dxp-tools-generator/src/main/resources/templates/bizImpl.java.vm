@@ -1,0 +1,16 @@
+package ${basePackage}.${entity};
+
+import com.boarsoft.hibernate.biz.SimpleBizImpl;
+import ${package.Entity}.${entity};
+import ${superMapperClassPackage};
+
+
+/**
+ * @author ${author}
+ * @description  $!{table.comment} 业务实现层
+ * @@date ${date}
+ */
+@Service
+public class ${table.mapperName}Impl extends SimpleBizImpl implements ${table.mapperName} {
+
+}

@@ -34,10 +34,6 @@
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-tools-core</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.dqcer</groupId>-->
-<!--            <artifactId>dxp-integration-ds</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-integration-log</artifactId>
@@ -49,8 +45,6 @@
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-integration-context</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate.validator</groupId>
@@ -59,12 +53,10 @@
         <dependency>
             <groupId>com.dqcer.integration</groupId>
             <artifactId>dxp-integration-slider</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-integration-cache</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>com.alibaba.cloud</groupId>-->
@@ -82,7 +74,20 @@
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-integration-datasource</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-crypto</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dqcer</groupId>
+            <artifactId>dxp-integration-fieldlog</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.dqcer</groupId>
+            <artifactId>dxp-provider-sso-api</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

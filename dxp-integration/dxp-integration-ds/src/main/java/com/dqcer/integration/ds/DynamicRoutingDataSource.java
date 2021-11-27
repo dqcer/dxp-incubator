@@ -34,8 +34,8 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource implemen
 
     @Override
     protected Object determineCurrentLookupKey() {
-        if (log.isInfoEnabled()) {
-            log.info("获取数据源...");
+        if (log.isDebugEnabled()) {
+            log.debug("获取数据源...");
         }
         String peek = DynamicDataSourceContextHolder.peek();
         if (null == peek || peek.trim().length() == 0) {
@@ -84,9 +84,9 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource implemen
 
     public DataSource addDataSource(String key, DataSource value) {
         DataSource oldDataSource = dataSourceMap.put(key, value);
-        if (log.isInfoEnabled()) {
+        if (log.isDebugEnabled()) {
                 HikariDataSource hikariDataSource = (HikariDataSource) value;
-                log.info("Add datasource : {}  jdbc-url:{}", key, hikariDataSource.getJdbcUrl());
+                log.debug("Add datasource : {}  jdbc-url:{}", key, hikariDataSource.getJdbcUrl());
         }
         return oldDataSource;
     }
@@ -104,8 +104,8 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource implemen
             Method closeMethod = clazz.getDeclaredMethod("close");
             closeMethod.invoke(dataSource);
 
-            if (log.isInfoEnabled()) {
-                log.info("Close datasource : {}", ds);
+            if (log.isDebugEnabled()) {
+                log.debug("Close datasource : {}", ds);
             }
 
         } catch (Exception e) {

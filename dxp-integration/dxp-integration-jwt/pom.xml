@@ -16,13 +16,13 @@
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-framework-jcl</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-integration-cache</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

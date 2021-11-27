@@ -14,7 +14,7 @@ public class LogEvent extends ApplicationEvent {
      *
      * @param source 源
      */
-    public LogEvent(BaseSysLog source) {
+    public LogEvent(SysLog source) {
         super(source);
     }
 }

@@ -1,6 +1,7 @@
 package com.dqcer.dxpprovider.sso.config;
 
-import com.dqcer.integration.context.BaseInfoInterceptor;
+import com.dqcer.integration.interceptor.BaseInfoInterceptor;
+import com.dqcer.integration.operation.RedissonObject;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.Validator;
 import org.springframework.web.servlet.LocaleResolver;
@@ -19,18 +20,21 @@ import javax.annotation.Resource;
 public class WebMvcConfigurer extends WebMvcConfigurationSupport {
 
     @Resource
-    LocaleChangeInterceptor localeChangeInterceptor;
+    private LocaleChangeInterceptor localeChangeInterceptor;
 
     @Resource
-    Validator validator;
+    private Validator validator;
 
     @Resource
-    LocaleResolver customLocaleResolver;
+    private LocaleResolver customLocaleResolver;
+
+    @Resource
+    private RedissonObject redissonObject;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor);
-        registry.addInterceptor(new BaseInfoInterceptor());
+        registry.addInterceptor(new BaseInfoInterceptor(redissonObject));
     }
 
     @Override

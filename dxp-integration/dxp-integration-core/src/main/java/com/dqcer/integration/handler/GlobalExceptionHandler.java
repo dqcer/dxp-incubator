@@ -1,13 +1,13 @@
 package com.dqcer.integration.handler;
 
 import com.dqcer.dxpframework.api.ResultApi;
-import com.dqcer.dxpframework.enums.CodeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = Exception.class)
     public ResultApi exception(Exception exception) {
-        log.error("系统异常: {}", exception);
+        log.error("系统异常: ", exception);
         return ResultApi.error("999500");
     }
 
@@ -46,9 +46,21 @@ public class GlobalExceptionHandler {
      * @param exception 异常
      * @return {@link ResultApi}
      */
+    @ExceptionHandler(value = HttpMediaTypeNotSupportedException.class)
+    public ResultApi httpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException exception) {
+        log.error("请求头Content-Type异常: ", exception);
+        return ResultApi.error("999303");
+    }
+
+    /**
+     * 缺少资源异常，无法找到对应properties文件中对应的key
+     *
+     * @param exception 异常
+     * @return {@link ResultApi}
+     */
     @ExceptionHandler(value = MissingResourceException.class)
     public ResultApi missingResourceException(Exception exception) {
-        log.error("无法找到对应properties文件中对应的key : {}", exception);
+        log.error("无法找到对应properties文件中对应的key: ", exception);
         return ResultApi.error("999302");
     }
 
@@ -60,7 +72,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     public ResultApi httpMessageConversionException(HttpMessageNotReadableException exception) {
-        log.error("参数接收时，类型转换异常 : {}", exception);
+        log.error("参数接收时，类型转换异常: ", exception);
         return ResultApi.error("999300");
     }
 
@@ -75,7 +87,7 @@ public class GlobalExceptionHandler {
         BindingResult bindingResult = exception.getBindingResult();
         StringBuilder stringBuilder = new StringBuilder();
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-        ResultApi resultApi = ResultApi.error(CodeEnum.GL99900301.getCode());
+        ResultApi resultApi = ResultApi.error("999301");
         for (FieldError fieldError : fieldErrors) {
             String defaultMessage = fieldError.getDefaultMessage();
             String field = fieldError.getField();
@@ -87,7 +99,7 @@ public class GlobalExceptionHandler {
             stringBuilder.append(defaultMessage).append("\t");
             resultApi.put(field, defaultMessage);
         }
-        log.error("参数绑定异常: {} {}", exception.getParameter(), stringBuilder);
+        log.error("参数绑定异常: {}", exception.getParameter(), stringBuilder);
         return resultApi;
     }
 }
