@@ -1,7 +1,5 @@
 package com.dqcer.dxptools.core;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -25,7 +23,6 @@ import java.security.spec.X509EncodedKeySpec;
  */
 public class RSAUtil {
 
-    private static final Logger log = LoggerFactory.getLogger(RSAUtil.class);
 
     /**
      * 禁止实例化
@@ -71,7 +68,7 @@ public class RSAUtil {
                 | NoSuchPaddingException | InvalidKeyException
                 | BadPaddingException | IllegalBlockSizeException
                 | IOException e) {
-            log.error(e.getMessage(), e);
+            //log.error(e.getMessage(), e);
         }
         return null;
     }
@@ -94,7 +91,7 @@ public class RSAUtil {
             cipher.init(Cipher.DECRYPT_MODE, privateK);
             return getBytes(text, cipher, MAX_DECRYPT_BLOCK);
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeySpecException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException | IOException e) {
-            log.error(e.getMessage(), e);
+            //log.error(e.getMessage(), e);
         }
         return null;
     }

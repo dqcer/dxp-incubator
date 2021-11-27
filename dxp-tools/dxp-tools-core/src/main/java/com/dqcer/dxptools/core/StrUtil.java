@@ -5,14 +5,16 @@ package com.dqcer.dxptools.core;
  * @description str工具
  * @date 2021/08/17
  */
-public class StrUtil {
+public enum  StrUtil {
+
+    INSTANCE;
 
     /**
      * 禁止实例化
      */
-    private StrUtil() {
-        throw new AssertionError();
-    }
+//    private StrUtil() {
+//        throw new AssertionError();
+//    }
 
     /**
      * 判断是否为空
@@ -49,5 +51,11 @@ public class StrUtil {
         char[] cs= str.toCharArray();
         cs[0] -= 32;
         return String.valueOf(cs);
+    }
+
+    public static void main(String[] args) {
+        boolean blank = StrUtil.isBlank(" ");
+        System.out.println(blank);
+        System.out.println(StrUtil.INSTANCE.equals(StrUtil.INSTANCE));
     }
 }
