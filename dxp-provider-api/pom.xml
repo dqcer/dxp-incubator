@@ -15,6 +15,7 @@
 
     <modules>
         <module>dxp-provider-sso-api</module>
+        <module>dxp-provider-uac-api</module>
     </modules>
 
 </project>

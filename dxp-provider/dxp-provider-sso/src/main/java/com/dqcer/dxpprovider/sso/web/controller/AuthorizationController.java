@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 /**
  * @author dongqin
@@ -65,6 +66,32 @@ public class AuthorizationController {
 
         return userService.auth(loginDTO.getUe(), loginDTO.getPd());
     }
+
+    @AuditLog(index = "#p0loginDTO.ue")
+    @UnAuthorize
+    @PostMapping("account/login1")
+    public Callable<Object> auth2(@RequestBody @Validated(LoginDTO.Account.class) LoginDTO loginDTO, HttpServletRequest request) {
+        long nanoTime = System.nanoTime();
+        //  开辟一个子线程
+        Callable<Object> callable = new Callable<Object>() {
+            @Override
+            public Object call() throws Exception {
+                long time = System.nanoTime();
+                ResultApi auth = userService.auth(loginDTO.getUe(), loginDTO.getPd());
+                System.out.println(Thread.currentThread() + ": "+ (System.nanoTime() - time));
+                return auth;
+            }
+        };
+        System.out.println(Thread.currentThread() + ": "+ (System.nanoTime() - nanoTime));
+        return callable;
+    }
+
+//    @PostConstruct
+//    public void task() {
+//        CompletableFuture<Map<String, Object>> future;
+//        ScheduledThreadPoolExecutor
+//        future.complete()
+//    }
 
     public static void main(String[] args) {
         SpelExpressionParser parser = new SpelExpressionParser();
