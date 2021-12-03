@@ -1,7 +1,5 @@
 package com.dqcer.dxptools.core;
 
-import java.util.Collection;
-
 /**
  * @author dongqin
  * @description str工具
