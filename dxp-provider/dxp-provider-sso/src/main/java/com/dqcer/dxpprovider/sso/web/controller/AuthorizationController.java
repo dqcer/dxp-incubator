@@ -6,7 +6,7 @@ import com.dqcer.dxpprovider.sso.web.service.AccountService;
 import com.dqcer.dxptools.core.IpAddressUtil;
 import com.dqcer.framework.storage.CacheConstant;
 import com.dqcer.integration.annotation.UnAuthorize;
-import com.dqcer.integration.fieldlog.annotation.AuditLog;
+import com.dqcer.integration.audit.annotation.AuditLog;
 import com.dqcer.integration.operation.RedissonObject;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;

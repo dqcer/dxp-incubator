@@ -1,4 +1,4 @@
-package com.dqcer.integration.fieldlog.enums;
+package com.dqcer.integration.audit.enums;
 
 /**
  * @author dongqin
@@ -7,10 +7,30 @@ package com.dqcer.integration.fieldlog.enums;
  */
 public enum TypeEnum {
 
+    /**
+     * 插入
+     */
     INSERT(1),
+
+    /**
+     * 更新
+     */
     UPDATE(2),
+
+    /**
+     * 删除
+     */
     DELETE(3),
+
+    /**
+     * 状态
+     */
     STATUS(4),
+
+    /**
+     * 下载
+     */
+    DOWNLOAD(5),
     ;
 
     private int value;
