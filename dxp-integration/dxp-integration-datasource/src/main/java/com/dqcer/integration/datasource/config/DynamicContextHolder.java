@@ -18,6 +18,15 @@ public final class DynamicContextHolder {
     private DynamicContextHolder() { }
 
     /**
+     * 获取所有
+     *
+     * @return {@link Deque<String>}
+     */
+    public static Deque<String> getAll() {
+        return DS_CONTEXT_HOLDER.get();
+    }
+
+    /**
      * 获得当前线程数据源
      *
      * @return 数据源名称

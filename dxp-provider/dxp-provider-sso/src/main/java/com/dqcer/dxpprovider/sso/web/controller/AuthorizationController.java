@@ -6,7 +6,6 @@ import com.dqcer.dxpprovider.sso.web.service.AccountService;
 import com.dqcer.dxptools.core.IpAddressUtil;
 import com.dqcer.framework.storage.CacheConstant;
 import com.dqcer.integration.annotation.UnAuthorize;
-import com.dqcer.integration.audit.annotation.AuditLog;
 import com.dqcer.integration.operation.RedissonObject;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
@@ -45,7 +44,6 @@ public class AuthorizationController {
      * @param request  请求
      * @return {@link ResultApi}
      */
-    @AuditLog(index = "#p0loginDTO.ue")
     @UnAuthorize
     @PostMapping("account/login")
     public ResultApi auth(@RequestBody @Validated(LoginDTO.Account.class) LoginDTO loginDTO, HttpServletRequest request) {
@@ -67,7 +65,6 @@ public class AuthorizationController {
         return userService.auth(loginDTO.getUe(), loginDTO.getPd());
     }
 
-    @AuditLog(index = "#p0loginDTO.ue")
     @UnAuthorize
     @PostMapping("account/login1")
     public Callable<Object> auth2(@RequestBody @Validated(LoginDTO.Account.class) LoginDTO loginDTO, HttpServletRequest request) {
