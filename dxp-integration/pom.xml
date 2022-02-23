@@ -17,6 +17,7 @@
     <description>集成模块</description>
 
     <modules>
+        <module>dxp-integration-audit</module>
         <module>dxp-integration-cache</module>
         <module>dxp-integration-context</module>
         <module>dxp-integration-core</module>

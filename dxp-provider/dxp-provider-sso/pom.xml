@@ -71,11 +71,6 @@
             <artifactId>dxp-integration-db</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.eclincloud.common</groupId>
-            <artifactId>ecc-ds-common</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-crypto</artifactId>
         </dependency>

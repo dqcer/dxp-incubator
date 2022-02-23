@@ -15,8 +15,8 @@
 
     <modules>
         <module>dxp-framework-api</module>
+        <module>dxp-framework-base</module>
         <module>dxp-framework-dto</module>
-        <module>dxp-framework-rpc</module>
         <module>dxp-framework-storage</module>
     </modules>
 
