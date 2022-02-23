@@ -62,8 +62,10 @@ public class LogFilter implements GlobalFilter, Ordered {
 			beforeReqArgs.add(":" + headerValue);
 		});
 		beforeReqLog.append("================  Gateway Request End =================\n");
-		// 打印执行时间
-		log.info(beforeReqLog.toString(), beforeReqArgs.toArray());
+		if (log.isDebugEnabled()) {
+			// 打印执行时间
+			log.debug(beforeReqLog.toString(), beforeReqArgs.toArray());
+		}
 
 		exchange.getAttributes().put(START_TIME, System.currentTimeMillis());
 		return chain.filter(exchange).then(Mono.fromRunnable(() -> {

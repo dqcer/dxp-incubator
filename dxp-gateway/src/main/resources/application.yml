@@ -12,15 +12,6 @@ spring:
         namespace: DXP-INCUBATOR
     # 网关配置
     gateway:
-      ## 跨域配置
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowCredentials: true
-            allowedOriginPatterns: "*"
-            allowedHeaders: "*"
-            allowedMethods: "*"
-            maxAge: 3628800
       ## 路由转发
       routes:
         -  id: dxp-provider-sso
@@ -29,10 +20,25 @@ spring:
              - Path=/sso/**
            filters:
              - StripPrefix=1
+             - name: Retry
+               args:
+                 retries: 1 #需要进行重试的次数
+                 statuses:  #返回哪个状态码需要进行重试，返回状态码为5XX进行重试, org.springframework.http.HttpStatus
+                   - BAD_GATEWAY
+                   - OK
+                 backoff:
+                   firstBackoff: 10ms
+                   maxBackoff: 50ms
+                   factor: 2
+                   basedOnPreviousValue: false
       ## 全局超时配置
       httpclient:
         connect-timeout: 1000 #毫秒
         response-timeout: 5s
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能
+          lower-case-service-id: true #使用小写服务名，默认是大写
 
 management:
   endpoints:
@@ -41,4 +47,8 @@ management:
         include: "*"
 logging:
   level:
-    com.eclincloud: debug
+    com.dqcer: debug
+ecc:
+  ignore:
+    token:
+      - /sso/auth/account/login

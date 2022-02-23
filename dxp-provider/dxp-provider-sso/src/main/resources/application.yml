@@ -27,29 +27,11 @@ spring:
   redis:
     port: 6379
     host: ${dev.redis}
-#    host: 192.168.0.106
-#    password: 123456
-#    cluster:
-#      nodes: 192.168.0.106:7001,192.168.0.106:7002,192.168.0.106:7003,192.168.0.106:7004,192.168.0.106:7005,192.168.0.106:7006
-#      max-redirects: 3
-#      # 连接超时时间
-#      timeout: 10s
-#      lettuce:
-#        pool:
-#          # 连接池中的最小空闲连接
-#          min-idle: 1
-#          # 连接池中的最大空闲连接
-#          max-idle: 16
-#          # 连接池的最大数据库连接数
-#          max-active: 32
-#          # #连接池最大阻塞等待时间（使用负值表示没有限制）
-#          max-wait: -1ms
-#  cloud:
-#    # nacos
-#    nacos:
-#      discovery:
-#        server-addr: 172.16.11.5:28848
-#        namespace: DXP-INCUBATOR
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.16.11.5:28848
+        namespace: DXP-INCUBATOR
 
   flyway:
     enabled:  false # 开启 Flyway 功能
@@ -64,8 +46,7 @@ spring:
     # table: dxp_schema_history
 logging:
   level:
-    com.dqcer: info
-
+    com.eclincloud: debug
 management:
   endpoints:
     web:

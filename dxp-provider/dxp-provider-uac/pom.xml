@@ -16,10 +16,6 @@
     <dependencies>
         <dependency>
             <groupId>com.dqcer</groupId>
-            <artifactId>dxp-integration-ds</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.dqcer</groupId>
             <artifactId>dxp-integration-log</artifactId>
         </dependency>
     </dependencies>

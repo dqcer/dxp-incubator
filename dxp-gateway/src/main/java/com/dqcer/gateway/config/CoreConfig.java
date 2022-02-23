@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableConfigurationProperties(EccGatewayProperties.class)
 public class CoreConfig {
-
     @Bean
     public WebExceptionHandler webExceptionHandler() {
         return new ExceptionHandler();
