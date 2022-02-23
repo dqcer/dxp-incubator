@@ -1,6 +1,6 @@
 package com.dqcer.dxpprovider.sso.web.controller;
 
-import com.dqcer.dxpframework.api.ResultApi;
+import com.dqcer.dxpframework.api.Result;
 import com.dqcer.dxpprovider.sso.web.model.dto.LoginDTO;
 import com.dqcer.dxpprovider.sso.web.service.AccountService;
 import com.dqcer.dxptools.core.IpAddressUtil;
@@ -42,11 +42,11 @@ public class AuthorizationController {
      *
      * @param loginDTO 登录dto E0A28F0F66C369000BA6590857885B27
      * @param request  请求
-     * @return {@link ResultApi}
+     * @return {@link Result}
      */
     @UnAuthorize
     @PostMapping("account/login")
-    public ResultApi auth(@RequestBody @Validated(LoginDTO.Account.class) LoginDTO loginDTO, HttpServletRequest request) {
+    public Result auth(@RequestBody @Validated(LoginDTO.Account.class) LoginDTO loginDTO, HttpServletRequest request) {
 
         String id = request.getSession().getId();
         String key = MessageFormat.format(CacheConstant.SLIDE_CODE_IP_USERNAME, IpAddressUtil.getHostIp(request), id);
@@ -54,12 +54,12 @@ public class AuthorizationController {
         // 从缓存获取验证码的值 实际项目应该根据用户令牌等获取
 //        SlideCodePlace slideCodePlace = (SlideCodePlace) redissonObject.getValue(key);
 //        if (ObjUtil.isNull(slideCodePlace)) {
-//            return ResultApi.error("901001");
+//            return Result.error("901001");
 //        }
 //
 //        boolean valid = slideCodePlace.valid(loginDTO.getNewXPosition());
 //        if (!valid) {
-//            return ResultApi.error("901002");
+//            return Result.error("901002");
 //        }
 
         return userService.auth(loginDTO.getUe(), loginDTO.getPd());
@@ -74,7 +74,7 @@ public class AuthorizationController {
             @Override
             public Object call() throws Exception {
                 long time = System.nanoTime();
-                ResultApi auth = userService.auth(loginDTO.getUe(), loginDTO.getPd());
+                Result auth = userService.auth(loginDTO.getUe(), loginDTO.getPd());
                 System.out.println(Thread.currentThread() + ": "+ (System.nanoTime() - time));
                 return auth;
             }

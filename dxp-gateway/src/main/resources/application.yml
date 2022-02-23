@@ -1,10 +1,11 @@
 server:
   port: 8081
 spring:
+  main:
+    banner-mode: off
   application:
-    name: dxp-gateway
+    name: @pom.artifactId@
   cloud:
-    # nacos
     nacos:
       discovery:
         server-addr: 172.16.11.5:28848
@@ -38,3 +39,6 @@ management:
     web:
       exposure:
         include: "*"
+logging:
+  level:
+    com.eclincloud: debug

@@ -1,6 +1,6 @@
 package com.dqcer.dxpprovider.sso.web.controller;
 
-import com.dqcer.dxpframework.api.ResultApi;
+import com.dqcer.dxpframework.api.Result;
 import com.dqcer.integration.idempotent.service.ApiIdempotentService;
 import com.dqcer.integration.log.annotation.OperationLog;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,12 +24,12 @@ public class CommonController {
     /**
      * 获取幂等token
      *
-     * @return {@link ResultApi}
+     * @return {@link Result}
      */
     @OperationLog(module = "idempotent.token")
     @PostMapping("idempotent/token")
-    public ResultApi idempotentToken()  {
-        return ResultApi.ok(apiIdempotentService.createToken());
+    public Result idempotentToken()  {
+        return Result.ok(apiIdempotentService.createToken());
     }
 
 }

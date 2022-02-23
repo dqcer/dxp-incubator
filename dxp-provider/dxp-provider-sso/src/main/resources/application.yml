@@ -14,13 +14,13 @@ mybatis-plus:
   global-config:
     banner: false
 dev:
-  mysql: 172.16.2.171:3308
-  redis: 172.16.2.171
+  mysql: 172.16.11.11:3308
+  redis: 172.16.11.11
 spring:
   application:
     name: dxp-provider-sso
   datasource:
-    url: jdbc:mysql://${dev.mysql}/uat-e-cloud?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
+    url: jdbc:mysql://${dev.mysql}/E-CLOUD?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver

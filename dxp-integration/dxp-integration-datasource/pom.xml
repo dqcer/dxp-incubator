@@ -5,19 +5,14 @@
     <parent>
         <groupId>com.dqcer.integration</groupId>
         <artifactId>dxp-integration</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <groupId>com.dqcer</groupId>
     <artifactId>dxp-integration-datasource</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>dxp-integration-datasource</name>
 
     <dependencies>
-        <dependency>
-            <groupId>com.dqcer</groupId>
-            <artifactId>dxp-framework-jcl</artifactId>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
@@ -47,7 +42,6 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-extension</artifactId>
             <version>3.4.3.2</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 

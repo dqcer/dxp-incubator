@@ -5,22 +5,17 @@
     <parent>
         <groupId>com.dqcer.integration</groupId>
         <artifactId>dxp-integration</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <groupId>com.dqcer.integration</groupId>
     <artifactId>dxp-integration-audit</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>dxp-integration-audit</name>
     <description>稽查日志（记录前后值的变化）</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>com.dqcer</groupId>
-            <artifactId>dxp-framework-jcl</artifactId>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>

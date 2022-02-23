@@ -1,7 +1,8 @@
 package com.dqcer.integration.interceptor;
 
 import com.alibaba.fastjson.JSON;
-import com.dqcer.dxpframework.api.ResultApi;
+import com.dqcer.dxpframework.api.Result;
+import com.dqcer.dxpframework.api.ResultCode;
 import com.dqcer.dxptools.core.IpAddressUtil;
 import com.dqcer.dxptools.core.ObjUtil;
 import com.dqcer.dxptools.core.StrUtil;
@@ -96,7 +97,7 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
         }
 
         if (StrUtil.isBlank(authorization) || !authorization.startsWith(HeaderConstant.BEARER)) {
-            response.getWriter().write(JSON.toJSONString(ResultApi.error("999400")));
+            response.getWriter().write(JSON.toJSONString(Result.error(ResultCode.UN_AUTHORIZATION)));
             //  认证失败
             return false;
         }
@@ -105,8 +106,8 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
 
         Object obj = redissonObject.getValue(MessageFormat.format(CacheConstant.SSO_TOKEN, token));
         if (ObjUtil.isNull(obj)) {
-            response.getWriter().write(JSON.toJSONString(ResultApi.error("999401")));
-            //  7天已过期
+            log.warn("BaseInfoInterceptor:  7天已过期");
+            response.getWriter().write(JSON.toJSONString(Result.error(ResultCode.UN_AUTHORIZATION)));
             return false;
         }
 
@@ -117,7 +118,8 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
         }
 
         if (CacheUser.OFFLINE.equals(user.getOnlineStatus())) {
-            response.getWriter().write(JSON.toJSONString(ResultApi.error("999402")));
+            log.warn("BaseInfoInterceptor:  异地登录");
+            response.getWriter().write(JSON.toJSONString(Result.error(ResultCode.UN_AUTHORIZATION)));
             //  异地登录
             return false;
         }
@@ -126,8 +128,8 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
 
 
         if (lastActiveTime.plusMinutes(30).isBefore(now)) {
-            response.getWriter().write(JSON.toJSONString(ResultApi.error("999401")));
-            //  用户操作已过期
+            log.warn("BaseInfoInterceptor:  用户操作已过期");
+            response.getWriter().write(JSON.toJSONString(Result.error(ResultCode.UN_AUTHORIZATION)));
             return false;
         }
 

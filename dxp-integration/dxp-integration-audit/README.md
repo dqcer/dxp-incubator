@@ -12,7 +12,7 @@
         <dependency>
             <groupId>com.dqcer.integration</groupId>
             <artifactId>dxp-integration-audit</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
 ```
 

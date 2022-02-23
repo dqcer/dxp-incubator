@@ -5,19 +5,14 @@
     <parent>
         <groupId>com.dqcer.integration</groupId>
         <artifactId>dxp-integration</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <groupId>com.dqcer</groupId>
     <artifactId>dxp-integration-encrypt</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>dxp-integration-encrypt</name>
 
     <dependencies>
-        <dependency>
-            <groupId>com.dqcer</groupId>
-            <artifactId>dxp-framework-jcl</artifactId>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>

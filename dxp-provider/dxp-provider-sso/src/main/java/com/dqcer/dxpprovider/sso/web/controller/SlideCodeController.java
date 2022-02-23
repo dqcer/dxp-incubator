@@ -1,6 +1,6 @@
 package com.dqcer.dxpprovider.sso.web.controller;
 
-import com.dqcer.dxpframework.api.ResultApi;
+import com.dqcer.dxpframework.api.Result;
 import com.dqcer.framework.storage.CacheConstant;
 import com.dqcer.dxptools.core.IpAddressUtil;
 import com.dqcer.integration.operation.RedissonObject;
@@ -34,11 +34,11 @@ public class SlideCodeController {
      * 获取滑块图片
      *
      * @param request 请求
-     * @return {@link ResultApi}
+     * @return {@link Result}
      * @throws IOException IOException
      */
     @PostMapping("account/image")
-    public ResultApi slideCode( HttpServletRequest request) throws IOException {
+    public Result slideCode( HttpServletRequest request) throws IOException {
 
         String hostIp = IpAddressUtil.getHostIp(request);
         String key = MessageFormat.format(CacheConstant.SLIDE_CODE_IP_USERNAME, hostIp, request.getSession().getId());
@@ -48,6 +48,6 @@ public class SlideCodeController {
         slideCodePlace.setDeviation(5);
         redissonObject.setValue(key, slideCodePlace, 1_000L * 60 * 60);
 
-        return ResultApi.ok(slideCodePlace);
+        return Result.ok(slideCodePlace);
     }
 }

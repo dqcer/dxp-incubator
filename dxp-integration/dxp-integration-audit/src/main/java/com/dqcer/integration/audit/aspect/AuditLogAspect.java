@@ -6,7 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
-import com.dqcer.dxpframework.api.ResultApi;
+import com.dqcer.dxpframework.api.Result;
 import com.dqcer.integration.audit.AuditProvider;
 import com.dqcer.integration.audit.annotation.AuditDTO;
 import com.dqcer.integration.audit.annotation.AuditLog;
@@ -142,13 +142,13 @@ public class AuditLogAspect {
             logEntity.setIndexName(indexName);
 
             result = point.proceed();
-            if (result instanceof ResultApi) {
-                ResultApi res = (ResultApi) result;
-                logEntity.setResultCode(Integer.parseInt(res.getCode()));
+            if (result instanceof Result) {
+                Result res = (Result) result;
+                logEntity.setResultCode(res.getCode());
                 logEntity.setResultMsg(res.getMessage());
             } else {
-                ResultApi ok = ResultApi.ok();
-                logEntity.setResultCode(Integer.parseInt(ok.getCode()));
+                Result ok = Result.ok();
+                logEntity.setResultCode(ok.getCode());
                 logEntity.setResultMsg(ok.getMessage());
             }
         } catch (Exception e) {

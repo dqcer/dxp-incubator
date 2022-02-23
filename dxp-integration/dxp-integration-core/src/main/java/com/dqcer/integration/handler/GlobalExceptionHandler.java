@@ -1,6 +1,7 @@
 package com.dqcer.integration.handler;
 
-import com.dqcer.dxpframework.api.ResultApi;
+import com.dqcer.dxpframework.api.Result;
+import com.dqcer.dxpframework.api.ResultCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -31,12 +32,12 @@ public class GlobalExceptionHandler {
      * 异常
      *
      * @param exception 异常
-     * @return {@link ResultApi}
+     * @return {@link Result}
      */
     @ExceptionHandler(value = Exception.class)
-    public ResultApi exception(Exception exception) {
+    public Result exception(Exception exception) {
         log.error("系统异常: ", exception);
-        return ResultApi.error("999500");
+        return Result.error(ResultCode.ERROR_UNKNOWN);
     }
 
 
@@ -44,50 +45,49 @@ public class GlobalExceptionHandler {
      * 缺少资源异常，无法找到对应properties文件中对应的key
      *
      * @param exception 异常
-     * @return {@link ResultApi}
+     * @return {@link Result}
      */
     @ExceptionHandler(value = HttpMediaTypeNotSupportedException.class)
-    public ResultApi httpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException exception) {
+    public Result httpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException exception) {
         log.error("请求头Content-Type异常: ", exception);
-        return ResultApi.error("999303");
+        return Result.error(ResultCode.ERROR_CONTENT_TYPE);
     }
 
     /**
      * 缺少资源异常，无法找到对应properties文件中对应的key
      *
      * @param exception 异常
-     * @return {@link ResultApi}
+     * @return {@link Result}
      */
     @ExceptionHandler(value = MissingResourceException.class)
-    public ResultApi missingResourceException(Exception exception) {
+    public Result missingResourceException(Exception exception) {
         log.error("无法找到对应properties文件中对应的key: ", exception);
-        return ResultApi.error("999302");
+        return Result.error(ResultCode.NOT_FIND_PROPERTIES_KEY);
     }
 
     /**
      * http消息转换异常，参数接收时，类型转换异常
      *
      * @param exception 异常
-     * @return {@link ResultApi}
+     * @return {@link Result}
      */
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
-    public ResultApi httpMessageConversionException(HttpMessageNotReadableException exception) {
+    public Result httpMessageConversionException(HttpMessageNotReadableException exception) {
         log.error("参数接收时，类型转换异常: ", exception);
-        return ResultApi.error("999300");
+        return Result.error(ResultCode.ERROR_CONVERSION);
     }
 
     /**
      * 方法参数无效异常处理
      *
      * @param exception 异常
-     * @return {@link ResultApi}
+     * @return {@link Result}
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResultApi methodArgumentNotValidException(MethodArgumentNotValidException exception) {
+    public Result methodArgumentNotValidException(MethodArgumentNotValidException exception) {
         BindingResult bindingResult = exception.getBindingResult();
         StringBuilder stringBuilder = new StringBuilder();
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-        ResultApi resultApi = ResultApi.error("999301");
         for (FieldError fieldError : fieldErrors) {
             String defaultMessage = fieldError.getDefaultMessage();
             String field = fieldError.getField();
@@ -97,9 +97,8 @@ public class GlobalExceptionHandler {
             stringBuilder.append("' ");
             stringBuilder.append("message:");
             stringBuilder.append(defaultMessage).append("\t");
-            resultApi.put(field, defaultMessage);
         }
         log.error("参数绑定异常: {}", exception.getParameter(), stringBuilder);
-        return resultApi;
+        return Result.error(ResultCode.ERROR_PARAMETERS);
     }
 }

@@ -5,11 +5,11 @@
     <parent>
         <groupId>com.dqcer</groupId>
         <artifactId>dxp-tools</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <groupId>com.dqcer.tools</groupId>
     <artifactId>dxp-tools-generator</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>dxp-tools-generator</name>
 
     <dependencies>
@@ -30,10 +30,6 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-core</artifactId>
             <version>3.4.3.4</version>
-        </dependency>
-        <dependency>
-            <groupId>com.dqcer</groupId>
-            <artifactId>dxp-framework-jcl</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.velocity</groupId>

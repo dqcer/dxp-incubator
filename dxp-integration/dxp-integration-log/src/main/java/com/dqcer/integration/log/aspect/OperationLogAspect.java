@@ -88,8 +88,8 @@ public class OperationLogAspect implements Ordered {
 //        sysLog.setCreatedTime(new Date());
 //        sysLog.setRequestUrl(requestUri);
 //        sysLog.setParam(key.toString());
-//        if (proceed instanceof ResultApi) {
-//            ResultApi result = (ResultApi) proceed;
+//        if (proceed instanceof Result) {
+//            Result result = (Result) proceed;
 //            sysLog.setResult(result.toString());
 //        } else {
 //            // TODO: 2021/11/13 IO流处理

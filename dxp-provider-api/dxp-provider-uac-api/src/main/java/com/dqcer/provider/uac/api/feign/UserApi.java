@@ -1,6 +1,6 @@
 package com.dqcer.provider.uac.api.feign;
 
-import com.dqcer.dxpframework.api.ResultApi;
+import com.dqcer.dxpframework.api.Result;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface UserApi {
 
     @PostMapping("/auth/token")
-    ResultApi tenantUsers();
+    Result tenantUsers();
 
 }

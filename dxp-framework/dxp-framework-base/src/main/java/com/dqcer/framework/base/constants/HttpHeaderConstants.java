@@ -1,0 +1,24 @@
+package com.dqcer.framework.base.constants;
+
+/**
+ * @author dongqin
+ * @description http报头常量
+ * @date 2022/01/25
+ */
+public class HttpHeaderConstants {
+
+    /**
+     * 授权key
+     */
+    public static final String AUTHORIZATION = "Authorization";
+
+    /**
+     * Bearer
+     */
+    public static final String BEARER = "Bearer ";
+
+    /**
+     * 租户id
+     */
+    public static final String T_ID = "tid ";
+}

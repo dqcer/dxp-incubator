@@ -5,11 +5,11 @@
     <parent>
         <groupId>com.dqcer.integration</groupId>
         <artifactId>dxp-integration</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <groupId>com.dqcer</groupId>
     <artifactId>dxp-integration-db</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>dxp-integration-db</name>
     <description>数据库集成</description>
 

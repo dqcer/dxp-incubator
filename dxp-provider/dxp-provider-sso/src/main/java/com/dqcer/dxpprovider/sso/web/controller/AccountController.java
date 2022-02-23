@@ -1,9 +1,7 @@
 package com.dqcer.dxpprovider.sso.web.controller;
 
-import com.dqcer.dxpframework.api.ResultApi;
+import com.dqcer.dxpframework.api.Result;
 import com.dqcer.dxpprovider.sso.web.service.AccountService;
-import com.dqcer.framework.storage.UnifySession;
-import com.dqcer.framework.storage.UserStorage;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +21,8 @@ public class AccountController {
     private AccountService userService;
 
     @PostMapping("base/detail")
-    public ResultApi baseDetail() {
-        return ResultApi.ok(userService.baseDetail());
+    public Result baseDetail() {
+        return Result.ok(userService.baseDetail());
     }
 
 
