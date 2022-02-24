@@ -96,7 +96,7 @@ public class Result extends HashMap<String, Object> {
     /**
      * 是否成功
      *
-     * @return boolean
+     * @return true/成功 false/失败
      */
     public boolean isOk() {
         return getCode() == ResultCode.SUCCESS.code;
@@ -112,7 +112,7 @@ public class Result extends HashMap<String, Object> {
     }
 
     /**
-     * 获取代码
+     * 获取code
      *
      * @return int
      */
