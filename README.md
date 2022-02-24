@@ -23,10 +23,6 @@
 
 ### 快速启动
 
-您的开发电脑需要安装：NodeJs（最新版）、npm或yarn（最新版）建议使用yarn、Mysql5.7、Jdk1.8
-
-* 启动前端：打开_web文件夹，进行依赖下载，运行npm install或yarn命令，再运行npm run serve或 yarn run serve
-
 * 启动后端：
 
         1.导入sql脚本
@@ -46,11 +42,6 @@
 
 
 ### 框架说明及后续补充
-
-* 纯手研发搭建框架脚手架，在自己用的时候，也为各位小伙伴打下坚固的接私活利器。
-* 此版本的升级除了跟随Snowy主版本升级外，Cloud架构也会一步步增强
-* 如需了解我们更多，请移步官网：[https://xiaonuo.vip](https://xiaonuo.vip)
-* 当然，有问题讨论的小伙伴还可以加入我们的QQ技术群：[732230670](https://wpa.qq.com/msgrd?v=3&uin=732230670&_blank)，一起学习讨论。
 
 更新中。。。
 
