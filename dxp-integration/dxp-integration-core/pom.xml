@@ -42,8 +42,8 @@
         <!-- end -->
 
         <dependency>
-            <groupId>com.dqcer</groupId>
-            <artifactId>dxp-framework-api</artifactId>
+            <groupId>com.dqcer.framework</groupId>
+            <artifactId>dxp-framework-base</artifactId>
             <scope>provided</scope>
         </dependency>
 

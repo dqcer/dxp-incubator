@@ -1,7 +1,7 @@
 package com.dqcer.gateway.filter;
 
-import com.dqcer.dxpframework.api.Result;
-import com.dqcer.dxpframework.api.ResultCode;
+import com.dqcer.framework.base.api.Result;
+import com.dqcer.framework.base.api.ResultCode;
 import com.dqcer.framework.base.constants.HttpHeaderConstants;
 import com.dqcer.gateway.config.EccGatewayProperties;
 import com.dqcer.gateway.config.GatewayResultCode;

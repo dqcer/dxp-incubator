@@ -1,7 +1,7 @@
 package com.dqcer.gateway.config;
 
 
-import com.dqcer.dxpframework.api.IResultCode;
+import com.dqcer.framework.base.api.IResultCode;
 
 /**
  * @author dongqin

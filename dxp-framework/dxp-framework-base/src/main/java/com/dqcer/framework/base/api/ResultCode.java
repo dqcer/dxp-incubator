@@ -1,4 +1,4 @@
-package com.dqcer.dxpframework.api;
+package com.dqcer.framework.base.api;
 
 /**
  * @author dongqin

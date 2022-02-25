@@ -104,12 +104,12 @@
 				<version>${dxp-incubator.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.dqcer</groupId>
-				<artifactId>dxp-framework-api</artifactId>
+				<groupId>com.dqcer.framework</groupId>
+				<artifactId>dxp-framework-base</artifactId>
 				<version>${dxp-incubator.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.dqcer</groupId>
+				<groupId>com.dqcer.framework</groupId>
 				<artifactId>dxp-framework-dto</artifactId>
 				<version>${dxp-incubator.version}</version>
 			</dependency>
