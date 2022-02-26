@@ -19,7 +19,6 @@
     <modules>
         <module>dxp-integration-audit</module>
         <module>dxp-integration-cache</module>
-        <module>dxp-integration-context</module>
         <module>dxp-integration-core</module>
         <module>dxp-integration-datasource</module>
         <module>dxp-integration-db</module>

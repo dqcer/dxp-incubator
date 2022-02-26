@@ -3,6 +3,12 @@ package com.dqcer.integration.encrypt.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * 密钥配置
+ *
+ * @author dongqin
+ * @date 2022/02/26
+ */
 @ConfigurationProperties(prefix = "dxp.encrypt")
 @Configuration
 public class SecretKeyConfig {

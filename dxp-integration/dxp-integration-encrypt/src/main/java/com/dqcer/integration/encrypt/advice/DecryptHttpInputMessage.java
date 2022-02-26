@@ -8,8 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpInputMessage;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -20,8 +24,10 @@ import java.util.stream.Collectors;
 public class DecryptHttpInputMessage implements HttpInputMessage {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
-    private HttpHeaders headers;
-    private InputStream body;
+
+    private final HttpHeaders headers;
+
+    private final InputStream body;
 
     public DecryptHttpInputMessage(HttpInputMessage inputMessage, String privateKey, String charset, boolean showLog) throws Exception {
 
@@ -42,7 +48,7 @@ public class DecryptHttpInputMessage implements HttpInputMessage {
             if (!StrUtil.isBlank(content)) {
                 String[] contents = content.split("\\|");
                 for (String value : contents) {
-                    value = new String(RSAUtil.decrypt(Base64Util.decoderByte(value.getBytes(StandardCharsets.UTF_8)), privateKey), charset);
+                    value = new String(Objects.requireNonNull(RSAUtil.decrypt(Base64Util.decoderByte(value.getBytes(StandardCharsets.UTF_8)), privateKey)), charset);
                     json.append(value);
                 }
             }
@@ -59,10 +65,9 @@ public class DecryptHttpInputMessage implements HttpInputMessage {
      * Return the body of the message as an input stream.
      *
      * @return the input stream body (never {@code null})
-     * @throws IOException in case of I/O errors
      */
     @Override
-    public InputStream getBody() throws IOException {
+    public InputStream getBody() {
         return body;
     }
 
