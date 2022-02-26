@@ -1,6 +1,6 @@
 package com.dqcer.dxpprovider.sso.web.controller;
 
-import com.dqcer.dxpframework.api.Result;
+import com.dqcer.framework.base.api.Result;
 import com.dqcer.framework.storage.CacheConstant;
 import com.dqcer.dxptools.core.IpAddressUtil;
 import com.dqcer.integration.operation.RedissonObject;
@@ -38,7 +38,7 @@ public class SlideCodeController {
      * @throws IOException IOException
      */
     @PostMapping("account/image")
-    public Result slideCode( HttpServletRequest request) throws IOException {
+    public Result slideCode(HttpServletRequest request) throws IOException {
 
         String hostIp = IpAddressUtil.getHostIp(request);
         String key = MessageFormat.format(CacheConstant.SLIDE_CODE_IP_USERNAME, hostIp, request.getSession().getId());

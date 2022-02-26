@@ -4,7 +4,7 @@ spring:
   main:
     banner-mode: off
   application:
-    name: @pom.artifactId@
+    name: dxp-gateway
   cloud:
     nacos:
       discovery:

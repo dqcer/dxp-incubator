@@ -1,11 +1,13 @@
 package com.dqcer.integration.interceptor;
 
 import com.alibaba.fastjson.JSON;
-import com.dqcer.dxpframework.api.Result;
-import com.dqcer.dxpframework.api.ResultCode;
 import com.dqcer.dxptools.core.IpAddressUtil;
 import com.dqcer.dxptools.core.ObjUtil;
 import com.dqcer.dxptools.core.StrUtil;
+import com.dqcer.framework.base.api.Result;
+import com.dqcer.framework.base.api.ResultCode;
+import com.dqcer.framework.base.constants.GlobalConstants;
+import com.dqcer.framework.base.constants.HttpHeaderConstants;
 import com.dqcer.framework.storage.*;
 import com.dqcer.integration.annotation.UnAuthorize;
 import com.dqcer.integration.operation.RedissonObject;
@@ -96,13 +98,13 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
             log.debug("Authorization: {}", authorization);
         }
 
-        if (StrUtil.isBlank(authorization) || !authorization.startsWith(HeaderConstant.BEARER)) {
+        if (StrUtil.isBlank(authorization) || !authorization.startsWith(HttpHeaderConstants.BEARER)) {
             response.getWriter().write(JSON.toJSONString(Result.error(ResultCode.UN_AUTHORIZATION)));
             //  认证失败
             return false;
         }
 
-        String token = authorization.substring(HeaderConstant.BEARER.length());
+        String token = authorization.substring(HttpHeaderConstants.BEARER.length());
 
         Object obj = redissonObject.getValue(MessageFormat.format(CacheConstant.SSO_TOKEN, token));
         if (ObjUtil.isNull(obj)) {

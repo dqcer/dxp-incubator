@@ -1,7 +1,6 @@
 package com.dqcer.dxpprovider.sso.web.model.dto;
 
-import com.dqcer.dxpframework.dto.BaseDTO;
-import com.dqcer.dxpframework.dto.annontation.StrValid;
+
 
 import javax.validation.constraints.NotNull;
 
@@ -19,13 +18,11 @@ public class LoginDTO extends BaseDTO {
     /**
      * 账号
      */
-    @StrValid(min = 3, max = 32, groups = Account.class,  message = "{loginDTO.ue}")
     private String ue;
 
     /**
      * 密码
      */
-    @StrValid(min = 3, max = 32, groups = Account.class, message = "{loginDTO.pd}")
     private String pd;
 
     /**

@@ -1,7 +1,7 @@
 package com.dqcer.integration.handler;
 
-import com.dqcer.dxpframework.api.Result;
-import com.dqcer.dxpframework.api.ResultCode;
+import com.dqcer.framework.base.api.Result;
+import com.dqcer.framework.base.api.ResultCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;

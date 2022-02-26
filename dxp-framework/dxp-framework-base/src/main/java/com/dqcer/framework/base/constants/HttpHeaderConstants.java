@@ -5,7 +5,7 @@ package com.dqcer.framework.base.constants;
  * @description http报头常量
  * @date 2022/01/25
  */
-public class HttpHeaderConstants {
+public final class HttpHeaderConstants {
 
     /**
      * 授权key

@@ -6,7 +6,7 @@ package com.dqcer.framework.base.constants;
  * @date 2022/01/25
  */
 @SuppressWarnings("unused")
-public class GlobalConstants {
+public final class GlobalConstants {
 
 
     /**

@@ -1,9 +1,9 @@
 package com.dqcer.dxpprovider.sso.web.controller;
 
-import com.dqcer.dxpframework.api.Result;
 import com.dqcer.dxpprovider.sso.web.model.dto.LoginDTO;
 import com.dqcer.dxpprovider.sso.web.service.AccountService;
 import com.dqcer.dxptools.core.IpAddressUtil;
+import com.dqcer.framework.base.api.Result;
 import com.dqcer.framework.storage.CacheConstant;
 import com.dqcer.integration.annotation.UnAuthorize;
 import com.dqcer.integration.operation.RedissonObject;

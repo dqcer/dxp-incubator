@@ -2,11 +2,11 @@ package com.dqcer.dxpprovider.sso.web.service;
 
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.dqcer.dxpframework.api.Result;
 import com.dqcer.dxpprovider.sso.web.dao.UserDAO;
 import com.dqcer.dxpprovider.sso.web.model.entity.AccountEntity;
 import com.dqcer.dxptools.core.MD5Util;
 import com.dqcer.dxptools.core.ObjUtil;
+import com.dqcer.framework.base.api.Result;
 import com.dqcer.framework.storage.*;
 import com.dqcer.integration.operation.RedissonObject;
 import com.dqcer.provider.sso.api.vo.AccountVO;
