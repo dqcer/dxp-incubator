@@ -16,6 +16,7 @@
         <module>dxp-framework</module>
         <module>dxp-gateway</module>
         <module>dxp-integration</module>
+        <module>dxp-monitor</module>
         <module>dxp-provider</module>
         <module>dxp-provider-api</module>
         <module>dxp-tools</module>

@@ -2,6 +2,8 @@ package com.dqcer.dxpprovider.sso.web.model.dto;
 
 
 
+import com.dqcer.framework.base.DTO;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -9,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * @description 登录dto
  * @date 2021/09/10
  */
-public class LoginDTO extends BaseDTO {
+public class LoginDTO implements DTO {
 
     private static final long serialVersionUID = -7311088026242433898L;
 

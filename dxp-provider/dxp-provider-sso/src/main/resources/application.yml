@@ -46,7 +46,7 @@ spring:
     # table: dxp_schema_history
 logging:
   level:
-    com.eclincloud: debug
+    com.dqcer: debug
 management:
   endpoints:
     web:

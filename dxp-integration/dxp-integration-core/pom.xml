@@ -27,17 +27,11 @@
             <scope>provided</scope>
         </dependency>
         <!-- end -->
-
-        <!-- language -->
+        <!-- xss过滤组件 -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <scope>provided</scope>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.9.2</version>
         </dependency>
         <!-- end -->
 
@@ -67,6 +61,10 @@
         <dependency>
             <groupId>com.dqcer</groupId>
             <artifactId>dxp-integration-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
         </dependency>
     </dependencies>
 

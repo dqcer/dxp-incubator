@@ -11,13 +11,9 @@
     <artifactId>dxp-provider-sso</artifactId>
     <version>1.0</version>
     <name>dxp-provider-sso</name>
-    <description>Demo project for Spring Boot</description>
+    <description>sso project</description>
 
     <dependencies>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.dqcer.framework</groupId>
             <artifactId>dxp-framework-base</artifactId>
@@ -57,10 +53,6 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.dqcer</groupId>

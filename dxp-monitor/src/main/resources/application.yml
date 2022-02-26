@@ -1,0 +1,7 @@
+server:
+  port: 9000
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: dxp-monitor

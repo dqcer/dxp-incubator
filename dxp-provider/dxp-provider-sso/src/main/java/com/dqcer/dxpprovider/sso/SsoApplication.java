@@ -21,10 +21,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableSysLog
 @EnableIdempotent
 @SpringBootApplication
-public class DxpProviderSsoApplication {
+public class SsoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DxpProviderSsoApplication.class, args);
+        SpringApplication.run(SsoApplication.class, args);
     }
 
 }

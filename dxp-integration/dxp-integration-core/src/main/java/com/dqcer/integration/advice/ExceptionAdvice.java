@@ -1,4 +1,4 @@
-package com.dqcer.integration.handler;
+package com.dqcer.integration.advice;
 
 import com.dqcer.framework.base.api.Result;
 import com.dqcer.framework.base.api.ResultCode;
@@ -23,7 +23,7 @@ import java.util.MissingResourceException;
  */
 @Order(-100)
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class ExceptionAdvice {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 

@@ -1,7 +1,9 @@
 package com.dqcer.dxpprovider.sso.web.controller;
 
+import com.dqcer.dxpprovider.sso.web.model.dto.LoginDTO;
 import com.dqcer.dxpprovider.sso.web.service.AccountService;
 import com.dqcer.framework.base.api.Result;
+import com.dqcer.integration.annotation.UnAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +22,9 @@ public class AccountController {
     @Resource
     private AccountService userService;
 
+    @UnAuthorize
     @PostMapping("base/detail")
-    public Result baseDetail() {
+    public Result baseDetail(LoginDTO dto) {
         return Result.ok(userService.baseDetail());
     }
 

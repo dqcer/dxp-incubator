@@ -14,6 +14,8 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import org.springframework.web.server.WebExceptionHandler;
 import org.springframework.web.util.pattern.PathPatternParser;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -42,14 +44,18 @@ public class CoreConfig {
      */
     @Bean
     public CorsWebFilter corsWebFilter() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(Boolean.TRUE);
-        config.addAllowedOrigin("*");
-        config.addAllowedMethod("*");
-        config.addAllowedHeader("*");
-        config.setMaxAge(3600L);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
-        source.registerCorsConfiguration("/**", config);
-        return new CorsWebFilter(source);
+        UrlBasedCorsConfigurationSource configurationSource = new UrlBasedCorsConfigurationSource(new PathPatternParser());
+        CorsConfiguration configuration = new CorsConfiguration();
+//       配置跨域
+        configuration.setAllowCredentials(true);
+        List<String> allowedOriginPatterns = new ArrayList<>();
+        allowedOriginPatterns.add(CorsConfiguration.ALL);
+        configuration.setAllowedOriginPatterns(allowedOriginPatterns);
+
+        configuration.addAllowedHeader(CorsConfiguration.ALL);
+        configuration.addAllowedMethod(CorsConfiguration.ALL);
+
+        configurationSource.registerCorsConfiguration("/**", configuration);
+        return new CorsWebFilter(configurationSource);
     }
 }

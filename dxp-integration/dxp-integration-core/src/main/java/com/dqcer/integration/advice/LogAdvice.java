@@ -1,4 +1,4 @@
-package com.dqcer.integration.handler;
+package com.dqcer.integration.advice;
 
 import com.dqcer.framework.storage.*;
 import com.dqcer.integration.log.config.LogEvent;
@@ -43,7 +43,7 @@ public class LogAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public Object beforeBodyWrite(Object object, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
         if (log.isDebugEnabled()) {
-            log.debug("log 拦截", object, methodParameter);
+            log.debug("LogAdvice 拦截", object, methodParameter);
         }
 
 
@@ -72,7 +72,9 @@ public class LogAdvice implements ResponseBodyAdvice<Object> {
 
 
         Duration between = Duration.between(unifyParameter.getStartTime(), now);
-        log.debug("耗时：{}", between.toMillis());
+        if (log.isDebugEnabled()) {
+            log.debug("耗时：{}", between.toMillis());
+        }
         return object;
 
     }

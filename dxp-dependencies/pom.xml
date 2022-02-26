@@ -39,6 +39,8 @@
 		<commons-codec.version>1.15</commons-codec.version>
 		<hutool.version>5.2.5</hutool.version>
 		<redisson.spring.boot.version>3.16.2</redisson.spring.boot.version>
+		<!--spring-boot-admin-->
+		<spring-boot-admin.version>2.4.3</spring-boot-admin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -157,6 +159,13 @@
 				<groupId>com.dqcer</groupId>
 				<artifactId>dxp-provider-sso-api</artifactId>
 				<version>${dxp-incubator.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-dependencies</artifactId>
+				<version>${spring-boot-admin.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

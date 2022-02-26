@@ -20,17 +20,17 @@ spring:
              - Path=/sso/**
            filters:
              - StripPrefix=1
-             - name: Retry
-               args:
-                 retries: 1 #需要进行重试的次数
-                 statuses:  #返回哪个状态码需要进行重试，返回状态码为5XX进行重试, org.springframework.http.HttpStatus
-                   - BAD_GATEWAY
-                   - OK
-                 backoff:
-                   firstBackoff: 10ms
-                   maxBackoff: 50ms
-                   factor: 2
-                   basedOnPreviousValue: false
+#             - name: Retry
+#               args:
+#                 retries: 1 #需要进行重试的次数
+#                 statuses:  #返回哪个状态码需要进行重试，返回状态码为5XX进行重试, org.springframework.http.HttpStatus
+#                   - BAD_GATEWAY
+#                   - OK
+#                 backoff:
+#                   firstBackoff: 10ms
+#                   maxBackoff: 50ms
+#                   factor: 2
+#                   basedOnPreviousValue: false
       ## 全局超时配置
       httpclient:
         connect-timeout: 1000 #毫秒
@@ -39,12 +39,22 @@ spring:
         locator:
           enabled: true #开启从注册中心动态创建路由的功能
           lower-case-service-id: true #使用小写服务名，默认是大写
+  boot:
+    admin:
+      client:
+        url: http://localhost:9000 # spring-boot-admin server 地址
+  jmx:
+    enabled: true # spring-boot-admin 监控 jmx
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
 logging:
   level:
     com.dqcer: debug
@@ -52,3 +62,5 @@ ecc:
   ignore:
     token:
       - /sso/auth/account/login
+      - /sso/user/base/detail
+      - /actuator/health

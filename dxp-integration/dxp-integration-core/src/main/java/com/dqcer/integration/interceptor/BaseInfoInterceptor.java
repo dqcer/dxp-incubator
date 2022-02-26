@@ -34,7 +34,7 @@ import java.util.Map;
  */
 public class BaseInfoInterceptor implements HandlerInterceptor {
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private static final Logger log = LoggerFactory.getLogger(BaseInfoInterceptor.class);
 
     private final RedissonObject redissonObject;
 
@@ -44,6 +44,10 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+        String requestURI = request.getRequestURI();
+        if (log.isDebugEnabled()) {
+            log.debug("BaseInfoInterceptor#preHandle requestURI:[{}]", requestURI);
+        }
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
 
@@ -86,7 +90,7 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
         UnAuthorize unauthorize = method.getMethodAnnotation(UnAuthorize.class);
         if (null != unauthorize) {
             if (log.isDebugEnabled()) {
-                log.debug("UnAuthorize: {}", request.getRequestURI());
+                log.debug("UnAuthorize: {}", requestURI);
             }
             UserStorage.setSession(unifySession);
             return true;

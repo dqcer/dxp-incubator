@@ -20,5 +20,13 @@ public final class HttpHeaderConstants {
     /**
      * 租户id
      */
-    public static final String T_ID = "tid ";
+    public static final String T_ID = "tid";
+
+
+    /**
+     * feign调用标识
+     */
+    public static final String X_FEIGN = "x-feign";
+
+
 }

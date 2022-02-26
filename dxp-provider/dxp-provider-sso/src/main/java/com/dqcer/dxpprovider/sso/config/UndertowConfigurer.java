@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @date 2021/08/19
  */
 @Component
-public class CustomizationBean implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
+public class UndertowConfigurer implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
 
     @Override
     public void customize(UndertowServletWebServerFactory factory) {
