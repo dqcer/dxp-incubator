@@ -32,11 +32,13 @@ public class XssFilter implements Filter {
     public List<String> excludes = new ArrayList();
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException,ServletException {
+        HttpServletRequest req = (HttpServletRequest) request;
+        String requestURI = req.getRequestURI();
         if(log.isDebugEnabled()){
-            log.debug("XssFilter is open");
+            log.debug("XssFilter doFilter. requestURI:[{}]", requestURI);
         }
 
-        HttpServletRequest req = (HttpServletRequest) request;
+
         if(handleExcludeURL(req)){
             if (log.isDebugEnabled()) {
                 log.debug("XssFilter not exclude");

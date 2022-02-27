@@ -48,6 +48,9 @@ public class LogAdvice implements ResponseBodyAdvice<Object> {
 
 
         UnifySession unifySession = UserStorage.getSession();
+        if (null == unifySession) {
+            return object;
+        }
         UnifyParameter unifyParameter = QueryStorage.getParameter();
 
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
