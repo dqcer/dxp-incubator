@@ -1,4 +1,4 @@
-package com.dqcer.gateway.config;
+package com.dqcer.gateway.enums;
 
 
 import com.dqcer.framework.base.api.IResultCode;

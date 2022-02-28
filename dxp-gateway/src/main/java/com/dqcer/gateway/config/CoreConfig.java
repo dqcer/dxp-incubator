@@ -1,6 +1,7 @@
 package com.dqcer.gateway.config;
 
 import com.dqcer.gateway.handler.ExceptionHandler;
+import com.dqcer.gateway.properties.EccGatewayProperties;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;

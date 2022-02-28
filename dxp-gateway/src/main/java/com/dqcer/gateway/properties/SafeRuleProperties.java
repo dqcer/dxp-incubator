@@ -1,4 +1,4 @@
-package com.dqcer.gateway.config;
+package com.dqcer.gateway.properties;
 
 /**
  * @author dongqin

@@ -1,7 +1,7 @@
 package com.dqcer.gateway.filter;
 
 import com.dqcer.framework.base.constants.GlobalConstants;
-import com.dqcer.gateway.config.EccGatewayProperties;
+import com.dqcer.gateway.properties.EccGatewayProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
