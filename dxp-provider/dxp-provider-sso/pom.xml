@@ -39,10 +39,6 @@
             <artifactId>dxp-integration-idempotent</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.dqcer.integration</groupId>
             <artifactId>dxp-integration-slider</artifactId>
         </dependency>
