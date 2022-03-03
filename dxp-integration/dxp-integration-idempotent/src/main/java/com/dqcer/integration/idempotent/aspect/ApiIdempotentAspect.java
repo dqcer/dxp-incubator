@@ -1,6 +1,6 @@
 package com.dqcer.integration.idempotent.aspect;
 
-import com.dqcer.dxptools.core.StrUtil;
+import com.dqcer.tools.core.StrUtil;
 import com.dqcer.integration.idempotent.annotation.ApiIdempotent;
 import com.dqcer.integration.idempotent.service.ApiIdempotentService;
 import com.dqcer.integration.idempotent.util.HttpContextUtils;

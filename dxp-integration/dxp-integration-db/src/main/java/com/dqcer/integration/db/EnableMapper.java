@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 
 /**
  * @author dongqin
- * @description 启用动态数据源
+ * @description 启用动态数据源 http://localhost:8080/druid/index.html
  * @date 2021/08/21 19:08:69
  */
 @Target({ElementType.TYPE})

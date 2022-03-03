@@ -2,11 +2,11 @@ package com.dqcer.dxpprovider.sso.web.controller;
 
 import com.dqcer.dxpprovider.sso.web.model.dto.LoginDTO;
 import com.dqcer.dxpprovider.sso.web.service.AccountService;
-import com.dqcer.dxptools.core.IpAddressUtil;
+import com.dqcer.tools.core.IpAddressUtil;
 import com.dqcer.framework.base.api.Result;
 import com.dqcer.framework.storage.CacheConstant;
 import com.dqcer.integration.annotation.UnAuthorize;
-import com.dqcer.integration.operation.RedissonObject;
+import com.dqcer.integration.cache.operation.RedissonObject;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.validation.annotation.Validated;

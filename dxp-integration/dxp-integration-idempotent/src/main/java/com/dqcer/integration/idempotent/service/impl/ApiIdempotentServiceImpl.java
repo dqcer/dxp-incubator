@@ -1,6 +1,6 @@
 package com.dqcer.integration.idempotent.service.impl;
 
-import com.dqcer.dxptools.core.StrUtil;
+import com.dqcer.tools.core.StrUtil;
 import com.dqcer.integration.idempotent.service.ApiIdempotentService;
 import com.dqcer.integration.idempotent.util.SpringUtil;
 import org.springframework.data.redis.core.StringRedisTemplate;

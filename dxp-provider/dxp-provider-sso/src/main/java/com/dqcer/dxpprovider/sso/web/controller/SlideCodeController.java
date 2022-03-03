@@ -2,8 +2,8 @@ package com.dqcer.dxpprovider.sso.web.controller;
 
 import com.dqcer.framework.base.api.Result;
 import com.dqcer.framework.storage.CacheConstant;
-import com.dqcer.dxptools.core.IpAddressUtil;
-import com.dqcer.integration.operation.RedissonObject;
+import com.dqcer.tools.core.IpAddressUtil;
+import com.dqcer.integration.cache.operation.RedissonObject;
 import com.dqcer.integration.slider.SliderCode;
 import com.dqcer.integration.slider.model.SlideCodePlace;
 import org.springframework.web.bind.annotation.PostMapping;

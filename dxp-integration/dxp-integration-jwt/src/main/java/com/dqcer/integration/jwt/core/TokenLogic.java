@@ -2,7 +2,7 @@ package com.dqcer.integration.jwt.core;
 
 import com.dqcer.integration.jwt.bean.SessionBean;
 import com.dqcer.integration.jwt.util.AESUtil;
-import com.dqcer.integration.operation.RedissonObject;
+import com.dqcer.integration.cache.operation.RedissonObject;
 
 import javax.annotation.Resource;
 

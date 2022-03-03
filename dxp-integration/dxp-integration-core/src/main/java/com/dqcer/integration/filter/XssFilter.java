@@ -1,6 +1,6 @@
 package com.dqcer.integration.filter;
 
-import com.dqcer.dxptools.core.StrUtil;
+import com.dqcer.tools.core.StrUtil;
 import com.dqcer.integration.filter.wrapper.XssHttpServletRequestWrapper;
 import org.apache.commons.lang3.BooleanUtils;
 import org.slf4j.Logger;

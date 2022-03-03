@@ -1,6 +1,6 @@
 package com.dqcer.dxpprovider.open;
 
-import com.dqcer.dxptools.core.MD5Util;
+import com.dqcer.tools.core.MD5Util;
 
 import java.util.HashMap;
 import java.util.Map;

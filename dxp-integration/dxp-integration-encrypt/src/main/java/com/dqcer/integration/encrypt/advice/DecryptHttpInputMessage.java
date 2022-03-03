@@ -1,8 +1,8 @@
 package com.dqcer.integration.encrypt.advice;
 
-import com.dqcer.dxptools.core.Base64Util;
-import com.dqcer.dxptools.core.RSAUtil;
-import com.dqcer.dxptools.core.StrUtil;
+import com.dqcer.tools.core.Base64Util;
+import com.dqcer.tools.core.RSAUtil;
+import com.dqcer.tools.core.StrUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;

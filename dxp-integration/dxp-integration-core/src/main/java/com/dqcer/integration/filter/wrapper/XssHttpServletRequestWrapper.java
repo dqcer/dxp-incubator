@@ -1,6 +1,6 @@
 package com.dqcer.integration.filter.wrapper;
 
-import com.dqcer.dxptools.core.StrUtil;
+import com.dqcer.tools.core.StrUtil;
 import com.dqcer.integration.filter.JsoupUtil;
 
 import javax.servlet.http.HttpServletRequest;
