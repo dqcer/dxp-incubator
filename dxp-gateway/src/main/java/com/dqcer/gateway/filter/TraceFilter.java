@@ -1,6 +1,6 @@
 package com.dqcer.gateway.filter;
 
-import com.dqcer.framework.base.constants.GlobalConstants;
+import com.dqcer.framework.base.constants.TraceConstants;
 import org.slf4j.MDC;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -25,9 +25,9 @@ public class TraceFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String traceId = UUID.randomUUID().toString();
-        MDC.put(GlobalConstants.LOG_TRACE_ID, traceId);
+        MDC.put(TraceConstants.LOG_TRACE_ID, traceId);
         ServerHttpRequest serverHttpRequest = exchange.getRequest().mutate()
-                .headers(h -> h.add(GlobalConstants.TRACE_ID_HEADER, traceId))
+                .headers(h -> h.add(TraceConstants.TRACE_ID_HEADER, traceId))
                 .build();
         ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
         return chain.filter(build);

@@ -1,6 +1,6 @@
 package com.dqcer.dxpprovider.sso.web.controller;
 
-import com.dqcer.framework.base.api.Result;
+import com.dqcer.framework.base.bean.Result;
 import com.dqcer.framework.storage.CacheConstant;
 import com.dqcer.tools.core.IpAddressUtil;
 import com.dqcer.integration.cache.operation.RedissonObject;

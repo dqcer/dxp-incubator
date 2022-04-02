@@ -1,6 +1,6 @@
 package com.dqcer.gateway.filter;
 
-import com.dqcer.framework.base.constants.GlobalConstants;
+import com.dqcer.framework.base.constants.TraceConstants;
 import com.dqcer.gateway.properties.EccGatewayProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class LogFilter implements GlobalFilter, Ordered {
 			return chain.filter(exchange);
 		}
 		String requestUrl = exchange.getRequest().getURI().getRawPath();
-		String traceId = exchange.getRequest().getHeaders().getFirst(GlobalConstants.TRACE_ID_HEADER);
+		String traceId = exchange.getRequest().getHeaders().getFirst(TraceConstants.TRACE_ID_HEADER);
 		StringBuilder beforeReqLog = new StringBuilder(512);
 		// 日志参数
 		List<Object> beforeReqArgs = new ArrayList<>();

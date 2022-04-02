@@ -1,7 +1,7 @@
 package com.dqcer.gateway.enums;
 
 
-import com.dqcer.framework.base.api.IResultCode;
+import com.dqcer.framework.base.bean.IResultCode;
 
 /**
  * @author dongqin

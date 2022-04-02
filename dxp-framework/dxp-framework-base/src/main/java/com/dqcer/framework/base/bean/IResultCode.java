@@ -1,4 +1,4 @@
-package com.dqcer.framework.base.api;
+package com.dqcer.framework.base.bean;
 
 /**
  * @author dongqin

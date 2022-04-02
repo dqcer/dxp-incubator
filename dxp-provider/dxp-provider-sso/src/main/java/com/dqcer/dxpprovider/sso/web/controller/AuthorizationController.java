@@ -3,7 +3,7 @@ package com.dqcer.dxpprovider.sso.web.controller;
 import com.dqcer.dxpprovider.sso.web.model.dto.LoginDTO;
 import com.dqcer.dxpprovider.sso.web.service.AccountService;
 import com.dqcer.tools.core.IpAddressUtil;
-import com.dqcer.framework.base.api.Result;
+import com.dqcer.framework.base.bean.Result;
 import com.dqcer.framework.storage.CacheConstant;
 import com.dqcer.integration.annotation.UnAuthorize;
 import com.dqcer.integration.cache.operation.RedissonObject;

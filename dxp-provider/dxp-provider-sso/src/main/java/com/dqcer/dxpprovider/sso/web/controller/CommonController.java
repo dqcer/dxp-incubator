@@ -1,6 +1,6 @@
 package com.dqcer.dxpprovider.sso.web.controller;
 
-import com.dqcer.framework.base.api.Result;
+import com.dqcer.framework.base.bean.Result;
 import com.dqcer.integration.idempotent.service.ApiIdempotentService;
 import com.dqcer.integration.log.annotation.OperationLog;
 import org.springframework.web.bind.annotation.PostMapping;

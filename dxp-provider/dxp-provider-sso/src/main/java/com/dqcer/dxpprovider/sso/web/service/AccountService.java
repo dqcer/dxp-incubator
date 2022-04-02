@@ -6,7 +6,7 @@ import com.dqcer.dxpprovider.sso.web.dao.UserDAO;
 import com.dqcer.dxpprovider.sso.web.model.entity.AccountEntity;
 import com.dqcer.tools.core.MD5Util;
 import com.dqcer.tools.core.ObjUtil;
-import com.dqcer.framework.base.api.Result;
+import com.dqcer.framework.base.bean.Result;
 import com.dqcer.framework.storage.*;
 import com.dqcer.integration.cache.operation.RedissonObject;
 import com.dqcer.provider.sso.api.vo.AccountVO;

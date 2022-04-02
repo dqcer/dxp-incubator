@@ -1,7 +1,7 @@
 package com.dqcer.gateway.handler;
 
-import com.dqcer.framework.base.api.Result;
-import com.dqcer.framework.base.api.ResultCode;
+import com.dqcer.framework.base.bean.Result;
+import com.dqcer.framework.base.bean.ResultCode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
