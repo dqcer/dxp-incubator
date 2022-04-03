@@ -1,7 +1,7 @@
 package com.dqcer.dxpprovider.sso.web.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.dqcer.integration.db.entity.AttribEntity;
+import com.dqcer.framework.entity.core.BaseEntity;
 
 /**
  * @author dongqin
@@ -9,7 +9,7 @@ import com.dqcer.integration.db.entity.AttribEntity;
  * @date 2021/11/13
  */
 @TableName("plt_account")
-public class AccountEntity extends AttribEntity<Long> {
+public class AccountEntity extends BaseEntity {
 
     /**
      * 账户
@@ -21,6 +21,19 @@ public class AccountEntity extends AttribEntity<Long> {
      */
     private String password;
 
+    @Override
+    public String toString() {
+        return "AccountEntity{" +
+                "createdTime=" + createdTime +
+                ", createdBy=" + createdBy +
+                ", updatedTime=" + updatedTime +
+                ", updatedBy=" + updatedBy +
+                ", status=" + status +
+                ", id=" + id +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 
     public String getAccount() {
         return account;

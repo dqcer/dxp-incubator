@@ -15,10 +15,17 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.dqcer</groupId>
-            <artifactId>dxp-integration-log</artifactId>
+            <groupId>com.dqcer.framework</groupId>
+            <artifactId>dxp-framework-base</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
+
 
     <build>
         <plugins>

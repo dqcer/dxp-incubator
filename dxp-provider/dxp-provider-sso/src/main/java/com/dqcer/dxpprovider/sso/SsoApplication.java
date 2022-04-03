@@ -1,8 +1,7 @@
 package com.dqcer.dxpprovider.sso;
 
+import com.dqcer.integration.EnableWebCore;
 import com.dqcer.integration.cache.EnableCache;
-import com.dqcer.integration.core.EnableWebCore;
-import com.dqcer.integration.db.EnableMapper;
 import com.dqcer.integration.idempotent.annotation.EnableIdempotent;
 import com.dqcer.integration.log.EnableSysLog;
 import com.dqcer.integration.slider.EnableSliderValid;
@@ -15,7 +14,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2021/09/04
  */
 @EnableWebCore
-@EnableMapper
 @EnableCache
 @EnableSliderValid
 @EnableSysLog
