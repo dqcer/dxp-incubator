@@ -26,7 +26,7 @@ class UacApplicationTests {
 
     /**
      * 单元测试get接口
-     * {@link https://blog.csdn.net/wangxi06/article/details/114630426}
+     * {@see https://blog.csdn.net/wangxi06/article/details/114630426}
      *
      * @throws Exception 异常
      */

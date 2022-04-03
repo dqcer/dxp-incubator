@@ -12,19 +12,11 @@
     <version>1.0</version>
     <name>dxp-provider-uac</name>
     <description>用户中心</description>
+    <packaging>pom</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.dqcer.framework</groupId>
-            <artifactId>dxp-framework-base</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>uac-provider</module>
+    </modules>
 
 
     <build>
