@@ -1,22 +1,23 @@
-package com.dqcer.integration.db.entity;
+package com.dqcer.framework.entity.core;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author dongqin
- * @description 针对单个的实体表
- * @date 2021/03/21 20:08:09
+ * @description 基础的实体
+ * @date 2022/01/12
  */
-public abstract class AttribEntity<ID> extends Entity<ID> {
+@SuppressWarnings("unused")
+public abstract class BaseEntity extends SuperId {
 
     /**
-     * 创建时间
+     * 创建时间, 默认填充
      */
     @TableField(fill = FieldFill.INSERT)
-    protected LocalDateTime createdTime;
+    protected Date createdTime;
 
     /**
      * 创建人
@@ -27,7 +28,7 @@ public abstract class AttribEntity<ID> extends Entity<ID> {
      * 更新时间
      */
     @TableField(fill = FieldFill.UPDATE)
-    protected LocalDateTime updatedTime;
+    protected Date updatedTime;
 
     /**
      * 更新人
@@ -35,19 +36,19 @@ public abstract class AttribEntity<ID> extends Entity<ID> {
     protected Long updatedBy;
 
     /**
-     * 状态
+     * 状态, 默认填充
      */
+    @TableField(fill = FieldFill.INSERT)
     protected Integer status;
 
 
-    public LocalDateTime getCreatedTime() {
+    public Date getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(LocalDateTime createdTime) {
+    public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
     }
-
 
     public Long getCreatedBy() {
         return createdBy;
@@ -55,6 +56,14 @@ public abstract class AttribEntity<ID> extends Entity<ID> {
 
     public void setCreatedBy(Long createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public Date getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
     }
 
     public Long getUpdatedBy() {
@@ -65,15 +74,6 @@ public abstract class AttribEntity<ID> extends Entity<ID> {
         this.updatedBy = updatedBy;
     }
 
-    public LocalDateTime getUpdatedTime() {
-        return updatedTime;
-    }
-
-    public void setUpdatedTime(LocalDateTime updatedTime) {
-        this.updatedTime = updatedTime;
-    }
-
-
     public Integer getStatus() {
         return status;
     }
@@ -81,7 +81,5 @@ public abstract class AttribEntity<ID> extends Entity<ID> {
     public void setStatus(Integer status) {
         this.status = status;
     }
-
-
 
 }

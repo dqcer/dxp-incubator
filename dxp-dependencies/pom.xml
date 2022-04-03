@@ -116,6 +116,16 @@
 				<version>${dxp-incubator.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>com.dqcer.framework</groupId>
+				<artifactId>dxp-framework-log</artifactId>
+				<version>${dxp-incubator.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.dqcer.framework</groupId>
+				<artifactId>dxp-framework-entity</artifactId>
+				<version>${dxp-incubator.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>com.dqcer</groupId>
 				<artifactId>dxp-framework-storage</artifactId>
 				<version>${dxp-incubator.version}</version>
@@ -143,11 +153,6 @@
 			<dependency>
 				<groupId>com.dqcer.integration</groupId>
 				<artifactId>dxp-integration-slider</artifactId>
-				<version>${dxp-incubator.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.dqcer</groupId>
-				<artifactId>dxp-integration-db</artifactId>
 				<version>${dxp-incubator.version}</version>
 			</dependency>
 			<dependency>

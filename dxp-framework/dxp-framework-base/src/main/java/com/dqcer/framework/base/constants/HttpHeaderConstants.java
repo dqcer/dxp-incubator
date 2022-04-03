@@ -5,6 +5,7 @@ package com.dqcer.framework.base.constants;
  * @description http报头常量
  * @date 2022/01/25
  */
+@SuppressWarnings("unused")
 public final class HttpHeaderConstants {
 
     /**
