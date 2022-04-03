@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
  */
 public class DataSourceBuilder {
 
-    private final static String HIKARI_DATASOURCE = "com.zaxxer.hikari.HikariDataSource";
+    private static final String HIKARI_DATASOURCE = "com.zaxxer.hikari.HikariDataSource";
 
     private static Method configCopyMethod = null;
 
@@ -43,6 +43,7 @@ public class DataSourceBuilder {
         config.setUsername(dataSourceProperty.getUsername());
         config.setPassword(dataSourceProperty.getPassword());
         config.setJdbcUrl(dataSourceProperty.getUrl());
+        config.setDriverClassName(dataSourceProperty.getDriverClassName());
         config.validate();
         HikariDataSource source = new HikariDataSource();
         try {
@@ -54,4 +55,5 @@ public class DataSourceBuilder {
         }
         return source;
     }
+
 }

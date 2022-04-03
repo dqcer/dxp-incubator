@@ -1,12 +1,20 @@
 package com.dqcer.integration.datasource.config;
 
 
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import com.baomidou.mybatisplus.core.config.GlobalConfig;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.dqcer.integration.datasource.aspect.DataSourceAspect;
 import com.dqcer.integration.datasource.properties.DataSourceProperties;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -21,6 +29,7 @@ import java.util.Map;
 @EnableConfigurationProperties(DataSourceProperties.class)
 public class AutoConfiguration {
 
+
     /**
      * 调整 SqlSessionFactory 为 MyBatis-Plus 的 SqlSessionFactory
      *
@@ -28,10 +37,22 @@ public class AutoConfiguration {
      * @return {@link MybatisSqlSessionFactoryBean}
      */
     @Bean
-    public MybatisSqlSessionFactoryBean sqlSessionFactoryBean(RoutingDataSource dynamicDataSource) {
+    public SqlSessionFactory sqlSessionFactoryBean(RoutingDataSource dynamicDataSource) throws Exception {
         MybatisSqlSessionFactoryBean mybatisSqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();
+        PathMatchingResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
+        mybatisSqlSessionFactoryBean.setMapperLocations(patternResolver
+                .getResources("classpath*:mapper/**/*.xml"));
         mybatisSqlSessionFactoryBean.setDataSource(dynamicDataSource);
-        return mybatisSqlSessionFactoryBean;
+        GlobalConfig config = new GlobalConfig();
+        config.setMetaObjectHandler(new MybatisMetaObjectHandlerConfig());
+        mybatisSqlSessionFactoryBean.setGlobalConfig(config);
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+        MybatisConfiguration configuration = new MybatisConfiguration();
+        configuration.addInterceptor(interceptor);
+        mybatisSqlSessionFactoryBean.setConfiguration(configuration);
+
+        return mybatisSqlSessionFactoryBean.getObject();
     }
 
     /**
@@ -79,8 +100,13 @@ public class AutoConfiguration {
      * @return {@link Map}
      */
     private Map<Object, Object> multipleDataSources() {
-        // TODO: 2021/10/9  
+        // TODO: 2021/10/9
         return new HashMap<>(2);
+    }
+
+    @Bean
+    public DataSourceTransactionManager transactionManager(RoutingDataSource dynamicDataSource) {
+        return new DataSourceTransactionManager(dynamicDataSource);
     }
 
 }

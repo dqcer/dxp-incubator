@@ -3,7 +3,6 @@ package com.dqcer.integration.datasource.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.util.Map;
 
 /**
  * @author dongqin
@@ -14,7 +13,10 @@ import java.util.Map;
 public class DataSourceProperties {
 
 
-    private String dsName= "master";
+    /**
+     * 默认的key
+     */
+    private String defaultName = "master";
 
     /**
      * JDBC driver
@@ -33,12 +35,25 @@ public class DataSourceProperties {
      */
     private String password;
 
-    public String getDsName() {
-        return dsName;
+    /**
+     * 租户sql
+     */
+    private String tenantSql;
+
+    public String getTenantSql() {
+        return tenantSql;
     }
 
-    public void setDsName(String dsName) {
-        this.dsName = dsName;
+    public void setTenantSql(String tenantSql) {
+        this.tenantSql = tenantSql;
+    }
+
+    public String getDefaultName() {
+        return defaultName;
+    }
+
+    public void setDefaultName(String defaultName) {
+        this.defaultName = defaultName;
     }
 
     public String getDriverClassName() {
@@ -72,4 +87,5 @@ public class DataSourceProperties {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

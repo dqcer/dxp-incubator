@@ -8,8 +8,14 @@ import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.expression.MethodBasedEvaluationContext;
+import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.Ordered;
+import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.core.annotation.Order;
+import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
@@ -23,11 +29,10 @@ import java.util.Deque;
 @Aspect
 @Order(Ordered.HIGHEST_PRECEDENCE + 1)
 public class DataSourceAspect {
-
-    @Resource
-    private RoutingDataSource routingDataSource;
-
     private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+    private static final ParameterNameDiscoverer NAME_DISCOVERER = new DefaultParameterNameDiscoverer();
+    private static final ExpressionParser PARSER = new SpelExpressionParser();
 
     @Pointcut("@annotation(com.dqcer.integration.datasource.annotation.DynamicDataSource) ")
     public void dataSourcePointCut() {
@@ -36,29 +41,39 @@ public class DataSourceAspect {
 
     @Before("dataSourcePointCut()")
     public void before(JoinPoint joinPoint) {
-        if (log.isDebugEnabled()) {
-            log.debug("切换前数据源，当前数据源：{}", DynamicContextHolder.peek());
-        }
+        log.debug("切换前数据源，当前数据源：{}", DynamicContextHolder.peek());
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         DynamicDataSource annotation = method.getAnnotation(DynamicDataSource.class);
         if (null != annotation) {
-            String value = annotation.value();
-            if (value.trim().length() == 0) {
+            String value = calculateValue(annotation.value(),method, joinPoint.getArgs());
+            if (value == null || value.trim().length() == 0) {
                 throw new IllegalArgumentException("没有对应的数据源key");
             }
             Deque<String> deque = DynamicContextHolder.getAll();
             boolean contains = deque.contains(value);
             if (!contains) {
-                log.info("动态添加数据源 key: {}", value);
-                // TODO 加载数据库中的数据连接信息
-                // TODO routingDataSource.createDataSource(null);
+                log.debug("动态添加数据源 key: {}", value);
             }
             DynamicContextHolder.push(value);
         }
-        if (log.isDebugEnabled()) {
-            log.debug("切换后数据源，当前数据源：{}", DynamicContextHolder.peek());
+        log.debug("切换后数据源，当前数据源：{}", DynamicContextHolder.peek());
+    }
+
+    /**
+     * spel表达式通过方法入参计算数据源名称
+     * @param annoValue
+     * @param method
+     * @param arguments
+     * @return
+     */
+    private String calculateValue(String annoValue, Method method, Object[] arguments) {
+        if(!annoValue.startsWith("#")) {
+            return annoValue;
         }
+        EvaluationContext context = new MethodBasedEvaluationContext(null, method, arguments, NAME_DISCOVERER);
+        Object value = PARSER.parseExpression(annoValue).getValue(context);
+        return value == null ? null : value.toString();
     }
 
     @After("dataSourcePointCut()")
@@ -79,7 +94,7 @@ public class DataSourceAspect {
         Method method = signature.getMethod();
         DynamicDataSource annotation = method.getAnnotation(DynamicDataSource.class);
         if (null != annotation) {
-            DynamicContextHolder.poll();
+            DynamicContextHolder.clear();
         }
     }
 

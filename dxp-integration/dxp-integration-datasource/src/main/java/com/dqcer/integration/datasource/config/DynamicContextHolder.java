@@ -10,6 +10,7 @@ import java.util.Deque;
  */
 public final class DynamicContextHolder {
 
+
     /**
      * ds上下文持有人
      */
@@ -53,5 +54,13 @@ public final class DynamicContextHolder {
         if (deque.isEmpty()) {
             DS_CONTEXT_HOLDER.remove();
         }
+    }
+
+    /**
+     * 强制清空本地线程
+     * 防止内存泄漏，如手动调用了push可调用此方法确保清除
+     */
+    public static void clear() {
+        DS_CONTEXT_HOLDER.remove();
     }
 }
