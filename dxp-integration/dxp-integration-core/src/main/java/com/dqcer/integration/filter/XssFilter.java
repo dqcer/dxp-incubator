@@ -31,6 +31,7 @@ public class XssFilter implements Filter {
 
     public List<String> excludes = new ArrayList();
 
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException,ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         String requestURI = req.getRequestURI();
