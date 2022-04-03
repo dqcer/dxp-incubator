@@ -1,15 +1,17 @@
 package com.dqcer.framework.base.bean;
 
-import java.io.Serializable;
+import com.dqcer.framework.base.VO;
+
 import java.util.List;
 
 
 /**
  * @author dqcer
  * @description 分页对象
- * @DATE 22:21 2021/4/28
+ * @date 22:21 2021/4/28
  */
-public class PageInfo<T> implements Serializable {
+@SuppressWarnings("unused")
+public class PagedInfo<T> extends VO implements IPaged {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,23 +26,23 @@ public class PageInfo<T> implements Serializable {
     /**
      * 当前页
      */
-    private Integer pageNo;
+    private Integer pageNum;
 
     /**
      * 每页数量
      */
-    private Integer pageSize;
+    private Integer limit;
 
     /**
      * 总页数
      */
     private Integer pageCount;
 
-    public PageInfo(long total, List<T> list, int pageNo, int pageSize) {
+    public PagedInfo(long total, List<T> list, int pageNo, int pageSize) {
         this.total = total;
         this.list = list;
-        this.pageNo = pageNo;
-        this.pageSize = pageSize;
+        this.pageNum = pageNo;
+        this.limit = pageSize;
         this.pageCount = Math.toIntExact((total + pageSize - 1) / pageSize);
     }
 
@@ -49,8 +51,8 @@ public class PageInfo<T> implements Serializable {
         return "PageInfo{" +
                 "list=" + list +
                 ", total=" + total +
-                ", pageNo=" + pageNo +
-                ", pageSize=" + pageSize +
+                ", pageNo=" + pageNum +
+                ", pageSize=" + limit +
                 ", pageCount=" + pageCount +
                 '}';
     }
@@ -71,20 +73,22 @@ public class PageInfo<T> implements Serializable {
         this.total = total;
     }
 
-    public Integer getPageNo() {
-        return pageNo;
+    @Override
+    public Integer getPageNum() {
+        return pageNum;
     }
 
-    public void setPageNo(Integer pageNo) {
-        this.pageNo = pageNo;
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
     }
 
-    public Integer getPageSize() {
-        return pageSize;
+    @Override
+    public Integer getLimit() {
+        return limit;
     }
 
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
+    public void setLimit(Integer limit) {
+        this.limit = limit;
     }
 
     public Integer getPageCount() {
@@ -94,4 +98,5 @@ public class PageInfo<T> implements Serializable {
     public void setPageCount(Integer pageCount) {
         this.pageCount = pageCount;
     }
+
 }

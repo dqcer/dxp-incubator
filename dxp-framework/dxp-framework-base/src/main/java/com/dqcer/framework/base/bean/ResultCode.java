@@ -50,10 +50,14 @@ public enum ResultCode implements IResultCode {
 	 * 状态码
 	 */
 	final int code;
-	final String msg;
+
+	/**
+	 * 消息
+	 */
+	final String message;
 
 	@Override
-	public int code() {
+	public int getCode() {
 		return code;
 	}
 
@@ -63,12 +67,12 @@ public enum ResultCode implements IResultCode {
 	 * @return {@link String}
 	 */
 	@Override
-	public String msg() {
-		return this.msg;
+	public String getMessage() {
+		return this.message;
 	}
 
-	ResultCode(int code, String msg) {
+	ResultCode(int code, String message) {
 		this.code = code;
-		this.msg = msg;
+		this.message = message;
 	}
 }

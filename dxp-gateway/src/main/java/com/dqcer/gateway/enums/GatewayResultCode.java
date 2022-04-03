@@ -20,12 +20,12 @@ public enum GatewayResultCode implements IResultCode {
      * 状态码
      */
     final int code;
-    final String msg;
+    final String message;
 
 
-    GatewayResultCode(int code, String msg) {
+    GatewayResultCode(int code, String message) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
     }
 
     /**
@@ -34,7 +34,7 @@ public enum GatewayResultCode implements IResultCode {
      * @return int
      */
     @Override
-    public int code() {
+    public int getCode() {
         return this.code;
     }
 
@@ -44,7 +44,7 @@ public enum GatewayResultCode implements IResultCode {
      * @return {@link String}
      */
     @Override
-    public String msg() {
-        return this.msg;
+    public String getMessage() {
+        return this.message;
     }
 }

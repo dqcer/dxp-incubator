@@ -6,7 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
-import com.dqcer.dxpframework.api.Result;
+import com.dqcer.framework.base.bean.Result;
 import com.dqcer.integration.audit.annotation.AuditDTO;
 import com.dqcer.integration.audit.annotation.AuditLog;
 import com.dqcer.integration.audit.enums.TypeEnum;

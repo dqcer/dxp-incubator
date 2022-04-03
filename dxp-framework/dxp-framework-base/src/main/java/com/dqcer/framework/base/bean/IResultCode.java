@@ -12,12 +12,12 @@ public interface IResultCode {
 	 *
 	 * @return int
 	 */
-	int code();
+	int getCode();
 
 	/**
 	 * message
 	 *
 	 * @return {@link String}
 	 */
-	String msg();
+	String getMessage();
 }

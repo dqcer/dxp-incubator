@@ -67,5 +67,10 @@
             <artifactId>dxp-framework-base</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.dqcer.framework</groupId>
+            <artifactId>dxp-framework-log</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 </project>

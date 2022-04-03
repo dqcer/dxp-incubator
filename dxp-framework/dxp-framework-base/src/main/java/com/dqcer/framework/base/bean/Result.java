@@ -1,7 +1,8 @@
 package com.dqcer.framework.base.bean;
 
 
-import java.util.HashMap;
+import java.io.Serializable;
+import java.util.StringJoiner;
 
 /**
  * @author dqcer
@@ -9,22 +10,25 @@ import java.util.HashMap;
  * @date 22:21 2021/4/28
  */
 @SuppressWarnings("unused")
-public class Result extends HashMap<String, Object> {
+public class Result<T> implements Serializable {
+
+    private static final long serialVersionUID = -4671443827915132861L;
 
     /**
      * 状态码
      */
-    public static final String CODE = "code";
-
-    /**
-     * 数据对象
-     */
-    public static final String DATA = "data";
+    private int code;
 
     /**
      * message
      */
-    public static final String MSG = "msg";
+    private String message;
+
+    /**
+     * 数据对象
+     */
+    private T data;
+
 
     /**
      * 初始化一个新创建的 Result 对象，使其表示一个空消息。
@@ -32,44 +36,17 @@ public class Result extends HashMap<String, Object> {
     private Result() {
     }
 
-    /**
-     * 初始化一个新创建的 Result 对象
-     *
-     * @param code 状态码
-     * @param data 数据对象
-     */
-    private Result(int code, Object data, String msg) {
-        super.put(CODE, code);
-        super.put(DATA, data);
-        super.put(MSG, msg);
-    }
-
-    private Result(IResultCode code, Object data) {
-        super.put(CODE, code.code());
-        super.put(DATA, data);
-        super.put(MSG, code.msg());
-    }
-
-    /**
-     * 方便链式调用
-     *
-     * @param key   关键
-     * @param value 值
-     * @return {@link Result}
-     */
-    @Override
-    public Result put(String key, Object value) {
-        super.put(key, value);
-        return this;
-    }
 
     /**
      * 返回成功消息
      *
      * @return 成功消息
      */
-    public static Result ok() {
-        return new Result(ResultCode.SUCCESS,  null);
+    public static <T> Result<T> ok() {
+        return Result.<T>builder()
+                .withCode(ResultCode.SUCCESS.code)
+                .withMessage(ResultCode.SUCCESS.message)
+                .build();
     }
 
     /**
@@ -78,8 +55,12 @@ public class Result extends HashMap<String, Object> {
      * @param data 数据
      * @return 成功消息
      */
-    public static Result ok(Object data) {
-        return new Result(ResultCode.SUCCESS, data);
+    public static <T> Result<T> ok(T data) {
+        return Result.<T>builder()
+                .withCode(ResultCode.SUCCESS.code)
+                .withMessage(ResultCode.SUCCESS.message)
+                .withData(data)
+                .build();
     }
 
 
@@ -89,44 +70,110 @@ public class Result extends HashMap<String, Object> {
      * @param resultCode 结果代码
      * @return 警告消息
      */
-    public static Result error(IResultCode resultCode) {
-        return new Result(resultCode, null);
+    public static <T> Result<T> error(IResultCode resultCode) {
+        return Result.<T>builder()
+                .withCode(resultCode.getCode())
+                .withMessage(resultCode.getMessage())
+                .build();
+    }
+
+    /**
+     * 返回错误消息
+     *
+     * @param resultCode 结果代码
+     * @return 警告消息
+     */
+    public static <T> Result<T> error(int resultCode,String msg) {
+        return Result.<T>builder()
+                .withCode(resultCode)
+                .withMessage(msg)
+                .build();
     }
 
     /**
      * 是否成功
      *
-     * @return true/成功 false/失败
+     * @return boolean
      */
     public boolean isOk() {
-        return getCode() == ResultCode.SUCCESS.code;
+        return code == ResultCode.SUCCESS.code;
     }
 
-    /**
-     * 获取code
-     *
-     * @return {@link Object}
-     */
-    public Object getData() {
-        return this.get(DATA);
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Result.class.getSimpleName() + "[", "]")
+                .add("code=" + code)
+                .add("message='" + message + "'")
+                .add("data=" + data)
+                .toString();
     }
 
-    /**
-     * 获取code
-     *
-     * @return int
-     */
     public int getCode() {
-        return (int)this.get(CODE);
+        return code;
     }
 
-    /**
-     * 获取msg
-     *
-     * @return {@link String}
-     */
-    public String getMsg() {
-        return (String) this.get(MSG);
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public static <T> ResultBuilder<T> builder() {
+        return new ResultBuilder<>();
+    }
+
+    public static final class ResultBuilder<T> {
+
+        private int code;
+
+        private String message;
+
+        private T data;
+
+        private ResultBuilder() {
+        }
+
+        public ResultBuilder<T> withCode(int code) {
+            this.code = code;
+            return this;
+        }
+
+        public ResultBuilder<T> withMessage(String errMsg) {
+            this.message = errMsg;
+            return this;
+        }
+
+        public ResultBuilder<T> withData(T data) {
+            this.data = data;
+            return this;
+        }
+
+        /**
+         * Build result.
+         *
+         * @return result
+         */
+        public Result<T> build() {
+            Result<T> result = new Result<>();
+            result.setCode(code);
+            result.setMessage(message);
+            result.setData(data);
+            return result;
+        }
     }
 
 }

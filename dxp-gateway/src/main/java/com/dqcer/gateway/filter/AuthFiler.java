@@ -56,11 +56,11 @@ public class AuthFiler implements GlobalFilter, Ordered {
         }
 
         if (null == authorization || authorization.trim().length() == 0) {
-            return errorResponse(response, ResultCode.UN_AUTHORIZATION.code(), ResultCode.UN_AUTHORIZATION.msg());
+            return errorResponse(response, ResultCode.UN_AUTHORIZATION.getCode(), ResultCode.UN_AUTHORIZATION.getMessage());
         }
         String token = authorization.substring(HttpHeaderConstants.BEARER.length());
         if (null == token || token.length() == 0) {
-            return errorResponse(response, ResultCode.UN_AUTHORIZATION.code(), ResultCode.UN_AUTHORIZATION.msg());
+            return errorResponse(response, ResultCode.UN_AUTHORIZATION.getCode(), ResultCode.UN_AUTHORIZATION.getMessage());
         }
 
         //  租户
@@ -70,12 +70,12 @@ public class AuthFiler implements GlobalFilter, Ordered {
         }
         if (null == tenantIdStr || tenantIdStr.trim().length() == 0) {
             log.error("Gateway Filer tenantIdStr is null");
-            return errorResponse(response, GatewayResultCode.PARAM_TENANT_NULL.code(), GatewayResultCode.PARAM_TENANT_NULL.msg());
+            return errorResponse(response, GatewayResultCode.PARAM_TENANT_NULL.getCode(), GatewayResultCode.PARAM_TENANT_NULL.getMessage());
         }
 
         if (!isNumber(tenantIdStr)) {
             log.error("Gateway Filer tenantId: [{}] is no number", tenantIdStr);
-            return errorResponse(response, ResultCode.ERROR_PARAMETERS.code(), ResultCode.ERROR_PARAMETERS.msg());
+            return errorResponse(response, ResultCode.ERROR_PARAMETERS.getCode(), ResultCode.ERROR_PARAMETERS.getMessage());
         }
 
         // 获取accountId
@@ -89,7 +89,7 @@ public class AuthFiler implements GlobalFilter, Ordered {
         }
 
         if (!result.isOk()) {
-            return errorResponse(response, result.getCode(), result.getMsg());
+            return errorResponse(response, result.getCode(), result.getMessage());
         }
 
         return chain.filter(exchange.mutate().request(mutate.build()).build());

@@ -11,7 +11,7 @@
 
     <groupId>com.dqcer.framework</groupId>
     <artifactId>dxp-framework-log</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>dxp-framework-log</name>
 
     <dependencies>

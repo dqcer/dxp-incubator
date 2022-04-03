@@ -5,7 +5,17 @@ import java.io.Serializable;
 /**
  * @author dqcer
  * @description 统一返回VO定义
- * @DATE 22:21 2021/4/28
+ * @date  22:21 2021/4/28
  */
-public interface VO extends Serializable {
+public abstract class VO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 子类需实现
+     *
+     * @return {@link String}
+     */
+    @Override
+    public abstract String toString();
 }

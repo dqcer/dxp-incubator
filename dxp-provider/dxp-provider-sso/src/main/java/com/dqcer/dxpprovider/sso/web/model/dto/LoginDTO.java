@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * @description 登录dto
  * @date 2021/09/10
  */
-public class LoginDTO implements DTO {
+public class LoginDTO extends DTO {
 
     private static final long serialVersionUID = -7311088026242433898L;
 
@@ -32,6 +32,15 @@ public class LoginDTO implements DTO {
      */
     @NotNull(groups = Account.class, message = "{loginDTO.deviation}")
     private Integer newXPosition;
+
+    @Override
+    public String toString() {
+        return "LoginDTO{" +
+                "ue='" + ue + '\'' +
+                ", pd='" + pd + '\'' +
+                ", newXPosition=" + newXPosition +
+                '}';
+    }
 
     public Integer getNewXPosition() {
         return newXPosition;
