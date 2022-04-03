@@ -1,8 +1,8 @@
-package com.dqcer.integration.datasource.interceptor;
+package com.dqcer.integration.ds.interceptor;
 
 import com.dqcer.framework.base.constants.HttpHeaderConstants;
-import com.dqcer.integration.datasource.config.DynamicContextHolder;
-import com.dqcer.integration.datasource.properties.DataSourceProperties;
+import com.dqcer.integration.ds.config.DynamicContextHolder;
+import com.dqcer.integration.ds.properties.DataSourceProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;

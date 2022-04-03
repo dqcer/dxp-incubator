@@ -1,4 +1,4 @@
-package com.dqcer.integration.datasource.config;
+package com.dqcer.integration.ds.config;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

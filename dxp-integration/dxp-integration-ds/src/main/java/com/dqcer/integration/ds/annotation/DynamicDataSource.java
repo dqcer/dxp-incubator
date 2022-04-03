@@ -1,4 +1,4 @@
-package com.dqcer.integration.datasource.annotation;
+package com.dqcer.integration.ds.annotation;
 
 
 import java.lang.annotation.*;

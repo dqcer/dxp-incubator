@@ -1,8 +1,7 @@
-package com.dqcer.integration.datasource.aspect;
+package com.dqcer.integration.ds.aspect;
 
-import com.dqcer.integration.datasource.annotation.DynamicDataSource;
-import com.dqcer.integration.datasource.config.DynamicContextHolder;
-import com.dqcer.integration.datasource.config.RoutingDataSource;
+import com.dqcer.integration.ds.annotation.DynamicDataSource;
+import com.dqcer.integration.ds.config.DynamicContextHolder;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -17,7 +16,6 @@ import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
-import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.util.Deque;
 
@@ -34,7 +32,7 @@ public class DataSourceAspect {
     private static final ParameterNameDiscoverer NAME_DISCOVERER = new DefaultParameterNameDiscoverer();
     private static final ExpressionParser PARSER = new SpelExpressionParser();
 
-    @Pointcut("@annotation(com.dqcer.integration.datasource.annotation.DynamicDataSource) ")
+    @Pointcut("@annotation(com.dqcer.integration.ds.annotation.DynamicDataSource) ")
     public void dataSourcePointCut() {
         // 切点
     }

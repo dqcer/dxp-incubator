@@ -1,4 +1,4 @@
-package com.dqcer.integration.datasource.config;
+package com.dqcer.integration.ds.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;

@@ -1,4 +1,4 @@
-package com.dqcer.integration.datasource.properties;
+package com.dqcer.integration.ds.properties;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @description 动态数据源属性
  * @date 2021/08/31
  */
-@ConfigurationProperties(prefix = "spring.datasource")
+@ConfigurationProperties(prefix = "spring.ds")
 public class DataSourceProperties {
 
 

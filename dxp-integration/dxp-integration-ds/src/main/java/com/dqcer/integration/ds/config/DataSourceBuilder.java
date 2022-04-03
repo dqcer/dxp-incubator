@@ -1,6 +1,6 @@
-package com.dqcer.integration.datasource.config;
+package com.dqcer.integration.ds.config;
 
-import com.dqcer.integration.datasource.properties.DataSourceProperties;
+import com.dqcer.integration.ds.properties.DataSourceProperties;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 

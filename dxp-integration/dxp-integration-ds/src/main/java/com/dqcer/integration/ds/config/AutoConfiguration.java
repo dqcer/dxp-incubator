@@ -1,4 +1,4 @@
-package com.dqcer.integration.datasource.config;
+package com.dqcer.integration.ds.config;
 
 
 import com.baomidou.mybatisplus.annotation.DbType;
@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
-import com.dqcer.integration.datasource.aspect.DataSourceAspect;
-import com.dqcer.integration.datasource.properties.DataSourceProperties;
+import com.dqcer.integration.ds.aspect.DataSourceAspect;
+import com.dqcer.integration.ds.properties.DataSourceProperties;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

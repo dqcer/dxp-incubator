@@ -1,7 +1,7 @@
-package com.dqcer.integration.datasource;
+package com.dqcer.integration.ds;
 
 
-import com.dqcer.integration.datasource.config.AutoConfiguration;
+import com.dqcer.integration.ds.config.AutoConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;
