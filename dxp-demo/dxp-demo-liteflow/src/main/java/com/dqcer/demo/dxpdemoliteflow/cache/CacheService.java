@@ -41,8 +41,7 @@ public class CacheService {
         if (null != o) {
             return o;
         }
-
-
+        return null;
     }
 
 }

@@ -5,6 +5,7 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -12,11 +13,15 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author dqcer
  * @description Caffeine缓存
- * @DATE 22:21 2021/4/28
+ * @date  22:21 2021/4/28
  */
+@Component
 public class CaffeineCache implements ICache {
 
-    private int expire = 30;
+    /**
+     * 到期时间默认30s
+     */
+    private final int expire = 10;
 
     protected static final Logger log = LoggerFactory.getLogger(CaffeineCache.class);
 
@@ -34,7 +39,7 @@ public class CaffeineCache implements ICache {
         builder.expireAfterWrite(expire, TimeUnit.SECONDS);
 
         //  回收策略 每访问一次重新计算一次缓存的有效时间
-        /** builder.expireAfterAccess(expire, TimeUnit.SECONDS);*/
+        /* builder.expireAfterAccess(expire, TimeUnit.SECONDS);*/
         cache = caffeine.build();
     }
 
@@ -50,7 +55,7 @@ public class CaffeineCache implements ICache {
     public <T> T get(String key, Class<T> type) {
         Object o = cache.getIfPresent(key);
         if (null != o) {
-            if (type.isInstance(o)) {
+            if (!type.isInstance(o)) {
                 throw new IllegalArgumentException("缓存值的类型不能是" + type.getName());
             }
             if (log.isDebugEnabled()) {

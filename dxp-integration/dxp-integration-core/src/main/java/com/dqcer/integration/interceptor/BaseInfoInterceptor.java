@@ -1,6 +1,7 @@
 package com.dqcer.integration.interceptor;
 
 import com.alibaba.fastjson.JSON;
+import com.dqcer.integration.cache.operation.CacheChannel;
 import com.dqcer.tools.core.IpAddressUtil;
 import com.dqcer.tools.core.ObjUtil;
 import com.dqcer.tools.core.StrUtil;
@@ -9,7 +10,6 @@ import com.dqcer.framework.base.bean.ResultCode;
 import com.dqcer.framework.base.constants.HttpHeaderConstants;
 import com.dqcer.framework.storage.*;
 import com.dqcer.integration.annotation.UnAuthorize;
-import com.dqcer.integration.cache.operation.RedissonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
@@ -35,9 +35,9 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
 
     private static final Logger log = LoggerFactory.getLogger(BaseInfoInterceptor.class);
 
-    private final RedissonObject redissonObject;
+    private final CacheChannel redissonObject;
 
-    public BaseInfoInterceptor(RedissonObject redissonObject) {
+    public BaseInfoInterceptor(CacheChannel redissonObject) {
         this.redissonObject = redissonObject;
     }
 
@@ -109,7 +109,7 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
 
         String token = authorization.substring(HttpHeaderConstants.BEARER.length());
 
-        Object obj = redissonObject.getValue(MessageFormat.format(CacheConstant.SSO_TOKEN, token));
+        Object obj = redissonObject.get(MessageFormat.format(CacheConstant.SSO_TOKEN, token), String.class);
         if (ObjUtil.isNull(obj)) {
             log.warn("BaseInfoInterceptor:  7天已过期");
             response.getWriter().write(JSON.toJSONString(Result.error(ResultCode.UN_AUTHORIZATION)));
@@ -139,7 +139,7 @@ public class BaseInfoInterceptor implements HandlerInterceptor {
         }
 
 
-        redissonObject.setValue(MessageFormat.format(CacheConstant.SSO_TOKEN, token), user.setLastActiveTime(now));
+        redissonObject.put(MessageFormat.format(CacheConstant.SSO_TOKEN, token), user.setLastActiveTime(now), 10);
 
         unifySession.setAccountId(user.getAccountId());
         unifySession.setTenantId(user.getTenantId());

@@ -1,7 +1,7 @@
 package com.dqcer.dxpprovider.sso.config;
 
+import com.dqcer.integration.cache.operation.CacheChannel;
 import com.dqcer.integration.interceptor.BaseInfoInterceptor;
-import com.dqcer.integration.cache.operation.RedissonObject;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 public class WebMvcConfigurer extends WebMvcConfigurationSupport {
 
     @Resource
-    private RedissonObject redissonObject;
+    private CacheChannel redissonObject;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

@@ -2,6 +2,8 @@ package com.dqcer.integration.cache.operation;
 
 import com.dqcer.integration.cache.ICache;
 
+import javax.annotation.Resource;
+
 
 /**
  * @author dqcer
@@ -10,14 +12,12 @@ import com.dqcer.integration.cache.ICache;
  */
 public class CacheChannel implements ICache{
 
-    private ICache redisCache;
+    @Resource
+    private RedissonCache redisCache;
 
-    private ICache caffeineCache;
+    @Resource
+    private CaffeineCache caffeineCache;
 
-    public CacheChannel(ICache caffeineCache, ICache redisCache) {
-        this.caffeineCache = caffeineCache;
-        this.redisCache = redisCache;
-    }
 
     /**
      * get

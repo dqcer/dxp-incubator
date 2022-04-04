@@ -2,9 +2,9 @@ package com.dqcer.provider.uac;
 
 import com.dqcer.framework.base.bean.Result;
 import com.dqcer.integration.EnableWebCore;
+import com.dqcer.integration.cache.EnableCache;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @description 用户认证中心应用程序
  * @date 2021/08/31
  */
-@EnableCaching
+@EnableCache
 @EnableWebCore
 @RestController
 @SpringBootApplication

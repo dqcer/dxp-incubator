@@ -40,6 +40,4 @@ class UacApplicationTests {
         resultActions.andReturn().getResponse().setCharacterEncoding("UTF-8");
         resultActions.andExpect(MockMvcResultMatchers.status().isOk()).andDo(print());
     }
-
-
 }

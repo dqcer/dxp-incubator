@@ -1,11 +1,10 @@
 package com.dqcer.integration.cache.config;
 
 import com.dqcer.integration.cache.operation.CacheChannel;
-import com.dqcer.integration.cache.operation.CaffeineCache;
-import com.dqcer.integration.cache.operation.RedissonCache;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 
 /**
  * @author dongqin
@@ -18,7 +17,7 @@ public class RedissonAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(CacheChannel.class)
     public CacheChannel getRedissonObject() {
-        return new CacheChannel(new CaffeineCache(), new RedissonCache());
+        return new CacheChannel();
     }
 
 }
