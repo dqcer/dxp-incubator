@@ -22,7 +22,7 @@ var sa_plugins = function(hook) {
 		var footer = [
 			'<br/><br/><br/><br/><br/><br/><br/><hr/>',
 			'<footer>',
-			'&emsp;<span>本接口文档使用 <a href="https://github.com/click33/sa-doc" target="_blank">sa-doc</a> 编写</span>',
+			'&emsp;<span>本文档使用 <a href="https://github.com/click33/sa-doc" target="_blank">sa-doc</a> 编写</span>',
 			// '<span>Proudly published with <a href="https://github.com/docsifyjs/docsify" target="_blank">docsify</a>.</span>',
 			'</footer>'
 		].join('');
