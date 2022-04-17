@@ -12,3 +12,16 @@ Archunit是一个免费、简单、可扩展的类库，用于检查Java代码�
 
 - 开源地址[https://github.com/TNG/ArchUnit.git](https://github.com/TNG/ArchUnit.git)
 - 官网地址[https://github.com/TNG/ArchUnit.git](https://github.com/TNG/ArchUnit.git)
+
+# 快速开始
+
+## 导入坐标
+
+```xml
+        <dependency>
+            <groupId>com.tngtech.archunit</groupId>
+            <artifactId>archunit-junit5</artifactId>
+            <version>0.23.1</version>
+        </dependency>
+```
+
