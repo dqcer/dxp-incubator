@@ -64,3 +64,34 @@ IDomainExtension : code
 
 StepsExecTemplate --> IDomainStep: orchestrate
 @enduml
+
+
+@startuml
+
+skinparam componentStyle uml2
+skinparam component {
+  BorderColor #grey
+  BackgroundColor #white
+}
+
+[Address] <<..address..>>
+[Customer] <<..customer..>>
+[framework] <<dxp-framework>> #white/PowderBlue
+[Products] <<..product..>> #white/PowderBlue
+[Product Catalog] <<..catalog..>> as catalog #PowderBlue
+[Product Import] <<..importer..>> as import
+
+' Could be some random comment
+[XML] <<..xml.processor..>> <<..xml.types..>> as xml
+
+[framework] ---> [Customer] : is placed by
+[framework] --> [Products]
+
+[Customer] --> [Address]
+
+[Products] <--[#green]- catalog
+import -left-> catalog : parse products
+import --> xml
+note top on link #lightgreen: is responsible for translating XML to java classes
+
+@enduml
