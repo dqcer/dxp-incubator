@@ -16,6 +16,7 @@
     <modules>
         <module>dxp-framework-base</module>
         <module>dxp-framework-dto</module>
+        <module>dxp-framework-enforcer</module>
         <module>dxp-framework-entity</module>
         <module>dxp-framework-log</module>
         <module>dxp-framework-storage</module>
