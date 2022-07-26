@@ -18,9 +18,10 @@ import reactor.core.publisher.Mono;
 import javax.annotation.Resource;
 
 /**
+ * 异常处理程序
+ *
  * @author dongqin
- * @description 异常处理程序
- * @date 2021/12/20 00:12:30
+ * @date 2022/07/26
  */
 public class ExceptionHandler implements WebExceptionHandler, Ordered {
 

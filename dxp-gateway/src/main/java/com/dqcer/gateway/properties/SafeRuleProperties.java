@@ -1,9 +1,10 @@
 package com.dqcer.gateway.properties;
 
 /**
+ * 安全规则属性
+ *
  * @author dongqin
- * @description 安全规则的属性
- * @date 2022/01/13
+ * @date 2022/07/26
  */
 public class SafeRuleProperties {
 

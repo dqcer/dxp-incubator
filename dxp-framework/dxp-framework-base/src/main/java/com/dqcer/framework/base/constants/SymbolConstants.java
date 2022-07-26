@@ -1,9 +1,10 @@
 package com.dqcer.framework.base.constants;
 
 /**
+ * 符号常量
+ *
  * @author dongqin
- * @description 字符、符号
- * @date 18:12 2021/3/5
+ * @date 2022/07/26
  */
 @SuppressWarnings("unused")
 public final class SymbolConstants {

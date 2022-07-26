@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 忽略path
+ *
  * @author dongqin
- * @description 忽略path
- * @date 2022/01/13
+ * @date 2022/07/26
  */
 public class IgnorePathProperties {
 
@@ -34,8 +35,7 @@ public class IgnorePathProperties {
      * @return boolean
      */
     public boolean isIgnoreToken(String path) {
-        List<String> all = new ArrayList<>();
-        all.addAll(getToken());
+        List<String> all = new ArrayList<>(getToken());
         return all.stream().anyMatch(url -> path.startsWith(url) || PATH_MATCHER.match(url, path));
     }
 }

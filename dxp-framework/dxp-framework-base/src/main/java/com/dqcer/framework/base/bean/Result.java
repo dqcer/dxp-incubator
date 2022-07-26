@@ -5,9 +5,10 @@ import java.io.Serializable;
 import java.util.StringJoiner;
 
 /**
- * @author dqcer
- * @description 统一返回前端包装类
- * @date 22:21 2021/4/28
+ * 统一返回前端包装类
+ *
+ * @author dongqin
+ * @date 2022/07/26
  */
 @SuppressWarnings("unused")
 public class Result<T> implements Serializable {

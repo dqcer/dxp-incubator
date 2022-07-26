@@ -4,9 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
+ * 网关
+ *
  * @author dongqin
- * @description 网关应用程序
- * @date 2021/09/13
+ * @date 2022/07/26
  */
 @SpringBootApplication
 public class GatewayApplication {

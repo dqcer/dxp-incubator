@@ -4,9 +4,10 @@ package com.dqcer.gateway.enums;
 import com.dqcer.framework.base.bean.IResultCode;
 
 /**
+ * 网关CODE
+ *
  * @author dongqin
- * @description 网关CODE
- * @date 2022/01/13
+ * @date 2022/07/26
  */
 public enum GatewayResultCode implements IResultCode {
 

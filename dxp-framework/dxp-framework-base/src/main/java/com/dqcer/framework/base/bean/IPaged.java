@@ -1,10 +1,12 @@
 package com.dqcer.framework.base.bean;
 
 /**
- * @author dqcer
- * @description ipaged
- * @date  22:21 2021/4/28
+ * 分页接口
+ *
+ * @author dongqin
+ * @date 2022/07/26
  */
+@SuppressWarnings("unused")
 public interface IPaged {
 
     /**

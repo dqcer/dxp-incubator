@@ -23,9 +23,10 @@ import reactor.core.publisher.Mono;
 import javax.annotation.Resource;
 
 /**
+ * 身份验证过滤器
+ *
  * @author dongqin
- * @description 身份验证过滤器
- * @date 2022/01/13
+ * @date 2022/07/26
  */
 @Component
 public class AuthFiler implements GlobalFilter, Ordered {
@@ -59,7 +60,7 @@ public class AuthFiler implements GlobalFilter, Ordered {
             return errorResponse(response, ResultCode.UN_AUTHORIZATION.getCode(), ResultCode.UN_AUTHORIZATION.getMessage());
         }
         String token = authorization.substring(HttpHeaderConstants.BEARER.length());
-        if (null == token || token.length() == 0) {
+        if (token.length() == 0) {
             return errorResponse(response, ResultCode.UN_AUTHORIZATION.getCode(), ResultCode.UN_AUTHORIZATION.getMessage());
         }
 

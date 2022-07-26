@@ -4,9 +4,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 
 /**
+ * 忽略属性
+ *
  * @author dongqin
- * @description 忽略属性
- * @date 2022/01/13
+ * @date 2022/07/26
  */
 @ConfigurationProperties(prefix = EccGatewayProperties.PREFIX)
 public class EccGatewayProperties {

@@ -3,17 +3,13 @@ package com.dqcer.framework.base;
 import java.io.Serializable;
 
 /**
- * @author dqcer
- * @description 统一接收客户端参数定义
- * @date 22:21 2021/4/28
+ * 统一接收客户端参数定义
+ *
+ * @author dongqin
+ * @date 2022/07/26
  */
-public abstract class DTO implements Serializable {
+public class DTO implements Serializable {
 
-    /**
-     * 子类需实现
-     *
-     * @return {@link String}
-     */
-    @Override
-    public abstract String toString();
+    private static final long serialVersionUID = 1L;
+
 }

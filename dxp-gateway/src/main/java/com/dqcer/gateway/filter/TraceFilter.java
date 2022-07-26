@@ -14,9 +14,10 @@ import java.util.UUID;
 
 
 /**
+ * 生成日志链路追踪id todo 后续改为前端生成
+ *
  * @author dongqin
- * @description 生成日志链路追踪id
- * @date 2022/01/13
+ * @date 2022/07/26
  */
 @Component
 public class TraceFilter implements GlobalFilter, Ordered {

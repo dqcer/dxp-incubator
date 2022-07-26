@@ -20,9 +20,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * 核心配置（跨域）
+ *
  * @author dongqin
- * @description 核心配置
- * @date 2022/01/13
+ * @date 2022/07/26
  */
 @Configuration
 @EnableConfigurationProperties(EccGatewayProperties.class)

@@ -1,9 +1,10 @@
 package com.dqcer.framework.base.constants;
 
 /**
+ * http头部常量
+ *
  * @author dongqin
- * @description http报头常量
- * @date 2022/01/25
+ * @date 2022/07/26
  */
 @SuppressWarnings("unused")
 public final class HttpHeaderConstants {

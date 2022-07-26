@@ -10,9 +10,10 @@ import javax.validation.constraints.NotNull;
 
 
 /**
- * @author dqcer
- * @description 分页dto
- * @date  22:21 2021/4/28
+ * 分页dto
+ *
+ * @author dongqin
+ * @date 2022/07/26
  */
 @SuppressWarnings("unused")
 public abstract class PagedDTO extends DTO implements IPaged {

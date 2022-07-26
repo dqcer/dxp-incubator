@@ -16,12 +16,14 @@ import reactor.core.publisher.Mono;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
+ * 日志过滤器
+ *
  * @author dongqin
- * @description 日志过滤器
- * @date 2022/01/13
+ * @date 2022/07/26
  */
 @Component
 public class LogFilter implements GlobalFilter, Ordered {
@@ -84,7 +86,7 @@ public class LogFilter implements GlobalFilter, Ordered {
 			// 打印路由
 			responseLog.append("<=== {} {}: {}: {}\n");
 			// 参数
-			responseArgs.add(response.getStatusCode().value());
+			responseArgs.add(Objects.requireNonNull(response.getStatusCode()).value());
 			responseArgs.add(requestMethod);
 			responseArgs.add(requestUrl);
 			responseArgs.add(executeTime + "ms");

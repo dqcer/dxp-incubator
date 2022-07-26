@@ -12,7 +12,6 @@
     <description>集中管理模块</description>
 
     <modules>
-        <module>dxp-demo</module>
         <module>dxp-dependencies</module>
         <module>dxp-framework</module>
         <module>dxp-gateway</module>
